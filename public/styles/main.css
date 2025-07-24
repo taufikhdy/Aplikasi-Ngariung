@@ -1,0 +1,501 @@
+/*
+
+
+    CSS GLOBAL UNTUK SEMUA HALAMAN
+
+
+*/
+
+
+
+:root {
+    --primary: #2378DC;
+    --secondary: #2A23DC;
+    --tertiary: #23D4DC;
+    --warning: #FFBF00;
+    --error: #F21D0D;
+
+    --neutral-100: hsl(0, 0%, 100%);
+    --neutral-90: hsl(0, 0%, 90%);
+    --neutral-80: hsl(0, 0%, 80%);
+    --neutral-70: hsl(0, 0%, 70%);
+    --neutral-60: hsl(0, 0%, 60%);
+    --neutral-50: hsl(0, 0%, 50%);
+    --neutral-40: hsl(0, 0%, 40%);
+    --neutral-30: hsl(0, 0%, 30%);
+    --neutral-20: hsl(0, 0%, 20%);
+    --neutral-10: hsl(0, 0%, 10%);
+
+    --primary-90: hsl(212, 73%, 90%);
+    --primary-80: hsl(212, 73%, 80%);
+    --primary-70: hsl(212, 73%, 70%);
+    --primary-60: hsl(212, 73%, 60%);
+    --primary-50: hsl(212, 73%, 50%);
+
+    --secondary-90: hsl(242, 73%, 90%);
+    --secondary-80: hsl(242, 73%, 80%);
+    --secondary-70: hsl(242, 73%, 70%);
+    --secondary-60: hsl(242, 73%, 60%);
+    --secondary-50: hsl(242, 73%, 50%);
+
+    --tertiary-90: hsl(183, 73%, 90%);
+    --tertiary-80: hsl(183, 73%, 80%);
+    --tertiary-70: hsl(183, 73%, 70%);
+    --tertiary-60: hsl(183, 73%, 60%);
+    --tertiary-50: hsl(183, 73%, 50%);
+
+    --warning-90: hsl(45, 100%, 90%);
+    --warning-80: hsl(45, 100%, 80%);
+    --warning-70: hsl(45, 100%, 70%);
+    --warning-60: hsl(45, 100%, 60%);
+    --warning-50: hsl(45, 100%, 50%);
+
+    --error-90: hsl(4, 90%, 90%);
+    --error-80: hsl(4, 90%, 80%);
+    --error-70: hsl(4, 90%, 70%);
+    --error-60: hsl(4, 90%, 60%);
+    --error-50: hsl(4, 90%, 50%);
+
+    /* FONT DIATUR DI
+
+    1. DI HTML <HEAD> -> DIIMPOR DISANA
+    2. FONT DIATUR DI CSS PUBLIC
+
+    */
+
+    /* ⚠️ HATI HATI NAMA FONT SERING SALAH */
+    --font: "Nunito", sans-serif;
+
+    --body-regular: 16px;
+    --regular-height: 24px;
+
+    --body-small: 14px;
+    --small: 22px;
+
+    --body-large: 18px;
+    --large-height: 28px;
+
+    --caption: 12px;
+    --cp-height: 18px;
+
+    --h1: 36px;
+    --h1-height: 44px;
+
+    --h2: 30px;
+    --h2-height: 40px;
+
+    --h3: 24px;
+    --h3-height: 32px;
+
+    --h4: 20px;
+    --h4-height: 28px;
+
+    --h5: 18px;
+    --h5-height: 26px;
+
+    --h6: 16px;
+    --h6-height: 24px;
+}
+
+
+/* GLOBAL */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font);
+}
+
+p {
+    color: var(--neutral-20);
+}
+
+/* SET RELATIF AGAR TIDAK KETIBAN SIDEBAR */
+
+body {
+    position: relative;
+    background-color: hsl(0, 0%, 95%);
+    padding-bottom: 40px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+/* TYPOGRAPHY */
+.cp {
+    font-size: var(--caption);
+    line-height: var(--cp-height);
+    letter-spacing: 0.02em;
+}
+
+.cp-gray {
+    font-size: var(--caption);
+    line-height: var(--cp-height);
+    color: var(--neutral-50);
+    letter-spacing: 0.02em;
+}
+
+.cp.masuk {
+    color: #19959A;
+}
+
+.cp.keluar {
+    color: var(--error-50);
+}
+
+h1 {
+    font-size: var(--h1);
+    line-height: var(--h1-height);
+    color: var(--neutral-20);
+}
+
+h2 {
+    font-size: var(--h2);
+    line-height: var(--h2-height);
+    color: var(--neutral-20);
+}
+
+h3 {
+    font-size: var(--h3);
+    line-height: var(--h3-height);
+    color: var(--neutral-20);
+}
+
+h3.bold {
+    font-weight: 800;
+}
+
+h4 {
+    font-size: var(--h4);
+    line-height: var(--h4-height);
+    color: var(--neutral-20);
+}
+
+h5 {
+    font-size: var(--h5);
+    line-height: var(--h5-height);
+    color: var(--neutral-20);
+}
+
+h6 {
+    font-size: var(--h6);
+    line-height: var(--h6-height);
+    color: var(--neutral-20);
+}
+
+button {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.text-white{
+    color: var(--neutral-100);
+}
+
+.text-black{
+    color: var(--neutral-20);
+}
+
+
+.text-small {
+    font-size: var(--body-small);
+    line-height: var(--small-height);
+}
+
+.text-regular {
+    font-size: var(--body-regular);
+    line-height: var(--regular-height);
+}
+
+.text-large {
+    font-size: var(--body-large);
+    line-height: var(--large-height);
+}
+
+/* TEXT JUSTIFY */
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/* ICON */
+.small-icon {
+    font-size: 20px;
+}
+
+.regular-icon {
+    font-size: 25px;
+}
+
+.large-icon {
+    font-size: 30px;
+}
+
+/* SETTING LINK A */
+a {
+    color: var(--secondary-50);
+    text-decoration: none;
+}
+
+
+
+
+/* UNTUK SEARCH */
+.search-box {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.search-box input {
+    background: var(--neutral-100);
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 13px 15px;
+    border-radius: 5px;
+}
+
+.search-box p {
+    color: var(--neutral-100);
+}
+
+
+/* SPOTLIGHT OVERFLOW */
+.overflow {
+    margin: 40px 0px 0px;
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+    align-items: center;
+    overflow-x: scroll;
+
+    animation: toLeft .8s alternate;
+}
+
+.overflow::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* SETTING LINK JADI BUTTON, BISA DIPAKAI BARANG KALI KALO BUTUH */
+
+.link-a-disable {
+    background-color: hsl(0, 0%, 97%);
+    border: 2px solid var(--neutral-90);
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100%;
+    color: var(--neutral-50);
+}
+
+.link-a-error {
+    background-color: hsl(4, 90%, 95%);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--error-50);
+    outline: none;
+}
+
+.link-a-active {
+    color: var(--neutral-100);
+    background-color: var(--primary);
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.link-a-active i {
+    margin-right: 5px;
+}
+
+.link-a-secondary {
+    color: var(--neutral-100);
+    background-color: var(--secondary);
+    border: 2px solid var(--secondary);
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.link-a-secondary-full {
+    color: var(--neutral-100);
+    background-color: var(--secondary);
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 100% + 50%;
+    text-wrap: nowrap;
+}
+
+.link-a-active.big,
+.link-a-secondary.big,
+.link-a-error.big,
+.link-a-disable.big {
+    padding: 10px;
+}
+
+
+.delete-btn {
+    display: block;
+    width: 100%;
+    color: var(--error-80);
+}
+
+.delete-btn:hover,
+.delete-btn:checked {
+    color: var(--error-50);
+}
+
+
+
+/* Setting box */
+.box-a-disable {
+    background-color: hsl(0, 0%, 97%);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--neutral-20);
+}
+
+.box-a-error {
+    background-color: hsl(4, 90%, 95%);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--error-50);
+}
+
+
+
+
+/* Halaman Detail Kas */
+
+.detail-kas {
+    /* margin-top: 30px; */
+}
+
+.kas-text {
+    margin-top: 25px;
+    padding: 0px 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.kas-text p {
+    color: var(--neutral-40);
+    text-align: justify;
+}
+
+.pemasukan {
+    margin: 20px 24px 0px 24px;
+    background-color: var(--neutral-100);
+    padding: 15px 20px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/*
+
+    HATI HATI DENGAN PENGELUARAN DAN PEMASUKAN BEDA CSS DIKIT
+
+*/
+
+
+.pengeluaran-field h6 {
+    margin-bottom: 20px;
+}
+
+.pengeluaran-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    padding: 0px 24px;
+    margin-top: 25px;
+}
+
+.pengeluaran {
+    background-color: var(--neutral-100);
+    padding: 15px 20px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.pemasukan .pemasukan-header,
+.pengeluaran .pengeluaran-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.pemasukan .detail-pemasukan,
+.pengeluaran .detail-pengeluaran {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pemasukan .detail-pemasukan .rincian,
+.pengeluaran .detail-pengeluaran .rincian {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pemasukan .detail-pemasukan .rincian .saldo-masuk,
+.pemasukan .detail-pemasukan .rincian .saldo-keluar,
+.pengeluaran .detail-pengeluaran .rincian .saldo-keluar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pemasukan .detail-pemasukan .rincian-menu,
+.pengeluaran .rincian-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.pengeluaran .rincian-menu p {
+    width: 100%;
+}
+
+.padding {
+    padding: 0px 24px;
+}
+
+
+.bayar {
+    position: absolute;
+    bottom: 40px;
+    background-color: var(--primary);
+    color: var(--neutral-100);
+    padding: 10px;
+    width: 100%;
+}

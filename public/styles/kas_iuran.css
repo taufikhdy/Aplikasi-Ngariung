@@ -1,0 +1,90 @@
+.tambah-kas {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    padding: 30px 24px;
+
+    animation: up .8s alternate;
+}
+
+.tambah-kas-header{
+    text-align: center;
+}
+
+.tambah-kas .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tambah-kas .form .input-tambah{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tambah-kas .form .input-tambah-flex{
+    display: flex;
+    gap: 20px;
+}
+
+.tambah-kas .form label {
+    font-size: var(--body-small);
+    color: var(--neutral-20);
+    display: block;
+}
+
+.tambah-kas .form input,
+.tambah-kas .form select{
+    border: none;
+    background: var(--neutral-100);
+
+    display: block;
+    width: 100%;
+    padding: 16px 13px;
+    border-radius: 5px;
+    outline: 1px solid var(--neutral-90);
+    font-size: var(--body-small);
+}
+
+.tambah-kas .form  textarea{
+    display: block;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid var(--neutral-90);
+    outline: none;
+}
+
+.tambah-kas input[type="submit"]{
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    background-color: var(--primary);
+    color: var(--neutral-100);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+
+
+
+/* kas halaman iuran dan kas */
+.kas {
+    padding: 0px 24px;
+    margin: 30px 0px 80px 0px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    animation: longUp .8s alternate;
+}
+
+.kas .kas-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}

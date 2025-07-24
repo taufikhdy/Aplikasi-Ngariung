@@ -1,0 +1,245 @@
+/* background atas */
+.bg {
+    width: 100%;
+    background: var(--primary);
+    padding: 15px 24px 24px;
+    border-radius: 0px 0px 20px 20px;
+
+    animation: down .8s alternate;
+    box-shadow: 0px -50px 0px 0px var(--primary-50);
+    position: relative;
+}
+
+
+/* NAVBAR */
+.relative {
+    position: relative;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    color: var(--neutral-100);
+
+    padding: 20px 24px 15px 24px;
+    background-color: var(--primary);
+
+    animation: down .8s alternate;
+    box-shadow: 0px -50px 0px 0px var(--primary-50);
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    border-radius: 0px 0px 20px 20px;
+}
+
+nav .burger {
+    cursor: pointer;
+}
+
+nav .info {
+    display: flex;
+    align-items: center;
+}
+
+nav .info i {
+    padding: 5px;
+    border-radius: 100px;
+    background-color: white;
+    color: var(--primary);
+}
+
+nav .info .link {
+    padding: 10px;
+    color: var(--neutral-100);
+}
+
+/* overlay */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    background-color: hsla(0, 0%, 0%, 25%);
+    width: 0;
+    transition: ease-out .2s;
+    opacity: 0;
+}
+
+.overlay.show {
+    width: 100%;
+    opacity: 1;
+}
+
+/* SIDEBAR */
+.aside {
+    background-color: var(--neutral-100);
+    width: 300px;
+    height: 100vh;
+    padding: 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+
+    position: fixed;
+    top: 0;
+    z-index: 99;
+
+    transition: ease-out .4s;
+    /* MAU BIKIN GLOBAL ANIMASI GAK */
+    transform: translateX(-100%);
+}
+
+.aside.show {
+    transform: translateX(0);
+}
+
+/* ATUR IKON SIDEBAR */
+/* PAKAI CLASS DI ATAS BUAT NGATUR IKON */
+
+.aside .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.aside .sidebar-header img {
+    width: 50%;
+}
+
+.aside .sidebar-header i {
+    color: var(--neutral-20);
+    font-size: 25px;
+    /* regular icon */
+    cursor: pointer;
+}
+
+.aside p {
+    color: var(--neutral-50);
+}
+
+.aside .link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 4px;
+}
+
+.aside .link a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--neutral-20);
+
+    /* ukuran pakai class .text-regular */
+}
+
+.aside .link a i {
+    margin-right: 16px;
+}
+
+.aside form button {
+    border: none;
+    background: none;
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    width: 100%;
+    color: var(--error-50);
+    cursor: pointer;
+}
+
+.aside form button i {
+    margin-right: 16px;
+}
+
+
+/* NAVIGASI BAWAH */
+
+.navigasi {
+    position: fixed;
+    bottom: 0;
+    border-radius: 0px;
+    width: 100%;
+    padding: 15px 24px;
+    background-color: var(--neutral-100);
+    box-shadow: 0px 0px 5px 0px var(--neutral-70);
+    display: flex;
+    gap: 15px;
+
+    animation: up .8s alternate;
+}
+
+.navigasi input {
+    border: none;
+    outline: none;
+}
+
+.tombol {
+    display: block;
+    width: 100%;
+    border-radius: 0px;
+}
+
+a.text-regular.active{
+    color: white;
+    background-color: var(--primary-60);
+}
+
+
+
+
+
+.more {
+    display: inline-block;
+    padding: 5px;
+}
+
+
+/* .more-action {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    display: inline-block;
+    width: max-content;
+
+    background-color: var(--neutral-100);
+    box-shadow: 0 0 5px 0 var(--neutral-80);
+    transform: scale(0);
+}
+
+.more-action.show{
+    transform: scale(1);
+} */
+
+
+/* NAVIIGASI TAMBAHAN DIBAWAH NAVBAR */
+.back{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px 0px 15px 0px;
+}
+
+.back a{
+    color: var(--neutral-20);
+}
+
+.back a i{
+    margin-right: 10px;
+}
+
+.back:hover a h4,
+.back:checked a h4
+{
+    color: var(--primary-50);
+}

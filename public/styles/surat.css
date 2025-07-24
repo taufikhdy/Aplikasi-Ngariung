@@ -1,0 +1,12 @@
+.surat {
+    margin-top: 35px;
+    padding: 0px 24px;
+
+    animation: up .8s alternate;
+}
+
+.surat .surat-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

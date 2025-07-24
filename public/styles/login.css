@@ -1,0 +1,252 @@
+:root {
+    --primary: #2378DC;
+    --secondary: #2A23DC;
+    --tertiary: #23D4DC;
+    --warning: #FFBF00;
+    --error: #F21D0D;
+
+    --neutral-100: hsl(0, 0%, 100%);
+    --neutral-90: hsl(0, 0%, 90%);
+    --neutral-80: hsl(0, 0%, 80%);
+    --neutral-70: hsl(0, 0%, 70%);
+    --neutral-60: hsl(0, 0%, 60%);
+    --neutral-50: hsl(0, 0%, 50%);
+    --neutral-40: hsl(0, 0%, 40%);
+    --neutral-30: hsl(0, 0%, 30%);
+    --neutral-20: hsl(0, 0%, 20%);
+    --neutral-10: hsl(0, 0%, 10%);
+
+    --warning-90: hsl(45, 100%, 90%);
+    --warning-80: hsl(45, 100%, 80%);
+    --warning-70: hsl(45, 100%, 70%);
+    --warning-600: hsl(45, 100%, 60%);
+    --warning-50: hsl(45, 100%, 50%);
+
+
+    /* FONT DIATUR DI
+
+    1. DI HTML <HEAD> -> DIIMPOR DISANA
+    2. FONT DIATUR DI CSS PUBLIC
+
+    */
+
+    /* ⚠️ HATI HATI NAMA FONT SERING SALAH */
+    --font: "Nunito", sans-serif;
+
+    --body-regular: 16px;
+    --regular-height: 24px;
+
+    --body-small: 14px;
+    --small: 22px;
+
+    --body-large: 18px;
+    --large-height: 28px;
+
+    --caption: 12px;
+    --cp-height: 18px;
+
+    --h1: 36px;
+    --h1-height: 44px;
+
+    --h2: 30px;
+    --h2-height: 40px;
+
+    --h3: 24px;
+    --h3-height: 32px;
+
+    --h4: 20px;
+    --h4-height: 28px;
+
+    --h5: 18px;
+    --h5-height: 26px;
+
+    --h6: 16px;
+    --h6-height: 24px;
+}
+
+
+/* GLOBAL */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font);
+
+    transition: .1s;
+}
+
+/* TYPOGRAPHY */
+.cp {
+    font-size: var(--caption);
+    line-height: var(--cp-height);
+}
+
+h1 {
+    font-size: var(--h1);
+    line-height: var(--h1-height);
+    color: var(--neutral-20);
+}
+
+h2 {
+    font-size: var(--h2);
+    line-height: var(--h2-height);
+    color: var(--neutral-20);
+}
+
+h3 {
+    font-size: var(--h3);
+    line-height: var(--h3-height);
+    color: var(--neutral-20);
+}
+
+h4 {
+    font-size: var(--h4);
+    line-height: var(--h4-height);
+    color: var(--neutral-20);
+}
+
+h5 {
+    font-size: var(--h5);
+    line-height: var(--h5-height);
+    color: var(--neutral-20);
+}
+
+h6 {
+    font-size: var(--h6);
+    line-height: var(--h6-height);
+    color: var(--neutral-20);
+}
+
+
+.text-small {
+    font-size: var(--body-small);
+    line-height: var(--small-height);
+}
+
+.text-regular {
+    font-size: var(--body-regular);
+    line-height: var(--regular-height);
+}
+
+.text-large {
+    font-size: var(--body-large);
+    line-height: var(--large-height);
+}
+
+/* TEXT JUSTIFY */
+.text-left{text-align: left;}
+.text-center{text-align: center;}
+.text-right{text-align: right;}
+.text-justify{text-align: justify;}
+
+/* SETTING LINK A */
+a{
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+
+/* LOGO */
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 45vh;
+
+    animation: down .8s alternate;
+}
+
+.logo img{
+    width: 30%;
+}
+
+
+/* LOGIN FORM */
+body {
+    background-color: var(--primary);
+    overflow: hidden;
+}
+
+.form-box {
+    display: block;
+    width: 100%;
+    padding: 24px 32px 56px;
+    background-color: var(--neutral-100);
+    border-radius: 20px 20px 0px 0px;
+
+    position: absolute;
+    bottom: 0;
+    z-index: 99;
+
+    box-shadow: 0 100px 0px 0px white;
+
+    animation: up .8s alternate;
+}
+
+
+.form-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+/* desc */
+.form-header p,
+.input-group label {
+    font-size: var(--body-small);
+    color: var(--neutral-20);
+    display: block;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 30px 0px;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.input-box input {
+    border: none;
+    background: none;
+
+    display: block;
+    width: 100%;
+    padding: 16px 13px;
+    border-radius: 5px;
+    outline: 1px solid var(--neutral-90);
+    font-size: var(--body-small);
+    color: ;
+}
+
+/* penangan input type submit biar ga jadi style global */
+.form-box input[type=submit] {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--neutral-100);
+    font-size: var(--body-large);
+    font-weight: bolder;
+    outline: none;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+}
+
+.input-box input:focus {
+    outline: var(--primary) solid 2px;
+}
+
+.helper {
+    text-align: center;
+    margin-top: 20px;
+}

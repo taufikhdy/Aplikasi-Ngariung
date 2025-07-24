@@ -1,0 +1,112 @@
+.form-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* background-color: var(--neutral-100); */
+    border-radius: 20px 20px 0px 0px;
+    /* padding: 0px 24px 40px; */
+    padding: 0px 24px 0px;
+    margin-top: 30px;
+
+    animation: up .8s alternate;
+    overflow-x: hidden;
+}
+
+.form-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+
+
+/* desc */
+.form-header p,
+.input-group label {
+    font-size: var(--body-small);
+    color: var(--neutral-20);
+    display: block;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* margin: 30px 0px; */
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.input-box input,
+.input-box select {
+    border: none;
+    background: var(--neutral-100);
+
+    display: block;
+    width: 100%;
+    padding: 16px 13px;
+    border-radius: 5px;
+    outline: 1px solid var(--neutral-90);
+    font-size: var(--body-small);
+    color: ;
+}
+
+/* penangan input type submit biar ga jadi style global */
+.form-box input[type=submit] {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--neutral-100);
+    font-size: var(--body-small);
+    font-weight: bold;
+    outline: none;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+
+    margin-top: 20px;
+}
+
+.input-box input:focus {
+    outline: var(--primary) solid 1.5px;
+}
+
+.input-group .input-box textarea {
+    border: none;
+    /* background: none; */
+
+    display: block;
+    width: 100%;
+    padding: 16px 13px;
+    border-radius: 5px;
+    outline: 1px solid var(--neutral-90);
+    font-size: var(--body-small);
+    color: ;
+}
+
+.input-group .input-box .file[type="file"] {
+    border: none;
+    background: none;
+
+    display: block;
+    width: 100%;
+    padding: 16px 13px;
+    border-radius: 5px;
+    outline: 1px solid var(--neutral-90);
+    font-size: var(--body-small);
+    color: ;
+}
+
+.helper {
+    text-align: center;
+    margin-top: 20px;
+}
+
+textarea{
+    background: var(--neutral-100);
+}

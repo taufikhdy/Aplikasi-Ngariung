@@ -1,0 +1,135 @@
+.lite-card{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    background-color: var(--neutral-100);
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+
+.lite-card .header{
+    width: min-content;
+}
+
+.lite-card .menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* CARD KAS */
+.card {
+    position: relative;
+    background-color: var(--neutral-100);
+    padding: 15px 20px;
+
+    min-width: 300px;
+    width: 100%;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 10px;
+
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.030);
+}
+
+.card .card-head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card .card-head .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.card .card-head .card-header .card-title{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+.card .card-head .card-header .card-title h6,
+.card .card-head .card-header .card-title h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card .card-head .card-header .card-icon,
+.title-icon {
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    background-color: hsl(183, 73%, 95%);
+    color: var(--primary-50);
+}
+
+.card .card-head .card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.card .card-head .card-info p {
+    color: var(--neutral-50);
+}
+
+.card .card-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.card-status-warning {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    background-color: var(--warning-90);
+    color: hsl(45, 100%, 30%);
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-wrap: nowrap;
+}
+
+.card-status-success {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+    background-color: var(--tertiary-90);
+    color: #19959A;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-wrap: nowrap;
+}
+
+.card .card-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.card input{
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+}

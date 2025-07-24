@@ -1,0 +1,52 @@
+.table {
+    overflow-x: scroll;
+    height: 650px;
+}
+
+.table::-webkit-scrollbar {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    border: none;
+    /* border: 1px solid var(--neutral-40); */
+    position: relative;
+}
+
+table td {
+    padding: 10px 15px;
+    text-align: center;
+}
+
+table .aksi{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+}
+
+table th {
+    border: 1px solid var(--primary-60);
+    background-color: var(--primary-60);
+    color: var(--neutral-100);
+    padding: 10px 15px;
+    text-wrap: nowrap;
+    width: 100%;
+
+    position: sticky;
+    top: 0;
+}
+
+table tr:hover,
+table tr:checked,
+table tr:nth-child(odd):hover,
+table tr:nth-child(odd):checked
+{
+    background-color: var(--neutral-80);
+}
+
+table tr:nth-child(odd) {
+    background-color: var(--neutral-90);
+}

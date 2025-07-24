@@ -1,0 +1,24 @@
+.message-error {
+    display: block;
+    width: 100%;
+    padding: 5px 10px;
+    background-color: hsl(4, 90%, 95%);
+    color: var(--error);
+    border: 2px solid hsl(4, 90%, 94%);
+    border-radius: 5px;
+}
+
+.message-success {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: hsl(183, 73%, 95%);
+    border: 2px solid hsl(183, 73%, 94%);
+    color: var(--primary-50);
+    padding: 10px 15px;
+    border-radius: 5px;
+    z-index: 99;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
