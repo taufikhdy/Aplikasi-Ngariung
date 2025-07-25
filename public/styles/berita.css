@@ -58,7 +58,7 @@
 }
 
 .news-section .news-group{
-    background-color: white;
+    background-color: var(--neutral-100);
     border-radius: 10px;
 }
 
@@ -84,7 +84,8 @@
 .news-section .news-group .news img {
     height: 100%;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 

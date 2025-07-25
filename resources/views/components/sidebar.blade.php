@@ -25,7 +25,7 @@
                 Profil</a>
 
         </div>
-        <form action="{{ route('logout') }}" method="post">
+        <form action="{{ route('logout') }}" method="post" onsubmit="return confirm('Apakah anda yakin ingin keluar dari akun?')">
             @csrf
             <button type="submit" name="" id="" value="" class="text-left text-large"><i
                     class="ri-logout-box-line"></i> logout</button>

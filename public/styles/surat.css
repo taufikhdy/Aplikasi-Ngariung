@@ -5,6 +5,10 @@
     animation: up .8s alternate;
 }
 
+.surat h6{
+    margin-bottom: 20px;
+}
+
 .surat .surat-section {
     display: flex;
     flex-direction: column;

@@ -4,30 +4,50 @@
 
 @section('content')
 
+    @if (session('success'))
+        <p class="message-success cp" id="message-success">{{ session('success') }}</p>
+    @endif
+
     <div class="form-box">
         <div class="form-header">
-            <h6>Ajukan Surat</h6>
-            <p>Login ke akun anda</p>
+            <h4>Ajukan Surat</h4>
         </div>
 
         {{-- disini form ubah --}}
-        <form action="" method="post">
+        <form action="{{ route('warga.ajukanSkck') }}" method="post">
+            <h6>Surat Pengajuan SKCK</h6>
             @csrf
             <div class="input-group">
 
+                <input type="hidden" name="jenis_surat_id" value="1"> {{-- id SKCK --}}
+
                 <div class="input-box">
                     <label for="nama">Nama</label>
-                    <input type="text" name="name" id="nama" placeholder="Nama" autocomplete="off">
+                    <input type="text" name="nama" id="nama" value="{{ Auth::user()->warga->nama }}"
+                        placeholder="Nama" autocomplete="off" required>
                 </div>
 
                 <div class="input-box">
                     <label for="nik">NIK</label>
-                    <input type="number" name="nik" id="nik" placeholder="Nomor Induk Kependudukan"
-                        autocomplete="off">
+                    <input type="number" name="nik" id="nik" value="{{ Auth::user()->warga->nik }}"
+                        placeholder="Nomor Induk Kependudukan" autocomplete="off" required>
                 </div>
 
-                <div class="input-box"> <label for="password">Kata Sandi</label>
-                    <input type="password" name="password" id="password" placeholder="Kata Sandi" autocomplete="off">
+                <div class="input-box">
+                    <label for="alamat">Alamat</label>
+                    <textarea name="alamat" id="" cols="" rows="" required autocomplete="off">{{ Auth::user()->warga->kartuKeluarga->alamat }}</textarea>
+                </div>
+
+                <div class="input-box">
+                    <label for="keperluan">Keperluan</label>
+                    <input type="text" name="keperluan" id="" placeholder="Keperluan" required
+                        autocomplete="off" value="{{ old('keperluan') }}"">
+                </div>
+
+                <div class="input-box">
+                    <label for="tujuan">Tujuan SKCK</label>
+                    <input type="text" name="tujuan_skck" id="" value="{{ old('tujuan_skck') }}"
+                        autocomplete="off" placeholder="Tujuan Pengajuan SKCK">
                 </div>
 
             </div>
@@ -41,33 +61,23 @@
         <h6>Riwayat Surat Pengajuan</h6>
 
         <div class="surat-section">
-            <div class="lite-card">
 
-                <div class="header">
-                    <p class="text-small link-a-error">Ditolak</p>
+            @foreach ($riwayat_surat as $riwayat)
+                <div class="lite-card">
+
+                    <div class="header">
+                        <p class="text-small link-a-error">Ditolak</p>
+                    </div>
+
+                    <p class="text-small">{{$riwayat->jenisSurat->nama_jenis}}</p>
+
+                    <div class="menu">
+                        <p class="cp-gray">{{ Carbon\Carbon::parse($riwayat->created_at)->format('d M Y') }}</p>
+                        <a href="{{ route('warga.detailSurat') }}" class="text-small">Detail</a>
+                    </div>
                 </div>
+            @endforeach
 
-                <p class="text-small">Surat Pengajuan</p>
-
-                <div class="menu">
-                    <p class="cp-gray">07/07/25</p>
-                    <a href="{{route('warga.detailSurat')}}" class="text-small">Detail</a>
-                </div>
-            </div>
-
-            <div class="lite-card">
-
-                <div class="header">
-                    <p class="text-small link-a-error">Ditolak</p>
-                </div>
-
-                <p class="text-small">Surat Pengajuan</p>
-
-                <div class="menu">
-                    <p class="cp-gray">07/07/25</p>
-                    <a href="" class="text-small">Detail</a>
-                </div>
-            </div>
         </div>
     </div>
 

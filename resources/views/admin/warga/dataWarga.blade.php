@@ -52,7 +52,8 @@
                         <td class="aksi">
                             <a href="{{ route('admin.editWarga', $warga->id) }}" class="link-a-active text-small">Edit</a>
 
-                            <form action="{{route('admin.hapusWarga', $warga->id)}}" method="POST" onsubmit="return confirm('Yakin ingin menghapus data warga. Tindakan ini akan menghapus data warga beserta akunnya.')">
+                            <form action="{{ route('admin.hapusWarga', $warga->id) }}" method="POST"
+                                onsubmit="return confirm('Yakin ingin menghapus data warga. Tindakan ini akan menghapus data warga beserta akunnya.')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="link-a-error text-samall">Hapus</button>
@@ -63,6 +64,10 @@
             </table>
         </div>
 
+
+    </div>
+
+    <div class="navigasi">
         <a href="{{ route('admin.tambahWarga') }}" class="link-a-active big text-small text-center">Tambah Data Warga</a>
     </div>
 

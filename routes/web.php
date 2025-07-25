@@ -108,6 +108,8 @@ Route::controller(adminController::class)->group(function () {
 
 
 
+// WARGA
+
 Route::controller(wargaController::class)->group(function () {
     route::get('/warga/dashboard', 'dashboard')->name('warga.dashboard');
 
@@ -130,7 +132,13 @@ Route::controller(wargaController::class)->group(function () {
     route::get('/warga/riwayat-bayar', 'riwayatBayar')->name('warga.riwayat-bayar');
     route::get('/warga/bukti-bayar', 'buktiBayar')->name('warga.bukti-bayar');
 
+
+
+
+    // SURAT
     route::get('/warga/surat', 'surat')->name('warga.surat');
+    route::post('/warga/surat/ajukan_surat/SKCK', 'ajukanSkck')->name('warga.ajukanSkck');
+
     route::get('/warga/detailSurat', 'detailSurat')->name('warga.detailSurat');
 
 });

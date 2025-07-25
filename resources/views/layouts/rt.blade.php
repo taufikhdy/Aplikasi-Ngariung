@@ -23,7 +23,7 @@
     {{-- CSS INTERNAL --}}
     <link rel="stylesheet" href="{{ asset('styles/animation.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/components.css?v=10') }}">
-    <link rel="stylesheet" href="{{ asset('styles/main.css?v=12') }}">
+    <link rel="stylesheet" href="{{ asset('styles/main.css?v=13') }}">
     <link rel="stylesheet" href="{{ asset('styles/dataList.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/form.css?V=6') }}">
     <link rel="stylesheet" href="{{ asset('styles/kas_iuran.css?v=4')}}">

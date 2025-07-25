@@ -74,10 +74,10 @@
                                 <div class="card-nav">
                                     <a href="" class="link-a-disable text-small text-center">Detail</a>
 
-                                    <form action="{{ route('warga.bayarIuran') }}" method="post"
+                                    <form action="{{ route('warga.bayarIuran', ['id' => $iuran->id]) }}" method="post"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" name="kategori_iuran_id" id="" value="{{$iuran->id}}">
+                                        {{-- <input type="hidden" name="kategori_iuran_id" id="" value="{{$iuran->id}}"> --}}
                                         <button type="submit" name="" id=""
                                             class="link-a-secondary-full text-small text-center"><i class="ri-arrow-right-line"></i> Bayar</button>
                                     </form>

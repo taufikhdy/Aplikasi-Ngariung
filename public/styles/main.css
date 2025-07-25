@@ -280,17 +280,30 @@ a {
 /* SPOTLIGHT OVERFLOW */
 .overflow {
     margin: 40px 0px 0px;
+    padding: 0px 0px 20px 0px;
     display: flex;
     justify-content: start;
     gap: 20px;
     align-items: center;
-    overflow-x: scroll;
+    overflow-x: auto;
+    width: 100%;
 
     animation: toLeft .8s alternate;
 }
 
-.overflow::-webkit-scrollbar {
-    display: none;
+.overflow::-webkit-scrollbar{
+    width: 100px;
+    height: 5px;
+}
+
+.overflow::-webkit-scrollbar-track{
+    background: var(--primary-70);
+    border-radius: 100px;
+}
+
+.overflow::-webkit-scrollbar-thumb{
+    background: var(--neutral-100);
+    border-radius: 100px;
 }
 
 
@@ -341,6 +354,15 @@ a {
     border-radius: 5px;
     width: 100% + 50%;
     text-wrap: nowrap;
+}
+
+.link-a-error-full {
+    background-color: hsl(4, 90%, 95%);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: var(--error-50);
+    outline: none;
+    width: 100%;
 }
 
 .link-a-active.big,

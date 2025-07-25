@@ -39,8 +39,9 @@
 
                         <div class="card-menu">
                             <div class="card-nav">
-                                {{-- <a href="{{ route('warga.detailkas', $k->id) }}"
-                                    class="link-a-disable text-small text-center">Detail</a> --}}
+                                <a href="{{ route('warga.pengeluaranKas', ['id' => $k->id]) }}"
+                                    class="link-a-error-full cp">Lihat Data
+                                    Pengeluaran</a>
                             </div>
                         </div>
 
@@ -53,7 +54,7 @@
                     </div>
                 @endforeach
 
-                @if($k_iurans)
+                @if ($k_iurans)
                     <div class="card">
                         <div class="card-head">
                             <div class="card-header">
@@ -64,7 +65,8 @@
                             </div>
 
                             <div class="card-info">
-                                <p class="cp">Berakhir tanggal {{ Carbon\Carbon::parse($k_iurans->tanggal_akhir)->format('d M Y') }}</p>
+                                <p class="cp">Berakhir tanggal
+                                    {{ Carbon\Carbon::parse($k_iurans->tanggal_akhir)->format('d M Y') }}</p>
                                 <h3>{{ 'Rp. ' . number_format($k_iurans->jumlah, 0, ',', '.') }}</h3>
                             </div>
                         </div>
@@ -87,10 +89,12 @@
                                     </form>
                                 </div>
                             @else
-                            <div class="card-status-success">
-                                <p class="cp">Sudah Bayar</p>
-                                <p class="cp">{{ Carbon\Carbon::parse($k_iurans->iuran->first()->tanggal_bayar)->format('d M Y') }}</p>
-                            </div>
+                                <div class="card-status-success">
+                                    <p class="cp">Sudah Bayar</p>
+                                    <p class="cp">
+                                        {{ Carbon\Carbon::parse($k_iurans->iuran->first()->tanggal_bayar)->format('d M Y') }}
+                                    </p>
+                                </div>
                                 <div class="card-nav">
                                     <a href="" class="link-a-disable text-small text-center">Detail</a>
                                 </div>

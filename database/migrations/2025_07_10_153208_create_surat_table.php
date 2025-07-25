@@ -14,18 +14,12 @@ return new class extends Migration
         Schema::create('surat', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('warga_id')->constrained('warga')->onDelete('cascade');
             $table->foreignId('jenis_surat_id')->constrained('jenis_surat')->onDelete('cascade');
-
-            $table->string('nomor_surat')->nullable();
-            $table->text('keperluan');
+            $table->foreignId('warga_id')->nullable()->constrained('warga')->onDelete('cascade');
 
             $table->enum('status', ['diproses', 'disetujui', 'ditolak'])->default('diproses');
 
-            $table->date('tanggal_pengajuan');
-            $table->date('tanggal_disetujui')->nullable();
-
-            $table->string('file_ttd')->nullable(); //TANDA TANGAN DIGITAL OPSIONAL
+            $table->string('file_pdf')->nullable();
 
             $table->timestamps();
         });

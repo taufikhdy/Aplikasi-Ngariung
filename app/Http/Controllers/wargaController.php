@@ -19,6 +19,10 @@ use App\Models\TransaksiIuran;
 
 use App\Models\Berita;
 
+use App\Models\JenisSurat;
+use App\Models\Surat;
+use App\Models\SuratSKCK;
+
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
@@ -167,6 +171,44 @@ class wargaController extends Controller
     {
         $this->hanyaUntukWarga();
 
-        return view('warga.surat.surat');
+        $warga = Auth::user()->warga;
+
+        $riwayat_surat = Surat::with('jenisSurat')->where('warga_id', $warga->id)->latest()->get();
+
+        return view('warga.surat.surat', compact('riwayat_surat'));
+    }
+
+
+    public function ajukanSkck(Request $request)
+    {
+        $this->hanyaUntukWarga();
+
+        $request->validate([
+            'nama' => 'required|string|max:100',
+            'nik' => 'required|string|max:20',
+            'alamat' => 'required|string',
+            'keperluan' => 'required|string|max:255',
+            'tujuan_skck' => 'nullable|string|max:255',
+            'jenis_surat_id' => 'required|exists:jenis_surat,id',
+        ]);
+
+        $warga = Auth::user()->warga;
+
+        $surat = Surat::create([
+            'jenis_surat_id' => $request->jenis_surat_id,
+            'warga_id' => $warga->id,
+            'status' => 'diproses',
+        ]);
+
+        SuratSKCK::create([
+            'surat_id' => $surat->id,
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'alamat' => $request->alamat,
+            'keperluan' => $request->keperluan,
+            'tujuan_skck' => $request->tujuan_skck,
+        ]);
+
+        return redirect()->back()->with('success', 'Pengajuan surat SKCK berhasil dikirim.');
     }
 }
