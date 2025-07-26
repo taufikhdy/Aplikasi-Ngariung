@@ -43,7 +43,7 @@
                     <div class="input-box">
                         <label for="nik">NIK</label>
                         <input type="number" name="nik" id="nik" placeholder="Nomor Induk Kependudukan"
-                            autocomplete="off">
+                            autocomplete="off" value="{{old('nik')}}">
                         @if(session('nik'))
                             <p class="message-error cp">{{ session('nik') }}</p>
                         @endif

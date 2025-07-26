@@ -17,14 +17,16 @@
 
     {{-- CSS INTERNAL --}}
     <link rel="stylesheet" href="{{ asset('styles/animation.css') }}">
-    <link rel="stylesheet" href="{{ asset('styles/components.css?v=8') }}">
-    <link rel="stylesheet" href="{{ asset('styles/main.css?v=8') }}">
-    <link rel="stylesheet" href="{{ asset('styles/dataList.css')}}">
-    <link rel="stylesheet" href="{{ asset('styles/form.css?V=4') }}">
+    <link rel="stylesheet" href="{{ asset('styles/components.css?v=11') }}">
+    <link rel="stylesheet" href="{{ asset('styles/main.css?v=13') }}">
+    <link rel="stylesheet" href="{{ asset('styles/dataList.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/form.css?V=7') }}">
     <link rel="stylesheet" href="{{ asset('styles/kas_iuran.css?v=4')}}">
     <link rel="stylesheet" href="{{ asset('styles/card.css?v=3') }}">
     <link rel="stylesheet" href="{{ asset('styles/berita.css?=3+') }}">
     <link rel="stylesheet" href="{{ asset('styles/surat.css')}}">
+    <link rel="stylesheet" href="{{ asset('styles/messages.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/table.css') }}">
 
     <link rel="stylesheet" href="{{ asset('remixicon/fonts/remixicon.css') }}">
 

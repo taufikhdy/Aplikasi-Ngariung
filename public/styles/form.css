@@ -29,11 +29,15 @@
     display: block;
 }
 
-.input-group {
+.input-group{
     display: flex;
     flex-direction: column;
     gap: 15px;
     /* margin: 30px 0px; */
+}
+
+.KKbaru .input-box{
+    margin-top: 15px;
 }
 
 .input-box {

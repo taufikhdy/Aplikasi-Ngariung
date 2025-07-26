@@ -1,7 +1,7 @@
 window.onload = function () {
   setTimeout(() => {
     window.scrollTo(0, 0);
-  }, 10);
+  }, 15);
 };
 
 
@@ -41,3 +41,18 @@ document.addEventListener("DOMContentLoaded", function() {
         if(!more?.contains(event.target)) {
             moreAcc?.classList.remove("show");
         }});
+
+
+    const pilih = document.getElementById('opsiKK');
+    const memilih = document.getElementById('pilih');
+    const buat = document.getElementById('buat');
+
+    pilih.addEventListener('change', () => {
+        if (pilih.value == 'ada'){
+            memilih.style.display = 'block';
+            buat.style.display = 'none'
+        }else{
+            memilih.style.display = 'none';
+            buat.style.display = 'block';
+        }
+    })

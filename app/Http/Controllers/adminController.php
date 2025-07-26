@@ -57,7 +57,7 @@ class adminController extends Controller
     public function profile(): View
     {
         $this->hanyaUntukAdmin();
-        $keluargas = Warga::where('kk_id', Auth::user()?->warga?->kk_id)->orderBy('status_keluarga', 'desc')->get();
+        $keluargas = Warga::where('kk_id', Auth::user()?->warga?->kk_id)->orderBy('status_keluarga', 'asc')->get();
         // PR
         return view('admin.profile', compact('keluargas'));
     }
@@ -107,7 +107,7 @@ class adminController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'kk_id' => 'required|exists:kartu_keluarga,id',
+            // 'kk_id' => 'required|exists:kartu_keluarga,id',
             'nik' => 'required|numeric|unique:warga,nik',
             'tanggal_lahir' => 'required|date',
             'agama' => 'required|string',
@@ -118,7 +118,41 @@ class adminController extends Controller
             'telepon' => 'required|string'
         ]);
 
-        $warga = Warga::create($request->all());
+        if($request->filled('kk_id')){
+            $kkId = $request->kk_id;
+        }else{
+            $request->validate([
+                'nomor_kk' => 'required|unique:kartu_keluarga,no_kk',
+                'alamat' => 'required|string',
+                'rt' => 'required|numeric',
+                'rw' => 'required|numeric'
+            ]);
+
+            $kk = KartuKeluarga::create([
+                'no_kk' => $request->nomor_kk,
+                'alamat' => $request->alamat,
+                'rt' => $request->rt,
+                'rw' => $request->rw,
+            ]);
+
+
+            $kkId = $kk->id;
+
+        }
+
+        $warga = Warga::create([
+            'kk_id' => $kkId,
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'jenis_kelamin' => $request->jenis_kelamin,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'agama' => $request->agama,
+            'pendidikan' => $request->pendidikan,
+            'pekerjaan' => $request->pekerjaan,
+            'status_perkawinan' => $request->status_perkawinan,
+            'status_keluarga' => $request->status_keluarga,
+            'telepon' => $request->telepon,
+        ]);
 
         User::create([
             'nik' => $warga->nik,
@@ -129,6 +163,8 @@ class adminController extends Controller
 
         return redirect()->route('admin.dataWarga')->with('success', 'Data Warga berhasil ditambahkan.');
     }
+
+
 
 
     public function editWarga($id): View
@@ -285,7 +321,7 @@ class adminController extends Controller
 
 
         // return redirect()->route('admin.kelolaKas', ['id' => $kas->id]);
-        return redirect()->route('admin.kasiuran');
+        return redirect()->route('admin.kasiuran')->with('success', 'Berhasil menambahkan transaksi.');
     }
 
 
@@ -404,7 +440,7 @@ class adminController extends Controller
 
         $kas = Kas::latest()->take(1)->first();
 
-        TransaksiKas::create([
+        $uang = TransaksiKas::create([
             'kas_id' => $kas->id,
             'jenis' => $jenis,
             'jumlah' => $transaksi->kategoriIuran->jumlah,
@@ -413,7 +449,7 @@ class adminController extends Controller
         ]);
 
 
-        $pemasukan = TransaksiKas::where('jenis', 'masuk')->sum('jumlah');
+        $pemasukan = $uang->jumlah;
 
 
         $kas->saldo += $pemasukan;

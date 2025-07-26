@@ -288,6 +288,8 @@ a {
     overflow-x: auto;
     width: 100%;
 
+    touch-action:;
+
     animation: toLeft .8s alternate;
 }
 

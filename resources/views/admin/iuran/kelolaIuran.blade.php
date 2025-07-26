@@ -7,7 +7,8 @@
     <div class="bg">
 
         <div class="back">
-            <a href="{{ url()->previous() }}">
+            {{-- <a href="{{ url()->previous() }}"> --}}
+            <a href="{{route('admin.kasiuran')}}">
                 <h4 class="text-white"><i class="ri-arrow-left-long-line small-icon"></i>Kelola Iuran</h4>
             </a>
         </div>

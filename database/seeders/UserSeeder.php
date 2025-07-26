@@ -17,15 +17,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-        $wargas = Warga::take(2)->get();
+        $wargas = Warga::where()->first();
 
-        foreach ($wargas as $warga) {
             User::create([
-                'nik' => $warga->nik,
+                'nik' => $wargas->nik,
                 'password' => Hash::make('password123'),
-                'warga_id' => $warga->id,
-                'role_id' => 2,
+                'warga_id' => $wargas->id,
+                'role_id' => 1,
             ]);
-        }
     }
 }

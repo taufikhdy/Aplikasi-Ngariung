@@ -22,10 +22,10 @@
 
     {{-- CSS INTERNAL --}}
     <link rel="stylesheet" href="{{ asset('styles/animation.css') }}">
-    <link rel="stylesheet" href="{{ asset('styles/components.css?v=10') }}">
+    <link rel="stylesheet" href="{{ asset('styles/components.css?v=11') }}">
     <link rel="stylesheet" href="{{ asset('styles/main.css?v=13') }}">
     <link rel="stylesheet" href="{{ asset('styles/dataList.css') }}">
-    <link rel="stylesheet" href="{{ asset('styles/form.css?V=6') }}">
+    <link rel="stylesheet" href="{{ asset('styles/form.css?V=7') }}">
     <link rel="stylesheet" href="{{ asset('styles/kas_iuran.css?v=4')}}">
     <link rel="stylesheet" href="{{ asset('styles/card.css?v=3') }}">
     <link rel="stylesheet" href="{{ asset('styles/berita.css?=3+') }}">
@@ -47,7 +47,7 @@
 
 
     {{-- IMPOR JS DARI PUBLIC --}}
-    <script src="{{ asset('js/script.js?v=7') }}"></script>
+    <script src="{{ asset('js/script.js?v=8') }}"></script>
     <script src="{{ asset('js/message.js') }}"></script>
 </body>
 

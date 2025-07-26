@@ -17,7 +17,8 @@ class KK_Seeder extends Seeder
         DB::table('kartu_keluarga')->insert([
             'no_kk' => '003214',
             'alamat' => 'cibingbin',
-            'rt' => '01'
+            'rt' => '01',
+            'rw' => '01'
         ]);
     }
 }

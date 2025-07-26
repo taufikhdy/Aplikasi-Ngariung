@@ -11,7 +11,7 @@
     <div class="kas">
 
         <div class="kas-section">
-            <h6>Kas</h6>
+            <h4>Kas</h4>
 
             @if ($kas->isEmpty())
                 <p class="cp-gray text-center">Belum ada kas untuk saat ini.</p>
@@ -56,7 +56,7 @@
         </div>
 
         <div class="kas-section">
-            <h6>Iuran</h6>
+            <h4>Iuran</h4>
 
             @if ($k_iurans->isEmpty())
                 <p class="cp-gray text-center">Belum ada iuran untuk saat ini.</p>

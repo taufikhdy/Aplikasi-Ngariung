@@ -80,7 +80,7 @@ nav .info .link {
 /* SIDEBAR */
 .aside {
     background-color: var(--neutral-100);
-    width: 300px;
+    width: 250px;
     height: 100%;
     padding: 16px;
 
@@ -194,6 +194,7 @@ nav .info .link {
 a.text-regular.active{
     color: white;
     background-color: var(--primary-60);
+    font-weight: bold;
 }
 
 

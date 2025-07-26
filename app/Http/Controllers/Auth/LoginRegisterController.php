@@ -23,31 +23,31 @@ class LoginRegisterController extends Controller implements HasMiddleware
         ];
     }
 
-    public function register(): View
-    {
-        return view('auth.register');
-    }
+    // public function register(): View
+    // {
+    //     return view('auth.register');
+    // }
 
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => 'required|string|max:250',
-            'email' => 'required|string|email:rfc,dns|max:250|unique:users,email',
-            'password' => 'required|string|min:8|confirmed'
-        ]);
+    // public function store(Request $request): RedirectResponse
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:250',
+    //         'email' => 'required|string|email:rfc,dns|max:250|unique:users,email',
+    //         'password' => 'required|string|min:8|confirmed'
+    //     ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+    //     $user = User::create([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'password' => Hash::make($request->password)
+    //     ]);
 
-        $credentials = $request->only('email', 'password');
-        Auth::attempt($credentials);
-        $request->session()->regenerate();
-        return redirect()->route('home')
-            ->withSuccess('You have successfully registered & logged in!');
-    }
+    //     $credentials = $request->only('email', 'password');
+    //     Auth::attempt($credentials);
+    //     $request->session()->regenerate();
+    //     return redirect()->route('home')
+    //         ->withSuccess('You have successfully registered & logged in!');
+    // }
 
     public function login(): View
     {
@@ -84,7 +84,7 @@ class LoginRegisterController extends Controller implements HasMiddleware
         if(!$nik){
             return redirect()->back()->with('nik', 'NIK tidak ditemukan, Pastikan NIK yang digunakan sudah terdaftar.');
         }
-        return redirect()->back()->with('password', 'Password salah. Coba lagi.');
+        return redirect()->back()->withInput()->with('password', 'Password salah. Coba lagi.');
 
     }
 

@@ -161,6 +161,7 @@ a{
 
 .logo img{
     width: 30%;
+    user-select: none;
 }
 
 

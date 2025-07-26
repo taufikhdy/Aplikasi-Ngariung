@@ -59,7 +59,7 @@ class wargaController extends Controller
     {
         $this->hanyaUntukWarga();
 
-        $keluargas = Warga::where('kk_id', Auth::user()?->warga?->kk_id)->get();
+                $keluargas = Warga::where('kk_id', Auth::user()?->warga?->kk_id)->orderBy('status_keluarga', 'asc')->get();
         return view('warga.profile', compact('keluargas'));
     }
 

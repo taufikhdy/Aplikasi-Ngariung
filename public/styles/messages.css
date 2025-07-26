@@ -10,15 +10,22 @@
 
 .message-success {
     position: fixed;
-    bottom: 50%;
+    top: 5%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--primary-90);
+    /* background-color: var(--primary-90);
     border: 2px solid var(--primary-30);
-    color: var(--primary-50);
+    color: var(--primary-50); */
+
+    background-color: var(--warning-90);
+    color: var(--neutral-20);
+    border: 2px solid var(--warning-70);
+    width: 90%;
+
     padding: 10px 15px;
     border-radius: 5px;
     z-index: 99;
     opacity: 1;
     transition: opacity 0.5s ease;
+    text-align: center;
 }

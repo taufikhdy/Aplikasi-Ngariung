@@ -14,12 +14,18 @@
             @csrf
             <div class="input-group">
 
+
+                {{-- Cek Data KK --}}
                 <div class="input-box">
-                    <label for="nama">Nama Lengkap</label>
-                    <input type="text" name="nama" id="nama" placeholder="Nama" autocomplete="off">
+                    <label for="opsiKK">Apakah KK sudah ada?</label>
+                    <select name="" id="opsiKK">
+                        <option value="ada">Ya, pilih dari KK yang sudah ada.</option>
+                        <option value="baru">Belum, buat KK baru.</option>
+                    </select>
                 </div>
 
-                <div class="input-box">
+                {{-- KK jika ada --}}
+                <div class="input-box" id="pilih">
                     <label for="no_kk">Nomor Kartu Keluarga</label>
                     <select name="kk_id" id="no_kk" placeholder="Nomor Kartu Keluarga" autocomplete="off">
                         <option value="" disabled selected>-- Pilih No KK --</option>
@@ -29,6 +35,46 @@
                         @endforeach
                     </select>
                 </div>
+
+
+                {{-- KK jika belum ada --}}
+                <div class="kkbaru" id="buat" style="display: none;">
+                    <div class="input-box">
+                        <label for="nomor_kk">Nomor Kartu Keluarga</label>
+                        <input type="number" name="nomor_kk" id="no_kk" placeholder="Nomor Kartu Keluarga">
+                    </div>
+
+                    <br>
+
+                    <div class="input-box">
+                        <label for="alamat">Alamat</label>
+                        <textarea name="alamat" id="alamat" cols="" rows=""></textarea>
+                    </div>
+
+                    <br>
+
+                    <div class="input-box">
+                        <label for="rt">RT</label>
+                        <input type="number" name="rt" placeholder="RT">
+                    </div>
+
+                    <br>
+
+                    <div class="input-box">
+                        <label for="rw">RW</label>
+                        <input type="number" name="rw" placeholder="RW">
+                    </div>
+
+                    <br>
+                    <hr>
+                </div>
+
+
+                <div class="input-box">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" name="nama" id="nama" placeholder="Nama" autocomplete="off">
+                </div>
+
 
                 <div class="input-box">
                     <label for="nik">Nomor Induk Kependudukan</label>
@@ -94,7 +140,8 @@
 
                 <div class="input-box">
                     <label for="status_keluarga">Status Keluarga</label>
-                    <select name="status_keluarga" id="status_keluarga" placeholder="Status Keluarga" autocomplete="off">
+                    <select name="status_keluarga" id="status_keluarga" placeholder="Status Keluarga"
+                        autocomplete="off">
 
                         <option value="" disabled selected>-- Status Keluarga --</option>
 

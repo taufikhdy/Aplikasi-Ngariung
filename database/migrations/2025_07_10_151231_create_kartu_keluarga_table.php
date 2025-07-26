@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('no_kk')->unique();
             $table->string('alamat');
             $table->string('rt');
+            $table->string('rw');
 
             // $table->string('rw'); opsi
 

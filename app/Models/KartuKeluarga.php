@@ -8,11 +8,12 @@ class KartuKeluarga extends Model
 {
 
     protected $table = 'kartu_keluarga';
-    
+
     protected $fillable = [
         'no_kk',
         'alamat',
-        'rt'
+        'rt',
+        'rw'
     ];
 
     public function warga()

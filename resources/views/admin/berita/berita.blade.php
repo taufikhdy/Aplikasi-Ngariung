@@ -9,7 +9,7 @@
     @endif
     <div class="news-section">
         <div class="news-menu">
-            <h6>Berita</h6>
+            <h4>Berita</h4>
             {{-- <a href="" class="text-small">Lihat semua</a> --}}
         </div>
 

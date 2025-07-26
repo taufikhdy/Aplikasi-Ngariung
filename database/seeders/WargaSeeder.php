@@ -15,15 +15,15 @@ class WargaSeeder extends Seeder
     public function run(): void
     {
         DB::table('warga')->insert([
-            'nama' => 'taufik',
-            'nik' => '3214',
+            'nama' => 'Pak RT',
+            'nik' => '1234',
             'jenis_kelamin' => 'laki-laki',
             'tanggal_lahir' => '2007-11-22',
             'agama' => 'islam',
-            'pendidikan' => 'smk',
-            'pekerjaan' => 'belum_bekerja',
+            'pendidikan' => 'S1',
+            'pekerjaan' => 'bekerja',
             'status_perkawinan' => 'belum_kawin',
-            'status_keluarga' => 'anggota',
+            'status_keluarga' => 'Kepala',
             'telepon' => '087736687006',
             'kk_id' => 1
         ]);
