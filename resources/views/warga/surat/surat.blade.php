@@ -14,8 +14,8 @@
         </div>
 
         {{-- disini form ubah --}}
+        <h6 class="text-center">Surat Pengajuan SKCK</h6>
         <form action="{{ route('warga.ajukanSkck') }}" method="post">
-            <h6>Surat Pengajuan SKCK</h6>
             @csrf
             <div class="input-group">
 

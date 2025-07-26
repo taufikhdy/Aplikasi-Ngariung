@@ -10,33 +10,30 @@
         <h6>Surat Masuk</h6>
 
         <div class="surat-section">
-            <div class="lite-card">
 
-                <div class="header">
-                    <p class="text-small link-a-error">Ditolak</p>
+            @foreach ($surats as $surat)
+                <div class="lite-card">
+
+                    <div class="header">
+                        @if ($surat->status == 'diproses')
+                            <p class="text-small link-a-warning">{{ $surat->status }}</p>
+                        @elseif ($surat->status == 'disetujui')
+                            <p class="text-small link-a-success">{{ $surat->status }}</p>
+                        @elseif ($surat->status == 'ditolak')
+                            <p class="text-small link-a-error">{{ $surat->status }}</p>
+                        @endif
+                    </div>
+
+                    <h6 class="title">{{$surat->jenisSurat->nama_jenis}}</h6>
+                    <p class="text-small">Diajukan oleh : {{$surat->warga->nama}}</p>
+
+                    <div class="menu">
+                        <p class="cp-gray">{{ Carbon\Carbon::parse($surat->created_at)->format('d M Y') }}</p>
+                        <a href="" class="text-small">Detail</a>
+                    </div>
                 </div>
+            @endforeach
 
-                <p class="text-small">Surat Pengajuan</p>
-
-                <div class="menu">
-                    <p class="cp-gray">07/07/25</p>
-                    <a href="{{route('warga.detailSurat')}}" class="text-small">Detail</a>
-                </div>
-            </div>
-
-            <div class="lite-card">
-
-                <div class="header">
-                    <p class="text-small link-a-error">Ditolak</p>
-                </div>
-
-                <p class="text-small">Surat Pengajuan</p>
-
-                <div class="menu">
-                    <p class="cp-gray">07/07/25</p>
-                    <a href="" class="text-small">Detail</a>
-                </div>
-            </div>
         </div>
     </div>
 

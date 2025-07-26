@@ -68,14 +68,14 @@
                                 <div class="card-title">
                                     <i class="ri-wallet-3-line card-icon"></i>
                                     <h6>{{ $iuran->nama_iuran }}</h6>
-                                </div>
-                                <div class="">
-                                    <form action="{{ route('admin.hapusIuran', $iuran->id) }}" method="post"
-                                        onsubmit="return confirm('Yakin ingin menghapus iuran ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="small-icon delete-btn"><i class="ri-delete-bin-line"></i></button>
-                                    </form>
+                                    <div class="">
+                                        <form action="{{ route('admin.hapusIuran', $iuran->id) }}" method="post"
+                                            onsubmit="return confirm('Yakin ingin menghapus iuran ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="small-icon delete-btn"><i class="ri-delete-bin-line"></i></button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
 

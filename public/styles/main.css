@@ -192,11 +192,11 @@ button {
     outline: none;
 }
 
-.text-white{
+.text-white {
     color: var(--neutral-100);
 }
 
-.text-black{
+.text-black {
     color: var(--neutral-20);
 }
 
@@ -291,17 +291,17 @@ a {
     animation: toLeft .8s alternate;
 }
 
-.overflow::-webkit-scrollbar{
+.overflow::-webkit-scrollbar {
     width: 100px;
     height: 5px;
 }
 
-.overflow::-webkit-scrollbar-track{
+.overflow::-webkit-scrollbar-track {
     background: var(--primary-70);
     border-radius: 100px;
 }
 
-.overflow::-webkit-scrollbar-thumb{
+.overflow::-webkit-scrollbar-thumb {
     background: var(--neutral-100);
     border-radius: 100px;
 }
@@ -323,6 +323,22 @@ a {
     padding: 5px 10px;
     border-radius: 5px;
     color: var(--error-50);
+    outline: none;
+}
+
+.link-a-warning {
+    background-color: var(--warning-90);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: hsl(45, 100%, 30%);;
+    outline: none;
+}
+
+.link-a-success {
+    background-color: var(--tertiary-90);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #19959A;
     outline: none;
 }
 
@@ -368,7 +384,9 @@ a {
 .link-a-active.big,
 .link-a-secondary.big,
 .link-a-error.big,
-.link-a-disable.big {
+.link-a-disable.big,
+.link-a-warning.big,
+.link-a-success.big {
     padding: 10px;
 }
 

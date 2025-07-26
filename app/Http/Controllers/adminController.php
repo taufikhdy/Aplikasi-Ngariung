@@ -23,6 +23,10 @@ use App\Models\TransaksiIuran;
 
 use App\Models\Berita;
 
+use App\Models\JenisSurat;
+use App\Models\Surat;
+use App\Models\SuratSKCK;
+
 // TANGGAL
 use Carbon\Carbon;
 
@@ -398,7 +402,10 @@ class adminController extends Controller
 
         $jenis = 'masuk';
 
+        $kas = Kas::latest()->take(1)->first();
+
         TransaksiKas::create([
+            'kas_id' => $kas->id,
             'jenis' => $jenis,
             'jumlah' => $transaksi->kategoriIuran->jumlah,
             'keterangan' => 'Pembayaran Iuran oleh : ' . $transaksi->warga->nama,
@@ -408,7 +415,6 @@ class adminController extends Controller
 
         $pemasukan = TransaksiKas::where('jenis', 'masuk')->sum('jumlah');
 
-        $kas = Kas::latest()->take(1)->first();
 
         $kas->saldo += $pemasukan;
 
@@ -507,6 +513,9 @@ class adminController extends Controller
     public function surat(): View
     {
         $this->hanyaUntukAdmin();
-        return view('admin.surat.surat');
+
+        $surats = Surat::with('jenisSurat', 'warga')->latest()->get();
+
+        return view('admin.surat.surat', compact('surats'));
     }
 }
