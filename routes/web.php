@@ -100,8 +100,12 @@ Route::controller(adminController::class)->group(function () {
     route::delete('/admin/berita/hapus/{id}', 'hapusBerita')->name('admin.hapusBerita');
 
 
+    // SURAT
     route::get('/admin/surat', 'surat')->name('admin.surat');
-    route::get('/admin/surat/detailSurat', 'detailSurat')->name('admin.detailSurat');
+    route::get('/admin/surat/detailSurat/{id}', 'detailSurat')->name('admin.detailSurat');
+
+    route::post('/admin/surat/setujui/{id}', 'setujuiSurat')->name('admin.setujuiSurat');
+    route::post('/admin/surat/tolak/{id}', 'tolakSurat')->name('admin.tolakSurat');
 
 });
 
@@ -139,6 +143,6 @@ Route::controller(wargaController::class)->group(function () {
     route::get('/warga/surat', 'surat')->name('warga.surat');
     route::post('/warga/surat/ajukan_surat/SKCK', 'ajukanSkck')->name('warga.ajukanSkck');
 
-    route::get('/warga/detailSurat', 'detailSurat')->name('warga.detailSurat');
+    route::get('/warga/detailSurat/{id}', 'detailSurat')->name('warga.detailSurat');
 
 });

@@ -5,7 +5,9 @@
 @section('content')
 
     @if (session('success'))
-        <p class="message-success cp" id="message-success">{{ session('success') }}</p>
+        <p class="message-success cp" id="message">{{ session('success') }}</p>
+    @elseif (session('error'))
+        <p class="message-pop-error cp" id="message">{{ session('error') }}</p>
     @endif
 
     <div class="kas">
@@ -28,7 +30,8 @@
                                             onsubmit="return confirm('Yakin ingin menghapus kas ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="small-icon delete-btn"><i class="ri-delete-bin-line"></i></button>
+                                            <button type="submit" class="small-icon delete-btn"><i
+                                                    class="ri-delete-bin-line"></i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -73,14 +76,16 @@
                                             onsubmit="return confirm('Yakin ingin menghapus iuran ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="small-icon delete-btn"><i class="ri-delete-bin-line"></i></button>
+                                            <button type="submit" class="small-icon delete-btn"><i
+                                                    class="ri-delete-bin-line"></i></button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="card-info">
-                                <p class="cp">Berakhir tanggal {{ Carbon\Carbon::parse($iuran->tanggal_akhir)->format('d M Y') }}</p>
+                                <p class="cp">Berakhir tanggal
+                                    {{ Carbon\Carbon::parse($iuran->tanggal_akhir)->format('d M Y') }}</p>
                                 <h3>{{ 'Rp. ' . number_format($iuran->jumlah, 0, ',', '.') }}</h3>
                             </div>
                         </div>
@@ -117,7 +122,8 @@
     </div>
 
     <div class="navigasi">
-        <a href="{{ route('admin.formTambahKas') }}" class="link-a-active big text-center text-small tombol">Tambah Kas</a>
+        <a href="{{ route('admin.formTambahKas') }}" class="link-a-active big text-center text-small tombol">Tambah
+            Kas</a>
         <a href="{{ route('admin.formTambahIuran') }}" class="link-a-active big text-center text-small tombol">Tambah
             Iuran</a>
     </div>

@@ -69,7 +69,7 @@
                             @if ($iuran->iuran->isEmpty())
                                 <div class="card-status-warning">
                                     <p class="cp">Belum Bayar</p>
-                                    <p class="cp">{{ $iuran->jumlah }}</p>
+                                    <p class="cp">{{ 'Rp. ' . number_format($iuran->jumlah, 0, ',', '.') }}</p>
                                 </div>
                                 <div class="card-nav">
                                     <a href="" class="link-a-disable text-small text-center">Detail</a>

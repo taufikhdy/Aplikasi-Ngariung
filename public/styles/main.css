@@ -288,7 +288,7 @@ a {
     overflow-x: auto;
     width: 100%;
 
-    touch-action:;
+    touch-action: ;
 
     animation: toLeft .8s alternate;
 }
@@ -332,7 +332,8 @@ a {
     background-color: var(--warning-90);
     padding: 5px 10px;
     border-radius: 5px;
-    color: hsl(45, 100%, 30%);;
+    color: hsl(45, 100%, 30%);
+    ;
     outline: none;
 }
 
@@ -354,6 +355,14 @@ a {
 
 .link-a-active i {
     margin-right: 5px;
+}
+
+.link-a-active-full {
+    color: var(--neutral-100);
+    background-color: var(--primary);
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
 }
 
 .link-a-secondary {
@@ -421,6 +430,13 @@ a {
     color: var(--error-50);
 }
 
+.box-a-warning {
+    background-color: var(--warning-90);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: hsl(45, 100%, 30%);
+}
+
 
 
 
@@ -444,7 +460,11 @@ a {
     text-align: justify;
 }
 
-.pemasukan {
+
+
+
+
+.transaksi {
     margin: 20px 24px 0px 24px;
     background-color: var(--neutral-100);
     padding: 15px 20px;
@@ -455,19 +475,52 @@ a {
     gap: 15px;
 }
 
+.transaksi-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.transaksi .transaksi-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transaksi .transaksi-detail .rincian-transaksi {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.transaksi .transaksi-detail .rincian-transaksi .saldo-masuk,
+.transaksi .transaksi-detail .rincian-transaksi .saldo-keluar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transaksi .transaksi-detail .rincian-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
 
 /*
 
-    HATI HATI DENGAN PENGELUARAN DAN PEMASUKAN BEDA CSS DIKIT
+    HATI HATI DENGAN transaksi DAN PEMASUKAN BEDA CSS DIKIT
 
 */
 
 
-.pengeluaran-field h6 {
+.transaksi-field h6 {
     margin-bottom: 20px;
 }
 
-.pengeluaran-section {
+.riwayat-section {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -476,7 +529,7 @@ a {
     margin-top: 25px;
 }
 
-.pengeluaran {
+.riwayat {
     background-color: var(--neutral-100);
     padding: 15px 20px;
     border-radius: 10px;
@@ -486,51 +539,49 @@ a {
     gap: 15px;
 }
 
-.pemasukan .pemasukan-header,
-.pengeluaran .pengeluaran-header {
+
+.riwayat .riwayat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 
-.pemasukan .detail-pemasukan,
-.pengeluaran .detail-pengeluaran {
+.riwayat .riwayat-detail {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.pemasukan .detail-pemasukan .rincian,
-.pengeluaran .detail-pengeluaran .rincian {
+
+.riwayat .riwayat-detail .riwayat-rincian {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.pemasukan .detail-pemasukan .rincian .saldo-masuk,
-.pemasukan .detail-pemasukan .rincian .saldo-keluar,
-.pengeluaran .detail-pengeluaran .rincian .saldo-keluar {
+
+.riwayat .riwayat-detail .riwayat-rincian .saldo-keluar {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.pemasukan .detail-pemasukan .rincian-menu,
-.pengeluaran .rincian-menu {
+
+.riwayat .rincian-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
 }
 
-.pengeluaran .rincian-menu p {
+.riwayat .rincian-menu p {
     width: 100%;
 }
 
-.padding {
+/* .padding {
     padding: 0px 24px;
-}
+} */
 
 
 .bayar {

@@ -7,9 +7,12 @@
 
 
     <div class="surat">
-        <h6>Surat Masuk</h6>
+        <h4>Surat Masuk</h6>
 
         <div class="surat-section">
+            @if ($surats->isEmpty())
+                <p class="cp-gray text-center">Belum ada surat masuk</p>
+            @else
 
             @foreach ($surats as $surat)
                 <div class="lite-card">
@@ -29,11 +32,11 @@
 
                     <div class="menu">
                         <p class="cp-gray">{{ Carbon\Carbon::parse($surat->created_at)->format('d M Y') }}</p>
-                        <a href="" class="text-small">Detail</a>
+                        <a href="{{route('admin.detailSurat', $surat->id)}}" class="text-small">Detail</a>
                     </div>
                 </div>
             @endforeach
-
+            @endif
         </div>
     </div>
 

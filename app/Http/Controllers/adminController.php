@@ -77,13 +77,6 @@ class adminController extends Controller
     }
 
 
-    public function detailSurat(): View
-    {
-        $this->hanyaUntukAdmin();
-        return view('admin.surat.detailSurat');
-    }
-
-
 
 
     //FUNGSI WARGA
@@ -118,9 +111,9 @@ class adminController extends Controller
             'telepon' => 'required|string'
         ]);
 
-        if($request->filled('kk_id')){
+        if ($request->filled('kk_id')) {
             $kkId = $request->kk_id;
-        }else{
+        } else {
             $request->validate([
                 'nomor_kk' => 'required|unique:kartu_keluarga,no_kk',
                 'alamat' => 'required|string',
@@ -137,7 +130,6 @@ class adminController extends Controller
 
 
             $kkId = $kk->id;
-
         }
 
         $warga = Warga::create([
@@ -194,7 +186,8 @@ class adminController extends Controller
     }
 
 
-    public function hapuswarga($id){
+    public function hapuswarga($id)
+    {
         User::where('warga_id', $id)->delete();
         Warga::findOrFail($id)->delete();
         return redirect()->route('admin.dataWarga')->with('success', 'Data warga berhasil dihapus');
@@ -228,7 +221,24 @@ class adminController extends Controller
         $this->hanyaUntukAdmin();
 
         $kas = Kas::findOrFail($id);
-        return view('admin.kas.detailkas', compact('kas'));
+
+
+        $transaksis = TransaksiKas::where('kas_id', $id)->orderByDesc('tanggal')->get();
+
+        $pemasukans = $transaksis->where('jenis', 'masuk');
+        $pengeluarans = $transaksis->where('jenis', 'keluar');
+
+        $total_masuk = $pemasukans->sum('jumlah');
+        $total_keluar = $pengeluarans->sum('jumlah');
+
+        $saldo_akhir = $total_masuk - $total_keluar;
+
+        return view('admin.kas.detailkas', compact(
+            'kas',
+            'total_masuk',
+            'total_keluar',
+            'saldo_akhir'
+        ));
     }
 
 
@@ -271,13 +281,13 @@ class adminController extends Controller
 
         $kas = Kas::findOrFail($id);
 
-        if($kas->transaksi()->exists()){
-            return back()->with('error', 'Tidak bisa menghapus kas yang memiliki transaksi');
+        if ($kas->transaksi()->exists()) {
+            return redirect()->back()->with('error', 'Tidak bisa menghapus kas yang memiliki transaksi. Silahkan cek kembali data transaksi terlebih dahulu.');
         }
 
         $kas->delete();
 
-        return back()->with('success', 'Kas berhasil dihapus');
+        return redirect()->back()->with('success', 'Kas berhasil dihapus');
     }
 
     //Kelola Kas
@@ -332,14 +342,24 @@ class adminController extends Controller
         $this->hanyaUntukAdmin();
 
         $kas = Kas::findOrFail($id);
-        $pengeluarans = TransaksiKas::where('kas_id', $id)->where('jenis', 'keluar')->orderByDesc('tanggal')->get();
 
-        $total_pengeluaran = $pengeluarans->sum('jumlah');
-        $total_pemasukan = TransaksiKas::where('kas_id', $id)->where('jenis', 'masuk')->sum('jumlah');
+        $transaksis = TransaksiKas::where('kas_id', $id)->orderByDesc('tanggal')->get();
 
-        $saldo_akhir = $total_pemasukan - $total_pengeluaran;
+        $pemasukans = $transaksis->where('jenis', 'masuk');
+        $pengeluarans = $transaksis->where('jenis', 'keluar');
 
-        return view('admin.kas.pengeluaranKas', compact('kas', 'pengeluarans', 'total_pengeluaran', 'saldo_akhir'));
+        $total_masuk = $pemasukans->sum('jumlah');
+        $total_keluar = $pengeluarans->sum('jumlah');
+
+        $saldo_akhir = $total_masuk - $total_keluar;
+
+        return view('admin.kas.pengeluaranKas', compact(
+            'kas',
+            'transaksis',
+            'total_masuk',
+            'total_keluar',
+            'saldo_akhir',
+        ));
     }
 
 
@@ -428,7 +448,7 @@ class adminController extends Controller
 
         $transaksi = TransaksiIuran::with(['warga', 'kategoriIuran'])->findOrFail($iuran_id);
 
-        if($transaksi->status === 'terkonfirmasi'){
+        if ($transaksi->status === 'terkonfirmasi') {
             return back()->with('info', 'Iuran sudah dikonfirmasi sebelumnya');
         }
 
@@ -505,7 +525,7 @@ class adminController extends Controller
 
         $pathGambar = null;
 
-        if($request->hasFile('gambar')){
+        if ($request->hasFile('gambar')) {
             $pathGambar = $request->file('gambar')->store('berita', 'public');
         }
 
@@ -527,7 +547,7 @@ class adminController extends Controller
     {
         $berita = Berita::findOrFail($id);
         $pathGambar = $berita->gambar;
-        if($pathGambar){
+        if ($pathGambar) {
             Storage::disk('public')->delete($pathGambar);
             $berita->delete();
         }
@@ -550,8 +570,38 @@ class adminController extends Controller
     {
         $this->hanyaUntukAdmin();
 
-        $surats = Surat::with('jenisSurat', 'warga')->latest()->get();
+        $surats = Surat::with('jenisSurat', 'warga')
+            ->orderByRaw("status = 'diproses' DESC")
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('admin.surat.surat', compact('surats'));
+    }
+
+
+    public function detailSurat($id)
+    {
+        $surat = Surat::with('warga', 'jenisSurat', 'skck')->findOrFail($id);
+
+        return view('admin.surat.detailSurat', compact('surat'));
+    }
+
+    public function setujuiSurat($id)
+    {
+        $surat = Surat::findOrFail($id);
+        $surat->status = 'disetujui';
+        $surat->save();
+
+        return redirect()->back()->with('success', 'Surat disetujui.');
+    }
+
+    public function tolakSurat(Request $request, $id)
+    {
+        $surat = Surat::findOrFail($id);
+        $surat->status = 'ditolak';
+        $surat->keterangan = $request->alasan;
+        $surat->save();
+
+        return redirect()->back()->with('success', 'Surat ditolak.');
     }
 }

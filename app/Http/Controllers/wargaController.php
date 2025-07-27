@@ -59,7 +59,7 @@ class wargaController extends Controller
     {
         $this->hanyaUntukWarga();
 
-                $keluargas = Warga::where('kk_id', Auth::user()?->warga?->kk_id)->orderBy('status_keluarga', 'asc')->get();
+        $keluargas = Warga::where('kk_id', Auth::user()?->warga?->kk_id)->orderBy('status_keluarga', 'asc')->get();
         return view('warga.profile', compact('keluargas'));
     }
 
@@ -89,7 +89,24 @@ class wargaController extends Controller
         $this->hanyaUntukWarga();
 
         $kas = Kas::findOrFail($id);
-        return view('warga.kas.detailkas', compact('kas'));
+
+
+        $transaksis = TransaksiKas::where('kas_id', $id)->orderByDesc('tanggal')->get();
+
+        $pemasukans = $transaksis->where('jenis', 'masuk');
+        $pengeluarans = $transaksis->where('jenis', 'keluar');
+
+        $total_masuk = $pemasukans->sum('jumlah');
+        $total_keluar = $pengeluarans->sum('jumlah');
+
+        $saldo_akhir = $total_masuk - $total_keluar;
+
+        return view('warga.kas.detailkas', compact(
+            'kas',
+            'total_masuk',
+            'total_keluar',
+            'saldo_akhir'
+        ));
     }
 
 
@@ -98,14 +115,24 @@ class wargaController extends Controller
         $this->hanyaUntukWarga();
 
         $kas = Kas::findOrFail($id);
-        $pengeluarans = TransaksiKas::where('kas_id', $id)->where('jenis', 'keluar')->orderByDesc('tanggal')->get();
 
-        $total_pengeluaran = $pengeluarans->sum('jumlah');
-        $total_pemasukan = TransaksiKas::where('kas_id', $id)->where('jenis', 'masuk')->sum('jumlah');
+        $transaksis = TransaksiKas::where('kas_id', $id)->orderByDesc('tanggal')->get();
 
-        $saldo_akhir = $total_pemasukan - $total_pengeluaran;
+        $pemasukans = $transaksis->where('jenis', 'masuk');
+        $pengeluarans = $transaksis->where('jenis', 'keluar');
 
-        return view('warga.kas.pengeluaranKas', compact('kas', 'pengeluarans', 'total_pengeluaran', 'saldo_akhir'));
+        $total_masuk = $pemasukans->sum('jumlah');
+        $total_keluar = $pengeluarans->sum('jumlah');
+
+        $saldo_akhir = $total_masuk - $total_keluar;
+
+        return view('warga.kas.pengeluaranKas', compact(
+            'kas',
+            'transaksis',
+            'total_masuk',
+            'total_keluar',
+            'saldo_akhir',
+        ));
     }
 
 
@@ -176,6 +203,13 @@ class wargaController extends Controller
         $riwayat_surat = Surat::with('jenisSurat')->where('warga_id', $warga->id)->latest()->get();
 
         return view('warga.surat.surat', compact('riwayat_surat'));
+    }
+
+    public function detailSurat($id)
+    {
+        $surat = Surat::with('warga', 'jenisSurat', 'skck')->findOrFail($id);
+
+        return view('warga.surat.detailSurat', compact('surat'));
     }
 
 

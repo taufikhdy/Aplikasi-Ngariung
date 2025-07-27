@@ -25,7 +25,7 @@
 }
 
 .berita-section .berita-content p {
-    text-align: ;
+    text-align: justify;
     overflow-wrap: break-word;
     color: var(--neutral-20);
     line-height: 2em;

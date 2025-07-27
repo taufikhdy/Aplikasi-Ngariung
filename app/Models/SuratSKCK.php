@@ -18,7 +18,7 @@ class SuratSKCK extends Model
         'tujuan_skck'
     ];
 
-    public function surat(){
-        return $this->belongsTo(Surat::class);
-    }
+    // public function surat(){
+    //     return $this->belongsTo(Surat::class);
+    // }
 }

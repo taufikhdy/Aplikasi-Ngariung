@@ -19,6 +19,8 @@ return new class extends Migration
 
             $table->enum('status', ['diproses', 'disetujui', 'ditolak'])->default('diproses');
 
+            $table->text('keterangan')->nullable();
+
             $table->string('file_pdf')->nullable();
 
             $table->timestamps();

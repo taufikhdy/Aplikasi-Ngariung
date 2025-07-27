@@ -16,12 +16,12 @@
 
                 <div class="input-box">
                     <label for="nama">Nama Lengkap</label>
-                    <input type="text" name="name" id="nama" placeholder="Nama" autocomplete="off" disabled value="{{Auth::user()?->warga?->nama}}"s>
+                    <input type="text" name="name" id="nama" placeholder="Nama" autocomplete="off" disabled value="{{Auth::user()?->warga?->nama}}">
                 </div>
 
                 <div class="input-box">
                     <label for="nik">Nomor Kartu Keluarga</label>
-                    <input type="number" name="nik" id="nik" placeholder="Nomor Induk Kependudukan"
+                    <input type="number" name="nik" id="nik" placeholder="Nomor Kartu Keluarga"
                         autocomplete="off" disabled value="{{Auth::user()?->warga?->kartuKeluarga?->no_kk}}">
                 </div>
 

@@ -8,6 +8,26 @@
     border-radius: 5px;
 }
 
+.message-pop-error {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background-color: hsl(4, 90%, 95%);
+    color: var(--error);
+    border: 2px solid hsl(4, 90%, 94%);
+
+    width: 90%;
+
+    padding: 10px 15px;
+    border-radius: 5px;
+    z-index: 99;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    text-align: center;
+}
+
 .message-success {
     position: fixed;
     top: 5%;
@@ -17,9 +37,9 @@
     border: 2px solid var(--primary-30);
     color: var(--primary-50); */
 
-    background-color: var(--warning-90);
-    color: var(--neutral-20);
-    border: 2px solid var(--warning-70);
+    background-color: var(--neutral-100);
+    color: #19959A;
+    border: 2px solid var(--neutral-90);
     width: 90%;
 
     padding: 10px 15px;

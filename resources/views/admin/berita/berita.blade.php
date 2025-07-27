@@ -5,7 +5,7 @@
 @section('content')
 
     @if (session('success'))
-        <p class="message-success cp" id="message-success">{{ session('success') }}</p>
+        <p class="message-success cp" id="message">{{ session('success') }}</p>
     @endif
     <div class="news-section">
         <div class="news-menu">

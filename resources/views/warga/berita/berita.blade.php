@@ -19,7 +19,11 @@
 
             <div class="news">
                 <div class="image">
-                    <img src="{{ asset('storage/' . $berita->gambar) }}" alt="img berita">
+                    @if (!$berita->gambar)
+                        <p class="text-center">Tidak ada gambar mini.</p>
+                    @else
+                        <img src="{{ asset('storage/' . $berita->gambar) }}" alt="img berita">
+                    @endif
                 </div>
 
                 <div class="detail">

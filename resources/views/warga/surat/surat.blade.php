@@ -5,7 +5,7 @@
 @section('content')
 
     @if (session('success'))
-        <p class="message-success cp" id="message-success">{{ session('success') }}</p>
+        <p class="message-success cp" id="message">{{ session('success') }}</p>
     @endif
 
     <div class="form-box">
@@ -58,26 +58,36 @@
 
 
     <div class="surat">
-        <h6>Riwayat Surat Pengajuan</h6>
 
         <div class="surat-section">
+            <h6>Riwayat Surat Pengajuan</h6>
 
-            @foreach ($riwayat_surat as $riwayat)
-                <div class="lite-card">
+            @if ($riwayat_surat->isEmpty())
+                <p class="cp-gray text-center">Belum ada berita</p>
+            @else
+                @foreach ($riwayat_surat as $riwayat)
+                    <div class="lite-card">
 
-                    <div class="header">
-                        <p class="text-small link-a-error">Ditolak</p>
+                        <div class="header">
+                            @if ($riwayat->status === 'diproses')
+                                <p class="text-small link-a-warning">{{ $riwayat->status }}</p>
+                            @elseif ($riwayat->status == 'bau')
+                                <p class="text-small link-a-primary">{{ $riwayat->status }}</p>
+                            @elseif ($riwayat->status == 'bau')
+                                <p class="text-small link-a-primary">{{ $riwayat->status }}</p>
+                            @endif
+                        </div>
+
+                        <p class="text-small">{{ $riwayat->jenisSurat->nama_jenis }}</p>
+
+                        <div class="menu">
+                            <p class="cp-gray">{{ Carbon\Carbon::parse($riwayat->created_at)->format('d M Y') }}</p>
+                            <a href="{{ route('warga.detailSurat', ['id' => $riwayat->id]) }}" class="text-small">Detail</a>
+                        </div>
                     </div>
+                @endforeach
 
-                    <p class="text-small">{{$riwayat->jenisSurat->nama_jenis}}</p>
-
-                    <div class="menu">
-                        <p class="cp-gray">{{ Carbon\Carbon::parse($riwayat->created_at)->format('d M Y') }}</p>
-                        <a href="{{ route('warga.detailSurat') }}" class="text-small">Detail</a>
-                    </div>
-                </div>
-            @endforeach
-
+            @endif
         </div>
     </div>
 

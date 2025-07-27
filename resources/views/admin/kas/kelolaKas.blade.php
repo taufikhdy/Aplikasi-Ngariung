@@ -8,7 +8,7 @@
 
         <div class="back">
             <a href="{{ url()->previous() }}">
-                <h4 class="text-white"><i class="ri-arrow-left-long-line regular-icon"></i>Kelola Iuran</h4>
+                <h4 class="text-white"><i class="ri-arrow-left-long-line regular-icon"></i>Kelola Kas</h4>
             </a>
         </div>
 

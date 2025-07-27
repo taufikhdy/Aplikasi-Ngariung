@@ -1,15 +1,14 @@
 .surat {
     margin-top: 35px;
     padding: 0px 24px;
-
-    animation: up .8s alternate;
+    animation: longUp .8s alternate;
 }
 
-.surat h6{
+.surat h4 {
     margin-bottom: 20px;
 }
 
-.surat .title{
+.surat .title {
     margin: 0px;
 }
 
@@ -17,4 +16,27 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.form-surat .alasan {
+    background-color: var(--neutral-100);
+    width: 100%;
+    padding: 16px 13px;
+    border-radius: 5px;
+    border: none;
+    outline: 1px solid var(--neutral-90);
+    font-size: var(--body-small);
+}
+
+.form-surat .tolak{
+    width: 100%;
+    background-color: var(--error-60);
+    color: var(--neutral-100);
+    font-size: var(--body-small);
+    font-weight: bold;
+    outline: none;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin-top: 20px;
 }

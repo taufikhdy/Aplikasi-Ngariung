@@ -13,6 +13,7 @@ class Surat extends Model
         'jenis_surat_id',
         'warga_id',
         'status',
+        'keterangan',
         'file_pdf',
     ];
 
