@@ -191,7 +191,7 @@ nav .info .link {
     border-radius: 0px;
 }
 
-a.text-regular.active{
+a.text-regular.active {
     color: white;
     background-color: var(--primary-60);
     font-weight: bold;
@@ -225,22 +225,66 @@ a.text-regular.active{
 
 
 /* NAVIIGASI TAMBAHAN DIBAWAH NAVBAR */
-.back{
+.back {
     display: inline-block;
     padding: 0px;
     margin: 0px 0px 15px 0px;
 }
 
-.back a{
+.back a {
     color: var(--neutral-20);
 }
 
-.back a i{
+.back a i {
     margin-right: 10px;
 }
 
 .back:hover a h4,
-.back:checked a h4
-{
+.back:checked a h4 {
     color: var(--primary-50);
+}
+
+
+
+
+/* POPUP GAMBAR */
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsla(0, 0%, 0%, 25%);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease-out;
+    z-index: 1000;
+}
+
+.popup-overlay:target{
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-content{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+}
+
+.popup-content img{
+    width: 100%;
+    height: auto;
+}
+
+.popup-content .close{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
 }

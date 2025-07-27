@@ -127,7 +127,8 @@ Route::controller(wargaController::class)->group(function () {
     route::get('/warga/kasiuran', 'kasiuran')->name('warga.kasiuran');
 
     // BAYAR IURAN
-    route::post('warga/iuran/bayar/{id}', 'bayarIuran')->name('warga.bayarIuran');
+    route::get('/warga/iuran/bayarIuran/{id}', 'formBayarIuran')->name('warga.formBayarIuran');
+    route::post('/warga/iuran/bayarIuran/{id}', 'bayarIuran')->name('warga.bayarIuran');
 
     route::get('/warga/berita', 'berita')->name('warga.berita');
     route::get('/warga/berita/detail/{id}', 'detailBerita')->name('warga.detailBerita');

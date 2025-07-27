@@ -23,9 +23,9 @@
                     @enderror
                 </div>
 
-                <div class="input box">
+                <div class="input-box">
                     <label for="gambar">Gambar Berita</label>
-                    <input type="file" name="gambar" id="" placeholder="Gambar Berita">
+                    <input type="file" name="gambar" id="gambar" placeholder="Gambar Berita">
                 </div>
 
                 <div class="input-box">

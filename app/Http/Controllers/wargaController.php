@@ -157,30 +157,37 @@ class wargaController extends Controller
 
 
     // BAYAR IURAN
+    public function formBayarIuran($id){
+        $this->hanyaUntukWarga();
+
+        $iuran = KategoriIuran::findOrFail($id);
+
+        return view('warga.iuran.bayarIuran', compact('iuran'));
+    }
+
 
     // public function bayarIuran(Request $request)
-    public function bayarIuran(Request $request)
+    public function bayarIuran(Request $request, $id)
     {
         $this->hanyaUntukWarga();
 
-        // $request->validate([
-        //     'kategori_iuran_id' => 'required|exists:kategori_iuran,id',
-        //     // 'jumlah' => 'required|numeric|min:1',
-        //     // 'bukti_bayar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
-        // ]);
+        $request->validate([
+            'warga_id' => 'required|exists:warga,id',
+            'bukti_bayar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
+        ]);
 
-        // $pathBukti = $request->file('bukti_bayar')->store('bukti_iuran', 'public');
+        $pathBukti = $request->file('bukti_bayar')->store('bukti_bayar_iuran', 'public');
 
         TransaksiIuran::create([
             'kategori_iuran_id' => $request->id,
-            'warga_id' => Auth::user()->warga->id,
+            'warga_id' => $request->warga_id,
             'jumlah_bayar' => $request->jumlah,
             'tanggal_bayar' => now(),
             'status' => 'pending',
-            'bukti_bayar' => null //$pathBukti,
+            'bukti_bayar' => $pathBukti //$pathBukti,
         ]);
 
-        return back()->with('success', 'Bukti bayar telah dikirim, tunggu konfirmasi dari RT.');
+        return redirect()->back()->with('success', 'Bukti bayar telah dikirim, tunggu konfirmasi dari RT.');
     }
 
 

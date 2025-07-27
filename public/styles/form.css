@@ -93,7 +93,7 @@
     color: ;
 }
 
-.input-group .input-box .file[type="file"] {
+/* .input-group .input-box .file[type="file"] {
     border: none;
     background: none;
 
@@ -104,7 +104,7 @@
     outline: 1px solid var(--neutral-90);
     font-size: var(--body-small);
     color: ;
-}
+} */
 
 .helper {
     text-align: center;
