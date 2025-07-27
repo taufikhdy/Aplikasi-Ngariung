@@ -57,7 +57,7 @@
     align-items: center;
 }
 
-.news-section .news-group{
+.news-section .news-group {
     background-color: var(--neutral-100);
     border-radius: 10px;
 }
@@ -92,10 +92,17 @@
 
 .news-section .news-group .news .detail h4 {
     width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     padding: 0px 0px 10px 0px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+    overflow-wrap: break-word;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 1.5em;
 }
 
 .news-section .news-group .news .detail .isi {

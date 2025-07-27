@@ -49,6 +49,17 @@ class adminController extends Controller
         $k_iuran = KategoriIuran::latest()->first();
 
         $beritas = Berita::latest()->get();
+
+        $user = Auth::user();
+
+        if($user->role->nama_role === 'rt'){
+
+            if (Surat::where('status', 'diproses')->exists())
+                {
+                    session()->flash('surat', 'Ada surat baru dari warga yang perlu dikonfirmasi');
+                };
+            }
+
         return view('admin.dashboard', compact('kas', 'k_iuran', 'beritas'));
     }
 

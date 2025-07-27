@@ -4,6 +4,10 @@
 
 @section('content')
 
+    @if (session('surat'))
+        <p class="message-success cp" id="message">{{ session('surat') }}</p>
+    @endif
+
     {{-- {{Auth::user()->nik}} --}}
 
     <div class="bg">
@@ -67,7 +71,8 @@
                             </div>
 
                             <div class="card-info">
-                                <p class="cp">Berakhir tanggal {{ Carbon\Carbon::parse($k_iuran->tanggal_akhir)->format('d M Y') }}</p>
+                                <p class="cp">Berakhir tanggal
+                                    {{ Carbon\Carbon::parse($k_iuran->tanggal_akhir)->format('d M Y') }}</p>
                                 <h3>{{ 'Rp. ' . number_format($k_iuran->jumlah, 0, ',', '.') }}</h3>
                             </div>
                         </div>
@@ -108,11 +113,15 @@
 
                     <div class="news">
                         <div class="image">
-                            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="img berita">
+                            @if (!$berita->gambar)
+                                <p class="text-center">Tidak ada gambar mini.</p>
+                            @else
+                                <img src="{{ asset('storage/' . $berita->gambar) }}" alt="img berita">
+                            @endif
                         </div>
 
                         <div class="detail">
-                            <h6>{{ $berita->judul }}</h6>
+                            <h4>{{ $berita->judul }}</h4>
 
                             <p class="text-small text-justify isi">{{ $berita->isi }}</p>
 

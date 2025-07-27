@@ -561,7 +561,7 @@ a {
 }
 
 
-.riwayat .riwayat-detail .riwayat-rincian .saldo-keluar {
+.riwayat .riwayat-detail .riwayat-rincian .saldo-detail {
     display: flex;
     justify-content: space-between;
     align-items: center;

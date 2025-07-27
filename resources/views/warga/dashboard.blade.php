@@ -4,6 +4,14 @@
 
 @section('content')
 
+    @if (session('surat'))
+        <p class="message-success cp" id="message">{{ session('surat') }}</p>
+    @endif
+
+    @if (session('iuran'))
+        <p class="message-success cp" id="message">{{ session('iuran') }}</p>
+    @endif
+
     {{-- {{Auth::user()->nik}} --}}
 
     <div class="bg">
@@ -122,11 +130,15 @@
 
                     <div class="news">
                         <div class="image">
-                            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="img berita">
+                            @if (!$berita->gambar)
+                                <p class="text-center">Tidak ada gambar mini.</p>
+                            @else
+                                <img src="{{ asset('storage/' . $berita->gambar) }}" alt="img berita">
+                            @endif
                         </div>
 
                         <div class="detail">
-                            <h6>{{ $berita->judul }}</h6>
+                            <h4>{{ $berita->judul }}</h4>
 
                             <p class="text-small text-justify isi">{{ $berita->isi }}</p>
 

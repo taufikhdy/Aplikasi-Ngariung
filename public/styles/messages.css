@@ -9,7 +9,7 @@
 }
 
 .message-pop-error {
-    position: fixed;
+    position: absolute;
     top: 5%;
     left: 50%;
     transform: translateX(-50%);
@@ -24,12 +24,12 @@
     border-radius: 5px;
     z-index: 99;
     opacity: 1;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.8s ease-in-out;
     text-align: center;
 }
 
 .message-success {
-    position: fixed;
+    position: absolute;
     top: 5%;
     left: 50%;
     transform: translateX(-50%);
@@ -40,12 +40,12 @@
     background-color: var(--neutral-100);
     color: #19959A;
     border: 2px solid var(--neutral-90);
-    width: 90%;
+    width: max-content;
 
     padding: 10px 15px;
     border-radius: 5px;
     z-index: 99;
     opacity: 1;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.8s ease-in-out;
     text-align: center;
 }

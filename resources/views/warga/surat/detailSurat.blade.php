@@ -11,11 +11,11 @@
             </div>
 
             @if ($surat->status == 'diproses')
-                <p class="text-small text-center box-a-warning" style="width: 100%;">{{ $surat->status }}</p>
+                <p class="text-small text-center link-a-warning" style="width: 100%;">{{ $surat->status }}</p>
             @elseif ($surat->status == 'disetujui')
-                <p class="text-small text-center box-a-warning" style="width: 100%;">{{ $surat->status }}</p>
+                <p class="text-small text-center link-a-success" style="width: 100%;">{{ $surat->status }}</p>
             @elseif ($surat->status == 'ditolak')
-                <p class="text-small text-center box-a-warning" style="width: 100%;">{{ $surat->status }}</p>
+                <p class="text-small text-center link-a-error" style="width: 100%;">{{ $surat->status }}</p>
             @endif
 
         </div>

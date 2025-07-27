@@ -49,10 +49,17 @@
                         <p class="text-small">Transaksi Tanggal :
                             {{ \Carbon\Carbon::parse($transaksi->tanggal)->format('d M Y') }}</p>
                         <div class="riwayat-rincian">
-                            <p class="cp">{{ $transaksi->jenis }}</p>
-                            <div class="saldo-keluar">
+                            <p class="cp">Transaksi {{ $transaksi->jenis }}</p>
+
+                            <div class="saldo-detail">
                                 <p class="cp">{{ $transaksi->keterangan }}</p>
-                                <p class="cp keluar">{{ 'Rp. ' . number_format($transaksi->jumlah, 0, ',', '.') }}</p>
+
+                                @if ($transaksi->jenis == 'masuk')
+                                    <p class="cp masuk">{{ '+ Rp. ' . number_format($transaksi->jumlah, 0, ',', '.') }}</p>
+                                @elseif ($transaksi->jenis == 'keluar')
+                                    <p class="cp keluar">{{ '- Rp. ' . number_format($transaksi->jumlah, 0, ',', '.') }}</p>
+                                @endif
+
                             </div>
                         </div>
 
@@ -63,12 +70,12 @@
             <div class="rincian-menu">
                 <p class="box-a-error text-small">
                     Total Pengeluaran<br>
-                    {{ $total_keluar }}
+                    {{ 'Rp. ' . number_format($total_keluar, 0, ',', '.') }}
                 </p>
 
                 <p class="box-a-disable text-small">
                     Total Saldo Akhir <br>
-                    {{ $saldo_akhir }}
+                    {{ 'Rp. ' . number_format($saldo_akhir, 0, ',', '.') }}
                 </p>
             </div>
     </div>

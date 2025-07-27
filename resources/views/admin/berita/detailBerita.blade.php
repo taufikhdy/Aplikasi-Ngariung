@@ -12,7 +12,11 @@
             </a>
         </div>
         <div class="berita-header">
-            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="berita img">
+            @if (!$berita->gambar)
+                <p class="text-center">Tidak ada gambar mini.</p>
+            @else
+                <img src="{{ asset('storage/' . $berita->gambar) }}" alt="img berita">
+            @endif
             <div class="berita-title">
                 <p class="cp">{{ Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</p>
                 <h3>{{ $berita->judul }}</h3>

@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="scroll-restoration" content="manual">
+    {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
 
     <title>@yield('title') - Warga</title>
 
@@ -21,16 +25,17 @@
     <link rel="stylesheet" href="{{ asset('styles/main.css?v=13') }}">
     <link rel="stylesheet" href="{{ asset('styles/dataList.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/form.css?V=7') }}">
-    <link rel="stylesheet" href="{{ asset('styles/kas_iuran.css?v=4')}}">
+    <link rel="stylesheet" href="{{ asset('styles/kas_iuran.css?v=4') }}">
     <link rel="stylesheet" href="{{ asset('styles/card.css?v=3') }}">
-    <link rel="stylesheet" href="{{ asset('styles/berita.css?=3+') }}">
-    <link rel="stylesheet" href="{{ asset('styles/surat.css')}}">
+    <link rel="stylesheet" href="{{ asset('styles/berita.css?=4+') }}">
+    <link rel="stylesheet" href="{{ asset('styles/surat.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/messages.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/table.css') }}">
 
     <link rel="stylesheet" href="{{ asset('remixicon/fonts/remixicon.css') }}">
 
 </head>
+
 <body>
     @include('components.sidebar')
     @include('components.navbar')
@@ -44,4 +49,5 @@
     <script src="{{ asset('js/script.js?v=4') }}"></script>
     <script src="{{ asset('js/message.js') }}"></script>
 </body>
+
 </html>

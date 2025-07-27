@@ -71,10 +71,10 @@
                         <div class="header">
                             @if ($riwayat->status === 'diproses')
                                 <p class="text-small link-a-warning">{{ $riwayat->status }}</p>
-                            @elseif ($riwayat->status == 'bau')
-                                <p class="text-small link-a-primary">{{ $riwayat->status }}</p>
-                            @elseif ($riwayat->status == 'bau')
-                                <p class="text-small link-a-primary">{{ $riwayat->status }}</p>
+                            @elseif ($riwayat->status == 'disetujui')
+                                <p class="text-small link-a-success">{{ $riwayat->status }}</p>
+                            @elseif ($riwayat->status == 'ditolak')
+                                <p class="text-small link-a-error">{{ $riwayat->status }}</p>
                             @endif
                         </div>
 

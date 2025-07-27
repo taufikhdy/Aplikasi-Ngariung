@@ -49,6 +49,24 @@ class wargaController extends Controller
         } else {
             $transaksi = null;
         }
+
+        $user = Auth::user();
+
+        if($user->role->nama_role === 'warga'){
+            $wargaId = $user->warga->id;
+
+            if ($adaSuratDisetujui = Surat::where('warga_id', $wargaId)->where('status', 'disetujui')->exists())
+                {
+                    session()->flash('surat', 'Ada surat kamu yang sudah dikonfirmasi RT. Yuk cek sekarang.');
+                };
+
+            if ($adaIuranBaru = KategoriIuran::whereMonth('tanggal_mulai', now()->month)->whereYear('tanggal_mulai', now()->year)->exists())
+                {
+                    session()->flash('iuran', 'Ada iuran baru  yang harus kamu bayar, yuk bayar sekarang.');
+                };
+
+        }
+
         $beritas = Berita::latest()->get();
         return view('warga.dashboard', compact('kas', 'k_iurans', 'transaksi', 'beritas'));
     }
