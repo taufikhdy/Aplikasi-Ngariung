@@ -52,13 +52,16 @@ class adminController extends Controller
 
         $user = Auth::user();
 
-        if($user->role->nama_role === 'rt'){
+        if ($user->role->nama_role === 'rt') {
 
-            if (Surat::where('status', 'diproses')->exists())
-                {
-                    session()->flash('surat', 'Ada surat baru dari warga yang perlu dikonfirmasi');
-                };
-            }
+            if (Surat::where('status', 'diproses')->exists()) {
+                session()->flash('surat', 'Ada surat baru dari warga yang perlu dikonfirmasi');
+            };
+
+            if (TransaksiIuran::where('status', 'pending')->exists()) {
+                session()->flash('iuran', 'Ada transaksi iuran dari warga yang perlu dikonfirmasi');
+            };
+        }
 
         return view('admin.dashboard', compact('kas', 'k_iuran', 'beritas'));
     }
@@ -167,6 +170,18 @@ class adminController extends Controller
         return redirect()->route('admin.dataWarga')->with('success', 'Data Warga berhasil ditambahkan.');
     }
 
+    public function resetSandi($id){
+        $user = User::where('warga_id', $id)->first();
+
+        if($user){
+            $user->password = Hash::make('password123');
+            $user->save();
+
+            return redirect()->back()->with('success', 'Kata sandi warga berhasil direset');
+        }
+
+        return redirect()->back()->with('with', 'Akun tidak ditemukan');
+    }
 
 
 
@@ -300,6 +315,15 @@ class adminController extends Controller
 
         return redirect()->back()->with('success', 'Kas berhasil dihapus');
     }
+
+
+    public function hapusRiwayatKas()
+    {
+        TransaksiKas::whereNotNull('id')->delete();
+
+        return redirect()->route('admin.kasiuran')->with('success', 'Semua riwayat transaksi berhasil dihapus.');
+    }
+
 
     //Kelola Kas
     public function kelolaKas($id): View
@@ -489,6 +513,18 @@ class adminController extends Controller
 
 
         return back()->with('success', 'Iuran berhasil dikonfirmasi dan dicatat di kas.');
+    }
+
+
+    // DETAIL IURAN
+    public function detailIuran($id): View
+    {
+        $this->hanyaUntukAdmin();
+
+        $iuran = KategoriIuran::where('id', $id)->first();
+        $semuaRiwayat = TransaksiIuran::with(['warga', 'kategoriIuran'])->where('kategori_iuran_id', $id)->get();
+
+        return view('admin.iuran.detailIuran', compact('iuran', 'semuaRiwayat'));
     }
 
 

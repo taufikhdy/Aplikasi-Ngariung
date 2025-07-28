@@ -437,6 +437,20 @@ a {
     color: hsl(45, 100%, 30%);
 }
 
+/* btn merah */
+
+.tolak{
+    width: 100%;
+    background-color: var(--error-60);
+    color: var(--neutral-100);
+    font-size: var(--body-small);
+    font-weight: bold;
+    outline: none;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
 
 
 
@@ -568,15 +582,15 @@ a {
 }
 
 
-.riwayat .rincian-menu {
+.rincian-menu {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
+    width: 100%;
 }
 
-.riwayat .rincian-menu p {
-    width: 100%;
+.rincian-menu p{
+    padding: 10px;
 }
 
 /* .padding {

@@ -38,6 +38,7 @@ Route::controller(adminController::class)->group(function () {
 
     //data warga
     route::get('/admin/data_warga', 'dataWarga')->name('admin.dataWarga');
+    route::post('/admin/data_warga/reset/{id}', 'resetSandi')->name('admin.resetSandi');
 
     //tambah warga
     route::get('/admin/data_warga/tambah_warga', 'tambahWarga')->name('admin.tambahWarga');
@@ -65,6 +66,8 @@ Route::controller(adminController::class)->group(function () {
 
     route::get('/admin/kasiuran/detailkas/{id}', 'detailkas')->name('admin.detailkas');
 
+    route::delete('/admin/kasiuran/detailKas/pengeluaranKas/hapus', 'hapusRiwayatKas')->name('admin.hapusRiwayatKas');
+
 
 
 
@@ -86,6 +89,7 @@ Route::controller(adminController::class)->group(function () {
     //KONFIRMASI IURAN
     route::get('/admin/kasiuran/kelola_iuran/{id}', 'kelolaIuran')->name('admin.kelolaIuran');
     route::post('/admin/konfirmasi_iuran/{id}', 'konfirmasiIuran')->name('admin.konfirmasiIuran');
+    route::get('/admin/kasiuran/detailIuran{id}', 'detailIuran')->name('admin.detailIuran');
 
 
 
@@ -120,15 +124,17 @@ Route::controller(wargaController::class)->group(function () {
     route::get('/warga/profile', 'profile')->name('warga.profile');
 
 
+    route::get('/warga/kasiuran', 'kasiuran')->name('warga.kasiuran');
+
+
     route::get('/warga/detailkas/{id}', 'detailkas')->name('warga.detailkas');
     route::get('/warga/pengeluaranKas{id}', 'pengeluaranKas')->name('warga.pengeluaranKas');
 
 
-    route::get('/warga/kasiuran', 'kasiuran')->name('warga.kasiuran');
-
     // BAYAR IURAN
-    route::get('/warga/iuran/bayarIuran/{id}', 'formBayarIuran')->name('warga.formBayarIuran');
-    route::post('/warga/iuran/bayarIuran/{id}', 'bayarIuran')->name('warga.bayarIuran');
+    route::get('/warga/kasiuran/iuran/bayarIuran/{id}', 'formBayarIuran')->name('warga.formBayarIuran');
+    route::post('/warga/kasiuran/iuran/bayarIuran/{id}', 'bayarIuran')->name('warga.bayarIuran');
+    route::get('/warga/kasiuran/iuran/detailIuran/{id}', 'detailIuran')->name('warga.detailIuran');
 
     route::get('/warga/berita', 'berita')->name('warga.berita');
     route::get('/warga/berita/detail/{id}', 'detailBerita')->name('warga.detailBerita');

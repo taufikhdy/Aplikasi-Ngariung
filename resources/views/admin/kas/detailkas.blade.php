@@ -57,7 +57,7 @@
                 </div>
                 <div class="saldo-keluar">
                     <p class="cp">Saldo keluar</p>
-                    <p class="cp keluar">{{ '- Rp. ' . number_format($total_masuk, 0, ',', '.') }}</p>
+                    <p class="cp keluar">{{ '- Rp. ' . number_format($total_keluar, 0, ',', '.') }}</p>
                 </div>
             </div>
             <div class="rincian-menu">

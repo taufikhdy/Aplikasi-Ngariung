@@ -40,7 +40,7 @@
     background-color: var(--neutral-100);
     color: #19959A;
     border: 2px solid var(--neutral-90);
-    width: max-content;
+    width: 90%;
 
     padding: 10px 15px;
     border-radius: 5px;
@@ -48,4 +48,8 @@
     opacity: 1;
     transition: opacity 0.8s ease-in-out;
     text-align: center;
+}
+
+.message-success#message-iuran{
+    top: 10%;
 }

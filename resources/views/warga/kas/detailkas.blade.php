@@ -6,7 +6,7 @@
 
     <div class="bg">
         <div class="back">
-            <a href="{{ url()->previous() }}">
+            <a href="{{route('warga.kasiuran')}}">
                 <h4 class="text-white"><i class="ri-arrow-left-long-line small-icon"></i>Detail Kas</h4>
             </a>
         </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="saldo-keluar">
                     <p class="cp">Saldo keluar</p>
-                    <p class="cp keluar">{{ '- Rp. ' . number_format($total_masuk, 0, ',', '.') }}</p>
+                    <p class="cp keluar">{{ '- Rp. ' . number_format($total_keluar, 0, ',', '.') }}</p>
                 </div>
             </div>
             <div class="rincian-menu">

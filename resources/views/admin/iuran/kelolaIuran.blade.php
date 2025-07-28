@@ -73,6 +73,8 @@
                                     </a>
                                 </div>
                             @else
+                                 <p class="text-regular">{{ $iuran->warga->nama }}</p>
+
                                 <div class="card-status-warning">
                                     <p>Status : {{ $iuran->status }}</p>
                                 </div>

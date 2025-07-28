@@ -8,6 +8,10 @@
         <p class="message-success cp" id="message">{{ session('surat') }}</p>
     @endif
 
+    @if (session('iuran'))
+        <p class="message-success cp" id="message-iuran">{{ session('iuran') }}</p>
+    @endif
+
     {{-- {{Auth::user()->nik}} --}}
 
     <div class="bg">
@@ -79,7 +83,7 @@
 
                         <div class="card-menu">
                             <div class="card-nav">
-                                <a href="" class="link-a-disable text-small text-center">Detail</a>
+                                <a href="{{route('admin.detailIuran', ['id' => $k_iuran->id ])}}" class="link-a-disable text-small text-center">Detail</a>
                                 <a href="{{ route('admin.kelolaIuran', $k_iuran->id) }}"
                                     class="link-a-secondary text-small text-center">Kelola</a>
                                 <form action="{{ route('admin.hapusIuran', $k_iuran->id) }}" method="post"

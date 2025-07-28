@@ -8,6 +8,10 @@
         <p class="message-success cp" id="message">{{ session('success') }}</p>
     @endif
 
+    @if (session('error'))
+        <p class="message-error cp" id="message">{{ session('error') }}</p>
+    @endif
+
     <div class="form-box">
         <div class="form-header">
             <h6 class="text-center">Data Warga</h6>
@@ -57,6 +61,12 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="link-a-error text-samall">Hapus</button>
+                            </form>
+
+                            <form action="{{route('admin.resetSandi', ['id' => $warga->id])}}" method="post"
+                                onsubmit="return confirm('Yakin ingin reset kata sandi akun warga yang bersangkutan?')">
+                                @csrf
+                                <button type="submit" name="" id="" class="link-a-warning text-small">Reset Kata sandi</button>
                             </form>
                         </td>
                     </tr>

@@ -9,7 +9,7 @@
     @endif
 
     @if (session('iuran'))
-        <p class="message-success cp" id="message">{{ session('iuran') }}</p>
+        <p class="message-success cp" id="message-iuran">{{ session('iuran') }}</p>
     @endif
 
     {{-- {{Auth::user()->nik}} --}}
@@ -86,15 +86,9 @@
                                     <p class="cp">{{ $k_iurans->jumlah }}</p>
                                 </div>
                                 <div class="card-nav">
-                                    <a href="" class="link-a-disable text-small text-center">Detail</a>
+                                    <a href="{{route('warga.detailIuran', ['id' => $k_iurans->id] )}}" class="link-a-disable text-small text-center">Detail</a>
 
-                                    <form action="{{ route('warga.bayarIuran', $k_iurans->id) }}" method="post"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <button type="submit" name="" id=""
-                                            class="link-a-secondary-full text-small text-center"><i
-                                                class="ri-arrow-right-line"></i> Bayar</button>
-                                    </form>
+                                    <a href="{{route('warga.formBayarIuran', ['id' => $k_iurans->id] )}}" class="link-a-secondary text-small text-center"><i class="ri-arrow-right-line"></i> Bayar</a>
                                 </div>
                             @else
                                 <div class="card-status-success">
@@ -104,7 +98,7 @@
                                     </p>
                                 </div>
                                 <div class="card-nav">
-                                    <a href="" class="link-a-disable text-small text-center">Detail</a>
+                                    <a href="{{route('warga.detailIuran', ['id' => $k_iurans->id] )}}" class="link-a-disable text-small text-center">Detail</a>
                                 </div>
                             @endif
                         </div>

@@ -92,7 +92,7 @@
 
                         <div class="card-menu">
                             <div class="card-nav">
-                                <a href="" class="link-a-disable text-small text-center">Detail</a>
+                                <a href="{{route('admin.detailIuran', ['id' => $iuran->id] )}}" class="link-a-disable text-small text-center">Detail</a>
                                 <a href="{{ route('admin.kelolaIuran', ['id' => $iuran->id]) }}"
                                     class="link-a-secondary text-small text-center">Kelola</a>
                                 {{-- <form action="{{ route('admin.hapusIuran', ['id' => $iuran->id]) }}" method="post"

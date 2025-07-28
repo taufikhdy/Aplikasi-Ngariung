@@ -181,13 +181,23 @@ class wargaController extends Controller
         TransaksiIuran::create([
             'kategori_iuran_id' => $request->id,
             'warga_id' => $request->warga_id,
-            'jumlah_bayar' => $request->jumlah,
+            'jumlah_bayar' => $request->jumlah, //ini kosong terisi jika dikonfirmasi RT nilai diambil di RT
             'tanggal_bayar' => now(),
             'status' => 'pending',
             'bukti_bayar' => $pathBukti //$pathBukti,
         ]);
 
         return redirect()->back()->with('success', 'Bukti bayar telah dikirim, tunggu konfirmasi dari RT.');
+    }
+
+    // DETAIL IURAN
+    public function detailIuran($id): View
+    {
+        $this->hanyaUntukWarga();
+
+        $riwayat = TransaksiIuran::with('kategoriIuran')->where('kategori_iuran_id', $id)->where('warga_id', Auth::user()->warga->id)->first();
+
+        return view('warga.iuran.detailIuran', compact('riwayat'));
     }
 
 

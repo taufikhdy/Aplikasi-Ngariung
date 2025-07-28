@@ -59,7 +59,7 @@
                 </div>
                 <input type="submit" name="" id="" value="Masuk">
 
-                <p class="helper text-small">Lupa kata sandi anda? <a href="#">Reset kata sandi</a></p>
+                <p class="helper text-small">Lupa kata sandi anda? <a href="https://wa.me/6287736687006?text=Halo%20Pak%20RT%2C%20saya%20butuh%20bantuan%20untuk%20reset%20sandi%20saya%20%5BNama%5D" target="_blank">Reset kata sandi</a></p>
             </form>
         </div>
     @endguest

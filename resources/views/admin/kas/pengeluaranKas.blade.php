@@ -67,21 +67,28 @@
 
                 </div>
             @endforeach
-            <div class="rincian-menu">
-                <p class="box-a-error text-small">
-                    Total Pengeluaran<br>
-                    {{ 'Rp. ' . number_format($total_keluar, 0, ',', '.') }}
-                </p>
-
-                <p class="box-a-disable text-small">
-                    Total Saldo Akhir <br>
-                    {{ 'Rp. ' . number_format($saldo_akhir, 0, ',', '.') }}
-                </p>
-            </div>
     </div>
 
     @endif
 
+    </div>
+
+    <div class="navigasi">
+        <div class="rincian-menu">
+                <p class="box-a-error text-small">
+                    Total Pengeluaran {{ 'Rp. ' . number_format($total_keluar, 0, ',', '.') }}
+                </p>
+
+                <p class="box-a-disable text-small">
+                    Total Saldo Akhir {{ 'Rp. ' . number_format($saldo_akhir, 0, ',', '.') }}
+                </p>
+
+                <form action="{{route('admin.hapusRiwayatKas')}}" method="post" onsubmit="return confirm('Yakin ingin menghapus semua riwayat transaksi kas?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-small text-center tolak">Hapus Riwayat Transaksi</button>
+                </form>
+            </div>
     </div>
 
 @endsection

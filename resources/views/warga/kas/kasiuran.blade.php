@@ -89,7 +89,7 @@
                                     <p class="cp">{{ Carbon\Carbon::parse($iuran->iuran->first()->tanggal_bayar)->format('d M Y') }}</p>
                                 </div>
                                 <div class="card-nav">
-                                    <a href="" class="link-a-disable text-small text-center">Detail</a>
+                                    <a href="{{route('warga.detailIuran', ['id' => $iuran->id] )}}" class="link-a-disable text-small text-center">Detail</a>
                                 </div>
                             @endif
                         </div>

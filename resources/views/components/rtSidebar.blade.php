@@ -27,6 +27,8 @@
             <a href="{{ route('admin.profile') }}" class="text-regular {{ Request::is('admin/profile*') ? 'active' : '' }}"><i class="ri-user-line regular-icon"></i>Data &
                 Profil</a>
 
+            <a href="{{ asset('Panduan Pengguna Aplikasi Manajemen RT.pdf') }}" download class="text-regular"><i class="ri-file-download-line regular-icon"></i>Unduh Panduan Pengguna</a>
+
         </div>
         <form action="{{ route('logout') }}" method="post" onsubmit="return confirm('Apakah anda yakin ingin keluar dari akun?')">
             @csrf
