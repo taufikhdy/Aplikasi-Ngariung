@@ -10,11 +10,11 @@
 
     <div class="form-box">
         <div class="form-header">
-            <h4>Ajukan Surat</h4>
+            <h4>Ajukan Surat SKCK</h4>
         </div>
 
         {{-- disini form ubah --}}
-        <h6 class="text-center">Surat Pengajuan SKCK</h6>
+        {{-- <h6 class="text-center">Surat Pengajuan SKCK</h6> --}}
         <form action="{{ route('warga.ajukanSkck') }}" method="post">
             @csrf
             <div class="input-group">
@@ -23,19 +23,19 @@
 
                 <div class="input-box">
                     <label for="nama">Nama</label>
-                    <input type="text" name="nama" id="nama" value="{{ Auth::user()->warga->nama }}"
-                        placeholder="Nama" autocomplete="off" required>
+                    <input type="text" name="nama" id="nama" value="{{ $warga->nama }}"
+                        placeholder="Nama" autocomplete="off" readonly>
                 </div>
 
                 <div class="input-box">
                     <label for="nik">NIK</label>
-                    <input type="number" name="nik" id="nik" value="{{ Auth::user()->warga->nik }}"
-                        placeholder="Nomor Induk Kependudukan" autocomplete="off" required>
+                    <input type="number" name="nik" id="nik" value="{{ $warga->nik }}"
+                        placeholder="Nomor Induk Kependudukan" autocomplete="off" readonly>
                 </div>
 
                 <div class="input-box">
                     <label for="alamat">Alamat</label>
-                    <textarea name="alamat" id="" cols="" rows="" required autocomplete="off">{{ Auth::user()->warga->kartuKeluarga->alamat }}</textarea>
+                    <textarea name="alamat" id="" cols="" rows="" autocomplete="off" readonly>{{ $warga->kartuKeluarga->alamat }}</textarea>
                 </div>
 
                 <div class="input-box">

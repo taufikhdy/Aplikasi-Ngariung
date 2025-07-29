@@ -170,10 +170,11 @@ class adminController extends Controller
         return redirect()->route('admin.dataWarga')->with('success', 'Data Warga berhasil ditambahkan.');
     }
 
-    public function resetSandi($id){
+    public function resetSandi($id)
+    {
         $user = User::where('warga_id', $id)->first();
 
-        if($user){
+        if ($user) {
             $user->password = Hash::make('password123');
             $user->save();
 
@@ -343,8 +344,11 @@ class adminController extends Controller
             'tanggal' => 'required|date',
             'jenis' => 'required|in:masuk,keluar',
             'jumlah' => 'required|integer|min:1',
-            'keterangan' => 'nullable|string'
+            'keterangan' => 'nullable|string',
+            'bukti_transaksi' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        $pathBukti = $request->file('bukti_transaksi')->store('bukti_transaksi_kas', 'public');
 
         $kas = Kas::findOrFail($request->kas_id);
 
@@ -353,7 +357,8 @@ class adminController extends Controller
             'tanggal' => $request->tanggal,
             'jenis' => $request->jenis,
             'jumlah' => $request->jumlah,
-            'keterangan' => $request->keterangan
+            'keterangan' => $request->keterangan,
+            'bukti_transaksi' => $pathBukti
         ]);
 
         if ($request->jenis === 'masuk') {
@@ -378,7 +383,7 @@ class adminController extends Controller
 
         $kas = Kas::findOrFail($id);
 
-        $transaksis = TransaksiKas::where('kas_id', $id)->orderByDesc('tanggal')->get();
+        $transaksis = TransaksiKas::where('kas_id', $id)->latest()->orderByDesc('tanggal')->get();
 
         $pemasukans = $transaksis->where('jenis', 'masuk');
         $pengeluarans = $transaksis->where('jenis', 'keluar');
@@ -488,6 +493,7 @@ class adminController extends Controller
         }
 
         $transaksi->update([
+            'jumlah_bayar' => $transaksi->kategoriIuran->jumlah,
             'status' => 'terkonfirmasi',
         ]);
 
@@ -499,7 +505,7 @@ class adminController extends Controller
             'kas_id' => $kas->id,
             'jenis' => $jenis,
             'jumlah' => $transaksi->kategoriIuran->jumlah,
-            'keterangan' => 'Pembayaran Iuran oleh : ' . $transaksi->warga->nama,
+            'keterangan' => 'Transaksi Masuk Dari ' . $transaksi->kategoriIuran->nama_iuran, // NAMA WARGA MASUK DARI SINI
             'tanggal' => now(),
         ]);
 
@@ -521,10 +527,25 @@ class adminController extends Controller
     {
         $this->hanyaUntukAdmin();
 
-        $iuran = KategoriIuran::where('id', $id)->first();
-        $semuaRiwayat = TransaksiIuran::with(['warga', 'kategoriIuran'])->where('kategori_iuran_id', $id)->get();
+        $iuran = KategoriIuran::findOrFail($id);
+        $semuaRiwayat = TransaksiIuran::with(['warga', 'kategoriIuran'])->where('kategori_iuran_id', $iuran->id)->where('status', 'terkonfirmasi')->get();
 
-        return view('admin.iuran.detailIuran', compact('iuran', 'semuaRiwayat'));
+        $total_warga = Warga::count();
+        // $kategoriIuran = KategoriIuran::findOrFail($id)->first();
+
+        $sudah_bayar = TransaksiIuran::where('kategori_iuran_id', $id)->count(); //buat berapa orang
+        $total_masuk = TransaksiIuran::where('kategori_iuran_id', $id)->sum('jumlah_bayar');
+
+        $target = $total_warga * $iuran->jumlah;
+
+        return view('admin.iuran.detailIuran', compact(
+            'iuran',
+            'semuaRiwayat',
+            'total_warga',
+            'sudah_bayar',
+            'total_masuk',
+            'target'
+        ));
     }
 
 

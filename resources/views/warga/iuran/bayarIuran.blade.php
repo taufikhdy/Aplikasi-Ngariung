@@ -1,4 +1,4 @@
-@extends('layouts.rt')
+@extends('layouts.warga')
 
 @section('title', 'Kelola Kas')
 
@@ -32,7 +32,7 @@
 
             <div class="card-menu">
                 <div class="card-nav">
-                    <a href="" class="link-a-disable text-small text-center">Detail</a>
+                    <a href="{{route('warga.detailIuran', ['id' => $iuran->id] )}}" class="link-a-disable text-small text-center">Detail</a>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
     <div class="tambah-kas">
 
         <div class="tambah-kas-header">
-            <h6>Bayar Iuran</h6>
+            <h6 class="text-left">Bayar Iuran</h6>
         </div>
 
         <form action="{{ route('warga.bayarIuran', ['id' => $iuran->id] ) }}" method="post" enctype="multipart/form-data">
@@ -60,7 +60,7 @@
                     <input type="file" name="bukti_bayar" id="bukti_bayar" placeholder="bukti_bayar" autocomplete="off" required>
                 </div>
 
-                <input type="submit" name="" id="" placeholder="Tambah Kas" class="text-small" value="Tambah Kas">
+                <input type="submit" name="" id="" class="text-small" value="Bayar Iuran">
             </div>
 
 

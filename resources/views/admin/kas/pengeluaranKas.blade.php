@@ -61,6 +61,14 @@
                                 @endif
 
                             </div>
+
+                            <a href="#popup-{{ $transaksi->id }}" class="text-small">Lihat bukti</a>
+
+                            <div id="popup-{{ $transaksi->id }}" class="popup-overlay">
+                                <a href="#" class="popup-content">
+                                    <img src="{{ asset('storage/' . $transaksi->bukti_transaksi) }}" alt="bukti bayar">
+                                </a>
+                            </div>
                         </div>
 
                     </div>
@@ -71,24 +79,23 @@
 
     @endif
 
-    </div>
-
     <div class="navigasi">
         <div class="rincian-menu">
-                <p class="box-a-error text-small">
-                    Total Pengeluaran {{ 'Rp. ' . number_format($total_keluar, 0, ',', '.') }}
-                </p>
+            <p class="box-a-error text-small">
+                Total Pengeluaran {{ 'Rp. ' . number_format($total_keluar, 0, ',', '.') }}
+            </p>
 
-                <p class="box-a-disable text-small">
-                    Total Saldo Akhir {{ 'Rp. ' . number_format($saldo_akhir, 0, ',', '.') }}
-                </p>
+            <p class="box-a-disable text-small">
+                Total Saldo Akhir {{ 'Rp. ' . number_format($saldo_akhir, 0, ',', '.') }}
+            </p>
 
-                <form action="{{route('admin.hapusRiwayatKas')}}" method="post" onsubmit="return confirm('Yakin ingin menghapus semua riwayat transaksi kas?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-small text-center tolak">Hapus Riwayat Transaksi</button>
-                </form>
-            </div>
+            <form action="{{ route('admin.hapusRiwayatKas') }}" method="post"
+                onsubmit="return confirm('Yakin ingin menghapus semua riwayat transaksi kas?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-small text-center tolak">Hapus Semua Riwayat Transaksi</button>
+            </form>
+        </div>
     </div>
 
 @endsection

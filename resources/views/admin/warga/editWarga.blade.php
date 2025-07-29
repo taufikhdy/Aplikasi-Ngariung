@@ -101,7 +101,7 @@
 
                         <option value="{{old('status_keluarga', $warga->status_keluarga)}}" selected>{{old('status_keluarga', $warga->status_keluarga)}}</option>
 
-                        <option value="kepala keluarga">Kepala Keluarga</option>
+                        <option value="kepala">Kepala Keluarga</option>
 
                         <option value="anggota">Anggota</option>
                     </select>

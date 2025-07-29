@@ -38,6 +38,11 @@
                 </div>
 
                 <div class="input-box">
+                    <label for="alamat">Alamat</label>
+                    <textarea name="alamat" id="alamat" cols="" rows="1" disabled>{{ Auth::user()?->warga?->kartuKeluarga?->alamat }}</textarea>
+                </div>
+
+                <div class="input-box">
                     <label for="keperluan">Keperluan</label>
                     <input type="text" name="keperluan" id="keperluan" placeholder="Keperluan" autocomplete="off" disabled
                         value="{{ $surat->skck->keperluan }}">
@@ -49,10 +54,6 @@
                         value="{{ $surat->skck->tujuan_skck }}">
                 </div>
 
-                <div class="input-box">
-                    <label for="alamat">Alamat</label>
-                    <textarea name="alamat" id="alamat" cols="" rows="1" disabled>{{ Auth::user()?->warga?->kartuKeluarga?->alamat }}</textarea>
-                </div>
 
             </div>
         </form>

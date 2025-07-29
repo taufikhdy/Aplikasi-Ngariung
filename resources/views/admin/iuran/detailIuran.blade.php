@@ -45,6 +45,39 @@
 
         <div class="data">
             <div class="data-caption">
+                <h6>Detail Iuran</h6>
+            </div>
+
+            <div class="row">
+
+                {{-- @if (!$riwayat)
+                    <p class="cp-gray text-center">Belum ada riwayat bayar</p>
+                @else --}}
+                <div class="item">
+                    <p class="text-regular">Total Target Iuran </p>
+                    <p class="text-regular">{{ 'Rp. ' . number_format($target, 0, ',', '.') }}</p>
+                </div>
+
+                <div class="item">
+                    <p class="text-regular">Total Iuran Terkumpul</p>
+                    <p class="text-regular">{{ 'Rp. ' . number_format($total_masuk, 0, ',', '.') }}</p>
+                </div>
+
+                <div class="item">
+                    <p class="text-regular">Sudah Bayar </p>
+                    <p class="text-regular">{{ $sudah_bayar . ' warga dari ' . $total_warga . ' warga' }}</p>
+                </div>
+                {{-- @endif --}}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="data-list">
+
+        <div class="data">
+            <div class="data-caption">
                 <h6>Riwayat Bayar</h6>
             </div>
 
@@ -78,6 +111,11 @@
 
         </div>
 
+    </div>
+
+    <div class="navigasi">
+        <a href="{{ route('admin.kelolaIuran', ['id' => $iuran->id]) }}"
+            class="link-a-active big text-center text-small tombol">Kelola Iuran</a>
     </div>
 
 @endsection

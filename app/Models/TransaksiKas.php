@@ -14,7 +14,8 @@ class TransaksiKas extends Model
         'tanggal',
         'jenis',
         'jumlah',
-        'keterangan'
+        'keterangan',
+        'bukti_transaksi'
     ];
 
     public function kas(){

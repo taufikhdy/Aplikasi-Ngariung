@@ -30,7 +30,7 @@
 
             <div class="card-menu">
                 <div class="card-nav">
-                    <a href="" class="link-a-disable text-small text-center">Detail</a>
+                    <a href="{{route('admin.detailIuran', ['id' => $kategori->id] )}}" class="link-a-disable text-small text-center">Detail</a>
                 </div>
             </div>
         </div>

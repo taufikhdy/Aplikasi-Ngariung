@@ -4,7 +4,7 @@
 
 @section('content')
 
-        <div class="riwayat-section">
+    <div class="riwayat-section">
         <div class="back">
             <a href="{{ url()->previous() }}">
                 <h4><i class="ri-arrow-left-long-line regular-icon"></i>Riwayat Transaksi Kas</h4>
@@ -49,8 +49,8 @@
                         <p class="text-small">Transaksi Tanggal :
                             {{ \Carbon\Carbon::parse($transaksi->tanggal)->format('d M Y') }}</p>
                         <div class="riwayat-rincian">
-                            <p class="cp">Transaksi {{ $transaksi->jenis }}</p>
 
+                            <p class="cp">Transaksi {{ $transaksi->jenis }}</p>
                             <div class="saldo-detail">
                                 <p class="cp">{{ $transaksi->keterangan }}</p>
 
@@ -61,27 +61,35 @@
                                 @endif
 
                             </div>
+
+                            <a href="#popup-{{ $transaksi->id }}" class="text-small">Lihat bukti</a>
+
+                            <div id="popup-{{ $transaksi->id }}" class="popup-overlay">
+                                <a href="#" class="popup-content">
+                                    <img src="{{ asset('storage/' . $transaksi->bukti_transaksi) }}" alt="bukti bayar">
+                                </a>
+                            </div>
                         </div>
 
                     </div>
 
                 </div>
             @endforeach
-            <div class="rincian-menu">
-                <p class="box-a-error text-small">
-                    Total Pengeluaran<br>
-                    {{ 'Rp. ' . number_format($total_keluar, 0, ',', '.') }}
-                </p>
 
-                <p class="box-a-disable text-small">
-                    Total Saldo Akhir <br>
-                    {{ 'Rp. ' . number_format($saldo_akhir, 0, ',', '.') }}
-                </p>
-            </div>
     </div>
 
     @endif
 
+    <div class="navigasi">
+        <div class="rincian-menu">
+            <p class="box-a-error text-small">
+                Total Pengeluaran {{ 'Rp. ' . number_format($total_keluar, 0, ',', '.') }}
+            </p>
+
+            <p class="box-a-disable text-small">
+                Total Saldo Akhir {{ 'Rp. ' . number_format($saldo_akhir, 0, ',', '.') }}
+            </p>
+        </div>
     </div>
 
 @endsection

@@ -83,7 +83,7 @@
                             @if (!$transaksi)
                                 <div class="card-status-warning">
                                     <p class="cp">Belum Bayar</p>
-                                    <p class="cp">{{ $k_iurans->jumlah }}</p>
+                                    <p class="cp">{{ 'Rp. ' . number_format($k_iurans->jumlah, 0, ',', '.') }}</p>
                                 </div>
                                 <div class="card-nav">
                                     <a href="{{route('warga.detailIuran', ['id' => $k_iurans->id] )}}" class="link-a-disable text-small text-center">Detail</a>

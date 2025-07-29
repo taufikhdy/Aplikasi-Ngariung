@@ -24,6 +24,8 @@ return new class extends Migration
 
             $table->string('keterangan')->nullable();
 
+            $table->string('bukti_transaksi')->nullable();
+
             $table->timestamps();
         });
     }

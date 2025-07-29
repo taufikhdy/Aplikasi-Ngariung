@@ -24,7 +24,7 @@
 
             <a href="{{ route('warga.surat') }}"
                 class="text-regular {{ Request::is('warga/surat*') ? 'active' : '' }}"><i
-                    class="ri-mail-line regular-icon"></i>Surat</a>
+                    class="ri-mail-line regular-icon"></i>Surat SKCK</a>
 
             <a href="{{ route('warga.profile') }}"
                 class="text-regular {{ Request::is('warga/profile*') ? 'active' : '' }}"><i

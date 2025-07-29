@@ -56,3 +56,14 @@ document.addEventListener("DOMContentLoaded", function() {
             buat.style.display = 'block';
         }
     })
+
+
+    // REVISI PASSWORD
+    function showPassword() {
+        const input = document.getElementById('password');
+        if (input.type === 'password'){
+            input.type = 'text';
+        } else {
+            input.type = 'password';
+        }
+    }

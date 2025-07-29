@@ -52,19 +52,16 @@ class wargaController extends Controller
 
         $user = Auth::user();
 
-        if($user->role->nama_role === 'warga'){
+        if ($user->role->nama_role === 'warga') {
             $wargaId = $user->warga->id;
 
-            if ($adaSuratDisetujui = Surat::where('warga_id', $wargaId)->where('status', 'disetujui')->exists())
-                {
-                    session()->flash('surat', 'Ada surat kamu yang sudah dikonfirmasi RT. Yuk cek sekarang.');
-                };
+            if ($adaSuratDisetujui = Surat::where('warga_id', $wargaId)->where('status', 'disetujui')->exists()) {
+                session()->flash('surat', 'Ada surat kamu yang sudah dikonfirmasi RT. Yuk cek sekarang.');
+            };
 
-            if ($adaIuranBaru = KategoriIuran::whereMonth('tanggal_mulai', now()->month)->whereYear('tanggal_mulai', now()->year)->exists())
-                {
-                    session()->flash('iuran', 'Ada iuran baru  yang harus kamu bayar, yuk bayar sekarang.');
-                };
-
+            if ($adaIuranBaru = KategoriIuran::whereMonth('tanggal_mulai', now()->month)->whereYear('tanggal_mulai', now()->year)->exists()) {
+                session()->flash('iuran', 'Ada iuran baru  yang harus kamu bayar, yuk bayar sekarang.');
+            };
         }
 
         $beritas = Berita::latest()->get();
@@ -134,7 +131,7 @@ class wargaController extends Controller
 
         $kas = Kas::findOrFail($id);
 
-        $transaksis = TransaksiKas::where('kas_id', $id)->orderByDesc('tanggal')->get();
+        $transaksis = TransaksiKas::where('kas_id', $id)->latest()->orderByDesc('tanggal')->get();
 
         $pemasukans = $transaksis->where('jenis', 'masuk');
         $pengeluarans = $transaksis->where('jenis', 'keluar');
@@ -157,7 +154,8 @@ class wargaController extends Controller
 
 
     // BAYAR IURAN
-    public function formBayarIuran($id){
+    public function formBayarIuran($id)
+    {
         $this->hanyaUntukWarga();
 
         $iuran = KategoriIuran::findOrFail($id);
@@ -180,14 +178,14 @@ class wargaController extends Controller
 
         TransaksiIuran::create([
             'kategori_iuran_id' => $request->id,
-            'warga_id' => $request->warga_id,
+            'warga_id' => $request->warga_id, //?
             'jumlah_bayar' => $request->jumlah, //ini kosong terisi jika dikonfirmasi RT nilai diambil di RT
             'tanggal_bayar' => now(),
             'status' => 'pending',
             'bukti_bayar' => $pathBukti //$pathBukti,
         ]);
 
-        return redirect()->back()->with('success', 'Bukti bayar telah dikirim, tunggu konfirmasi dari RT.');
+        return redirect()->route('warga.kasiuran')->with('success', 'Bukti bayar telah dikirim, tunggu konfirmasi dari RT.');
     }
 
     // DETAIL IURAN
@@ -195,9 +193,25 @@ class wargaController extends Controller
     {
         $this->hanyaUntukWarga();
 
+        $iuran = KategoriIuran::findOrFail($id);
         $riwayat = TransaksiIuran::with('kategoriIuran')->where('kategori_iuran_id', $id)->where('warga_id', Auth::user()->warga->id)->first();
 
-        return view('warga.iuran.detailIuran', compact('riwayat'));
+        $total_warga = Warga::count();
+        // $kategoriIuran = KategoriIuran::findOrFail($id)->first();
+
+        $sudah_bayar = TransaksiIuran::where('kategori_iuran_id', $id)->count(); //buat berapa orang
+        $total_masuk = TransaksiIuran::where('kategori_iuran_id', $id)->sum('jumlah_bayar');
+
+        $target = $total_warga * $iuran->jumlah;
+
+        return view('warga.iuran.detailIuran', compact(
+            'iuran',
+            'riwayat',
+            'total_warga',
+            'sudah_bayar',
+            'total_masuk',
+            'target'
+        ));
     }
 
 
@@ -237,12 +251,17 @@ class wargaController extends Controller
 
         $riwayat_surat = Surat::with('jenisSurat')->where('warga_id', $warga->id)->latest()->get();
 
-        return view('warga.surat.surat', compact('riwayat_surat'));
+        return view('warga.surat.surat', compact('warga', 'riwayat_surat'));
     }
 
     public function detailSurat($id)
     {
+
         $surat = Surat::with('warga', 'jenisSurat', 'skck')->findOrFail($id);
+
+        if (Auth::user()?->warga->id !== $surat->warga->id) {
+            abort(403, 'Akses ditolak');
+        }
 
         return view('warga.surat.detailSurat', compact('surat'));
     }
@@ -253,12 +272,12 @@ class wargaController extends Controller
         $this->hanyaUntukWarga();
 
         $request->validate([
-            'nama' => 'required|string|max:100',
-            'nik' => 'required|string|max:20',
-            'alamat' => 'required|string',
-            'keperluan' => 'required|string|max:255',
-            'tujuan_skck' => 'nullable|string|max:255',
-            'jenis_surat_id' => 'required|exists:jenis_surat,id',
+            // 'nama' => 'required|string|max:100',
+            // 'nik' => 'required|string|max:20',
+            // 'alamat' => 'required|string',
+            // 'keperluan' => 'required|string|max:255',
+            // 'tujuan_skck' => 'nullable|string|max:255',
+            // 'jenis_surat_id' => 'required|exists:jenis_surat,id',
         ]);
 
         $warga = Auth::user()->warga;

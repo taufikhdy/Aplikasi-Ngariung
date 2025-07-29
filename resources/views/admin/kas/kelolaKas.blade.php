@@ -43,7 +43,7 @@
             <h6 class="text-left">Tambah Transaksi</h6>
         </div>
 
-        <form action="{{ route('admin.tambahTransaksiKas') }}" method="post">
+        <form action="{{ route('admin.tambahTransaksiKas') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form">
 
@@ -72,6 +72,11 @@
                 <div class="input-tambah">
                     <label for="keterangan">Keterangan</label>
                     <textarea name="keterangan" id="keterangan" rows="5" cols="20">keterangan...</textarea>
+                </div>
+
+                <div class="input-tambah">
+                    <label for="bukti_transaksi">Bukti Transaksi</label>
+                    <input type="file" name="bukti_transaksi" id="bukti_transaksi" placeholder="bukti_transaksi" autocomplete="off" required>
                 </div>
 
             </div>

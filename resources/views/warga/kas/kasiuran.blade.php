@@ -4,6 +4,10 @@
 
 @section('content')
 
+    @if (session('success'))
+        <p class="message-success cp" id="message">{{ session('success') }}</p>
+    @endif
+
     <div class="kas">
 
         <div class="kas-section">
@@ -60,7 +64,8 @@
                             </div>
 
                             <div class="card-info">
-                                <p class="cp">Berakhir tanggal {{ Carbon\Carbon::parse($iuran->tanggal_akhir)->format('d M Y') }}</p>
+                                <p class="cp">Berakhir tanggal
+                                    {{ Carbon\Carbon::parse($iuran->tanggal_akhir)->format('d M Y') }}</p>
                                 <h3>{{ 'Rp. ' . number_format($iuran->jumlah, 0, ',', '.') }}</h3>
                             </div>
                         </div>
@@ -72,9 +77,11 @@
                                     <p class="cp">{{ 'Rp. ' . number_format($iuran->jumlah, 0, ',', '.') }}</p>
                                 </div>
                                 <div class="card-nav">
-                                    <a href="" class="link-a-disable text-small text-center">Detail</a>
+                                    <a href="{{route('warga.detailIuran', ['id' => $iuran->id] )}}" class="link-a-disable text-small text-center">Detail</a>
 
-                                    <a href="{{route('warga.formBayarIuran', ['id' => $iuran->id] )}}" class="link-a-secondary text-small text-center"><i class="ri-arrow-right-line"></i> Bayar</a>
+                                    <a href="{{ route('warga.formBayarIuran', ['id' => $iuran->id]) }}"
+                                        class="link-a-secondary text-small text-center"><i class="ri-arrow-right-line"></i>
+                                        Bayar</a>
                                     {{-- <form action="{{ route('warga.bayarIuran', ['id' => $iuran->id]) }}" method="post"
                                         enctype="multipart/form-data">
                                         @csrf
@@ -86,10 +93,13 @@
                             @else
                                 <div class="card-status-success">
                                     <p class="cp">Sudah Bayar</p>
-                                    <p class="cp">{{ Carbon\Carbon::parse($iuran->iuran->first()->tanggal_bayar)->format('d M Y') }}</p>
+                                    <p class="cp">
+                                        {{ Carbon\Carbon::parse($iuran->iuran->first()->tanggal_bayar)->format('d M Y') }}
+                                    </p>
                                 </div>
                                 <div class="card-nav">
-                                    <a href="{{route('warga.detailIuran', ['id' => $iuran->id] )}}" class="link-a-disable text-small text-center">Detail</a>
+                                    <a href="{{ route('warga.detailIuran', ['id' => $iuran->id]) }}"
+                                        class="link-a-disable text-small text-center">Detail</a>
                                 </div>
                             @endif
                         </div>

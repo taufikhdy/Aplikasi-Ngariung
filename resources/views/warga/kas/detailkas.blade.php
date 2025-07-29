@@ -62,7 +62,7 @@
             <div class="rincian-menu">
                 <a href="{{ route('warga.pengeluaranKas', ['id' => $kas->id]) }}"
                     class="link-a-error-full text-center cp">Lihat Transaksi Kas</a>
-                <a href="{{ route('warga.riwayat-bayar') }}" class="link-a-active-full text-center cp">lihat riwayat pembayaran</a>
+                {{-- <a href="{{ route('warga.riwayat-bayar') }}" class="link-a-active-full text-center cp">lihat riwayat pembayaran</a> --}}
             </div>
             <p class="box-a-disable text-small">
                 Saldo Akhir {{ 'Rp. ' . number_format($saldo_akhir, 0, ',', '.') }}

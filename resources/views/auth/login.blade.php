@@ -15,9 +15,9 @@
         rel="stylesheet">
 
     {{-- CSS INTERNAL --}}
-    <link rel="stylesheet" href="styles/animation.css">
-    <link rel="stylesheet" href="styles/messages.css">
-    <link rel="stylesheet" href="styles/login.css?v4+">
+    <link rel="stylesheet" href="{{ asset('styles/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/messages') }}">
+    <link rel="stylesheet" href="{{ asset('styles/animation.css') }}">
 
 
     <title>Aplikasi Manajemen Warga RT</title>
@@ -43,15 +43,22 @@
                     <div class="input-box">
                         <label for="nik">NIK</label>
                         <input type="number" name="nik" id="nik" placeholder="Nomor Induk Kependudukan"
-                            autocomplete="off" value="{{old('nik')}}">
-                        @if(session('nik'))
+                            autocomplete="off" value="{{ old('nik') }}">
+                        @if (session('nik'))
                             <p class="message-error cp">{{ session('nik') }}</p>
                         @endif
                     </div>
 
-                    <div class="input-box"> <label for="password">Kata Sandi</label>
+                    <div class="input-box">
+                        <label for="password">Kata Sandi</label>
+
                         <input type="password" name="password" id="password" placeholder="Kata Sandi" autocomplete="off">
-                        @if(session('password'))
+
+                        <div class="checkbox">
+                        <input type="checkbox" name="" id="show" onclick="showPassword()"> <label for="show" class="cp-gray">Tampilkan Password.</label>
+                        </div>
+
+                        @if (session('password'))
                             <p class="message-error cp">{{ session('password') }}</p>
                         @endif
                     </div>
@@ -59,10 +66,14 @@
                 </div>
                 <input type="submit" name="" id="" value="Masuk">
 
-                <p class="helper text-small">Lupa kata sandi anda? <a href="https://wa.me/6287736687006?text=Halo%20Pak%20RT%2C%20saya%20butuh%20bantuan%20untuk%20reset%20sandi%20saya%20%5BNama%5D" target="_blank">Reset kata sandi</a></p>
+                <p class="helper text-small">Lupa kata sandi anda? <a
+                        href="https://wa.me/6287736687006?text=Halo%20Pak%20RT%2C%20saya%20butuh%20bantuan%20untuk%20reset%20sandi%20saya%20%5BNama%5D"
+                        target="_blank">Reset kata sandi</a></p>
             </form>
         </div>
     @endguest
+
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>

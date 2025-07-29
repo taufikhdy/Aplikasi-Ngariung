@@ -81,6 +81,12 @@
     line-height: var(--cp-height);
 }
 
+.cp-gray{
+    font-size: var(--caption);
+    line-height: var(--cp-height);
+    color: var(--neutral-40);
+}
+
 h1 {
     font-size: var(--h1);
     line-height: var(--h1-height);
@@ -250,4 +256,36 @@ body {
 .helper {
     text-align: center;
     margin-top: 20px;
+}
+
+
+/* REVISI */
+
+
+/* LIHAT PASSWORD */
+
+/* ICON */
+.small-icon {
+    font-size: 20px;
+}
+
+.regular-icon {
+    font-size: 25px;
+}
+
+.large-icon {
+    font-size: 30px;
+}
+
+
+input[type="checkbox"]{
+    width: max-content;
+    background-color: none;
+}
+
+.input-box .checkbox{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
 }
