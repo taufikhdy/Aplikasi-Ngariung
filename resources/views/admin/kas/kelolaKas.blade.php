@@ -82,7 +82,7 @@
             </div>
 
             <input type="submit" name="" id="" placeholder="Tambah Kas" class="text-small"
-                value="Tambah Transaksi">
+                value="Tambah Transaksi" onclick="loading()">
 
         </form>
         {{-- <a href="{{ route('admin.kasiuran') }}" class="link-a-error big text-small text-center">Batal</a> --}}

@@ -233,7 +233,7 @@ class adminController extends Controller
         $this->hanyaUntukAdmin();
 
         $kas = Kas::all();
-        $k_iurans = KategoriIuran::orderBy('created_at', 'desc')->get();
+        $k_iurans = KategoriIuran::latest()->get(); //latest
 
         return view('admin.kas.kasiuran', compact('kas', 'k_iurans'));
     }
@@ -424,6 +424,9 @@ class adminController extends Controller
         $request->validate([
             'nama_iuran' => 'required|string|max:225',
             'jumlah' => 'required|integer|min:500',
+
+            'jenis' => 'required|in:kk,perorangan', // jenis iuran
+
             'tanggal_mulai' => 'required|date',
             'tanggal_akhir' => 'required|date|after_or_equal:tanggal_awal',
             'deskripsi' => 'nullable|string',
@@ -436,16 +439,43 @@ class adminController extends Controller
             'tanggal_akhir.required' => 'Tanggal akhir wajib diisi',
         ]);
 
-        KategoriIuran::create([
+        $buatIuran = KategoriIuran::create([
             'nama_iuran' => $request->nama_iuran,
             'jumlah' => $request->jumlah,
+
+            'jenis' => $request->jenis,
+
             'tanggal_mulai' => $request->tanggal_mulai,
             'tanggal_akhir' => $request->tanggal_akhir,
             'deskripsi' => $request->deskripsi,
         ]);
 
+        // if ($buatIuran->jenis === 'kk'){
+        //     $kks = KartuKeluarga::all();
+        //         foreach($kks as $kk){
+        //             TransaksiIuran::create([
+        //                 'kategori_iuran_id' => $buatIuran->id,
+        //                 'kartu_keluarga_id' => $kk->id,
+        //                 'status' => 'pending',
+        //             ]);
+        //         }
+        // } else if ($buatIuran->jenis === 'perorangan'){
+        //     $wargas = Warga::all();
+        //         foreach($wargas as $warga){
+        //             TransaksiIuran::create([
+        //                 'kategori_iuran_id' => $buatIuran->id,
+        //                 'warga_id' => $warga->id,
+        //                 'status_pending',
+        //             ]);
+        //         }
+        // }
+
         return redirect()->route('admin.kasiuran')->with('success', 'Iuran Berhasil Ditambahkan');
     }
+
+
+
+
 
     public function hapusIuran($id)
     {
@@ -469,51 +499,104 @@ class adminController extends Controller
     {
         $this->hanyaUntukAdmin();
 
-        $warga = Warga::with(['user'])->get();
+        // $warga = Warga::with(['user'])->get();
+
+        // $kategori = KategoriIuran::findOrFail($id);
+        // $transaksi = TransaksiIuran::where('kategori_iuran_id', $kategori->id)->with('kategoriIuran', 'warga', 'kk')->get();
+
+        // return view('admin.iuran.kelolaIuran', compact('kategori', 'transaksi'));
 
         $kategori = KategoriIuran::findOrFail($id);
-        $transaksi = TransaksiIuran::where('kategori_iuran_id', $kategori->id)->with('warga')->get();
 
-        return view('admin.iuran.kelolaIuran', compact('warga', 'kategori', 'transaksi'));
+        if ($kategori->jenis === 'kk'){
+            $transaksi = TransaksiIuran::where('kategori_iuran_id', $kategori->id)->with('kk')->latest()->get();
+        } else if ($kategori->jenis === 'perorangan'){
+            $transaksi = TransaksiIuran::where('kategori_iuran_id', $kategori->id)->with('warga')->latest()->get();
+        }
+
+        return view('admin.iuran.kelolaIuran', compact(
+            'kategori',
+            'transaksi'
+        ));
     }
+
 
 
 
     //KONFIRMASI IURAN WARGA
 
-
-    public function konfirmasiIuran($iuran_id)
+    public function konfirmasiIuran(Request $request, $iuran_id)
     {
         $this->hanyaUntukAdmin();
 
-        $transaksi = TransaksiIuran::with(['warga', 'kategoriIuran'])->findOrFail($iuran_id);
+        // $transaksi = TransaksiIuran::with(['warga', 'kategoriIuran'])->findOrFail($iuran_id);
 
-        if ($transaksi->status === 'terkonfirmasi') {
-            return back()->with('info', 'Iuran sudah dikonfirmasi sebelumnya');
-        }
+        // if ($transaksi->status === 'terkonfirmasi') {
+        //     return back()->with('info', 'Iuran sudah dikonfirmasi sebelumnya');
+        // }
 
-        $transaksi->update([
-            'jumlah_bayar' => $transaksi->kategoriIuran->jumlah,
-            'status' => 'terkonfirmasi',
-        ]);
+        // // REVISI BISA PER ORANGAN ATAU PER KK
 
-        $jenis = 'masuk';
+        // if($transaksi->kategoriIuran->jenis === 'kk'){
 
-        $kas = Kas::latest()->take(1)->first();
+        //     TransaksiIuran::where('kartu_keluarga_id', $transaksi->kartu_keluarga_id)->where('kategori_iuran_id', $transaksi->kategoriIuran->id)->update([
+        //         'jumlah_bayar' => $transaksi->kategoriIuran->jumlah,
+        //         'status' => 'terkonfirmasi',
+        //     ]);
+        // }
 
-        $uang = TransaksiKas::create([
+        // else if($transaksi->kategoriIuran->jenis === 'perorangan') {
+        //     $transaksi->update([
+        //         'jumlah_bayar' => $transaksi->kategoriIuran->jumlah,
+        //         'status' => 'terkonfirmasi',
+        //     ]);
+        // };
+
+
+        // $kas = Kas::latest()->first();
+
+        // $uang = TransaksiKas::create([
+        //     'kas_id' => $kas->id,
+        //     'jenis' => 'masuk',
+        //     'jumlah' => $transaksi->kategoriIuran->jumlah,
+        //     'keterangan' => 'Transaksi Masuk Dari ' . $transaksi->kategoriIuran->nama_iuran, // NAMA WARGA MASUK DARI SINI //REVISI GANTI NAMA IURAN AJA
+        //     'tanggal' => now(),
+
+        //     //BUKTI HARUS MASUK KE PENGELUARAN
+        //     'bukti_transaksi' => $request->bukti_bayar //MASIH SALAH BELUM ADA PATH
+        // ]);
+
+
+        // $pemasukan = $uang->jumlah;
+
+        // $kas->saldo += $pemasukan;
+
+        // $kas->save();
+
+        // TransaksiIuran::where('id', $iuran_id)->update([
+        //     'status' => 'terkonfirmasi',
+        //     'tanggal_bayar' => now(),
+        // ]);
+
+
+
+        $transaksi = TransaksiIuran::with('kategoriIuran')->findOrFail($iuran_id);
+        $transaksi->status = 'terkonfirmasi';
+        $transaksi->save();
+
+        $kas = Kas::latest()->first();
+
+        $uangKas = TransaksiKas::create([
             'kas_id' => $kas->id,
-            'jenis' => $jenis,
+            'jenis' => 'masuk',
             'jumlah' => $transaksi->kategoriIuran->jumlah,
-            'keterangan' => 'Transaksi Masuk Dari ' . $transaksi->kategoriIuran->nama_iuran, // NAMA WARGA MASUK DARI SINI
-            'tanggal' => now(),
+            'keterangan' => 'Transaksi masuk dari ' . $transaksi->kategoriIuran->nama_iuran,
+            'tanggal' => now()
         ]);
 
+        $pemasukanKas = $uangKas->jumlah;
 
-        $pemasukan = $uang->jumlah;
-
-
-        $kas->saldo += $pemasukan;
+        $kas->saldo += $pemasukanKas;
 
         $kas->save();
 
@@ -522,13 +605,14 @@ class adminController extends Controller
     }
 
 
+
     // DETAIL IURAN
     public function detailIuran($id): View
     {
         $this->hanyaUntukAdmin();
 
         $iuran = KategoriIuran::findOrFail($id);
-        $semuaRiwayat = TransaksiIuran::with(['warga', 'kategoriIuran'])->where('kategori_iuran_id', $iuran->id)->where('status', 'terkonfirmasi')->get();
+        $semuaRiwayat = TransaksiIuran::with('warga', 'kategoriIuran', 'kk')->where('kategori_iuran_id', $iuran->id)->where('status', 'terkonfirmasi')->latest()->get();
 
         $total_warga = Warga::count();
         // $kategoriIuran = KategoriIuran::findOrFail($id)->first();

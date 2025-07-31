@@ -30,7 +30,8 @@
 
             <div class="card-menu">
                 <div class="card-nav">
-                    <a href="{{route('admin.detailIuran', ['id' => $kategori->id] )}}" class="link-a-disable text-small text-center">Detail</a>
+                    <a href="{{ route('admin.detailIuran', ['id' => $kategori->id]) }}"
+                        class="link-a-disable text-small text-center">Detail</a>
                 </div>
             </div>
         </div>
@@ -59,7 +60,11 @@
                     @foreach ($transaksi as $iuran)
                         <div class="item">
                             @if ($iuran->status === 'terkonfirmasi')
-                                <p class="text-regular">{{ $iuran->warga->nama }}</p>
+                                @if ($iuran->warga)
+                                    <p class="text-regular">{{ $iuran->warga->nama }}</p>
+                                @elseif ($iuran->kk)
+                                    <p class="text-regular">{{ $iuran->kk->no_kk }}</p>
+                                @endif
 
                                 <div class="card-status-success">
                                     <p>Status : {{ $iuran->status }}</p>
@@ -73,7 +78,11 @@
                                     </a>
                                 </div>
                             @else
-                                 <p class="text-regular">{{ $iuran->warga->nama }}</p>
+                                @if ($iuran->warga)
+                                    <p class="text-regular">{{ $iuran->warga->nama }}</p>
+                                @elseif ($iuran->kk)
+                                    <p class="text-regular">{{ $iuran->kk->no_kk }}</p>
+                                @endif
 
                                 <div class="card-status-warning">
                                     <p>Status : {{ $iuran->status }}</p>
@@ -89,8 +98,9 @@
 
                                 <form action="{{ route('admin.konfirmasiIuran', $iuran->id) }}" method="POST">
                                     @csrf
+                                    <input type="hidden" name="bukti_transaksi" value="{{ $iuran->bukti_bayar }}">
                                     <button type="submit"
-                                        class="link-a-secondary text-small text-center">Konfirmasi</button>
+                                        class="link-a-secondary text-small text-center" onclick="loading()">Konfirmasi</button>
                                 </form>
                             @endif
                         </div>

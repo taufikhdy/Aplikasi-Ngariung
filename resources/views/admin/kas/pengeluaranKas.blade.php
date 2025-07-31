@@ -75,9 +75,10 @@
 
                 </div>
             @endforeach
-    </div>
 
     @endif
+
+    </div>
 
     <div class="navigasi">
         <div class="rincian-menu">
@@ -93,7 +94,7 @@
                 onsubmit="return confirm('Yakin ingin menghapus semua riwayat transaksi kas?')">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-small text-center tolak">Hapus Semua Riwayat Transaksi</button>
+                <button type="submit" class="text-small text-center tolak" onclick="loading()">Hapus Semua Riwayat Transaksi</button>
             </form>
         </div>
     </div>

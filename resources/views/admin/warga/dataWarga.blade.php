@@ -54,19 +54,19 @@
                         <td>{{ $warga->status_keluarga }}</td>
                         <td>{{ $warga->telepon }}</td>
                         <td class="aksi">
-                            <a href="{{ route('admin.editWarga', $warga->id) }}" class="link-a-active text-small">Edit</a>
+                            <a href="{{ route('admin.editWarga', $warga->id) }}" class="link-a-active text-small" onclick="loading()">Edit</a>
 
                             <form action="{{ route('admin.hapusWarga', $warga->id) }}" method="POST"
                                 onsubmit="return confirm('Yakin ingin menghapus data warga. Tindakan ini akan menghapus data warga beserta akunnya.')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="link-a-error text-samall">Hapus</button>
+                                <button type="submit" class="link-a-error text-samall" onclick="loading()">Hapus</button>
                             </form>
 
                             <form action="{{route('admin.resetSandi', ['id' => $warga->id])}}" method="post"
                                 onsubmit="return confirm('Yakin ingin reset kata sandi akun warga yang bersangkutan?')">
                                 @csrf
-                                <button type="submit" name="" id="" class="link-a-warning text-small">Reset Kata sandi</button>
+                                <button type="submit" name="" id="" class="link-a-warning text-small" onclick="loading()">Reset Kata sandi</button>
                             </form>
                         </td>
                     </tr>

@@ -21,20 +21,20 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
         rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('remixicon/fonts/remixicon.css') }}">
     {{-- CSS INTERNAL --}}
     <link rel="stylesheet" href="{{ asset('styles/animation.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/components.css?v=11') }}">
     <link rel="stylesheet" href="{{ asset('styles/main.css?v=13') }}">
     <link rel="stylesheet" href="{{ asset('styles/dataList.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/form.css?V=7') }}">
-    <link rel="stylesheet" href="{{ asset('styles/kas_iuran.css?v=4')}}">
+    <link rel="stylesheet" href="{{ asset('styles/kas_iuran.css?v=4') }}">
     <link rel="stylesheet" href="{{ asset('styles/card.css?v=3') }}">
     <link rel="stylesheet" href="{{ asset('styles/berita.css?=4+') }}">
-    <link rel="stylesheet" href="{{ asset('styles/surat.css')}}">
+    <link rel="stylesheet" href="{{ asset('styles/surat.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/messages.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/table.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('remixicon/fonts/remixicon.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/loading.css') }}">
 
 </head>
 
@@ -46,6 +46,9 @@
         @yield('content')
     </main>
 
+    <div class="loading" id="loading">
+        <span class="loader"></span>
+    </div>
 
     {{-- IMPOR JS DARI PUBLIC --}}
     <script src="{{ asset('js/script.js?v=10') }}"></script>

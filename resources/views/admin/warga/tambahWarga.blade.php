@@ -158,7 +158,7 @@
 
             </div>
 
-            <input type="submit" name="" id="" value="Tambah Warga" class="text-small">
+            <input type="submit" name="" id="" value="Tambah Warga" class="text-small" onclick="loading()">
         </form>
 
         <a href="{{ route('admin.dataWarga') }}" class="link-a-error big text-small text-center">Batal</a>

@@ -280,7 +280,8 @@ body {
 
 input[type="checkbox"]{
     width: max-content;
-    background-color: none;
+    background: none;
+    outline: none;
 }
 
 .input-box .checkbox{

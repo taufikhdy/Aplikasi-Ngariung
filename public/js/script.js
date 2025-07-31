@@ -67,3 +67,9 @@ document.addEventListener("DOMContentLoaded", function() {
             input.type = 'password';
         }
     }
+
+
+    // LOADING
+    function loading() {
+        document.getElementById('loading').style.transform = 'scale(1)';
+    }

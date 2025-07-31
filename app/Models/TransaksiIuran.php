@@ -12,6 +12,7 @@ class TransaksiIuran extends Model
     protected $fillable = [
         'kategori_iuran_id',
         'warga_id',
+        'kartu_keluarga_id',
         'tanggal_bayar',
         'jumlah_bayar',
         'bukti_bayar',
@@ -21,6 +22,10 @@ class TransaksiIuran extends Model
 
     public function kategoriIuran(){
         return $this->belongsTo(KategoriIuran::class, 'kategori_iuran_id');
+    }
+
+    public function kk(){
+        return $this->belongsTo(KartuKeluarga::class, 'kartu_keluarga_id');
     }
 
     public function warga(){

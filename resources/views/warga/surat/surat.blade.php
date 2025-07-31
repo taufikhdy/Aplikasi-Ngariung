@@ -52,7 +52,7 @@
 
             </div>
 
-            <input type="submit" name="" id="" value="Ajukan Surat" class="text-small">
+            <input type="submit" name="" id="" value="Ajukan Surat" class="text-small" onclick="loading()">
         </form>
     </div>
 

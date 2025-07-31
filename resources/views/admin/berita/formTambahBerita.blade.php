@@ -43,7 +43,7 @@
 
             </div>
 
-            <input type="submit" name="" id="" value="Tambah Berita" class="text-small">
+            <input type="submit" name="" id="" value="Tambah Berita" class="text-small" onclick="loading()">
         </form>
         <a href="{{ route('admin.berita') }}" class="link-a-error big text-small text-center">Batal</a>
     </div>

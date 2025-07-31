@@ -12,6 +12,7 @@ class KategoriIuran extends Model
     protected $fillable = [
         'nama_iuran',
         'jumlah',
+        'jenis',
         'tanggal_mulai',
         'tanggal_akhir',
         'deskripsi',

@@ -60,7 +60,7 @@
                 <form action="{{ route('admin.setujuiSurat', $surat->id) }}" method="post">
                 <form action="" method="post">
                     @csrf
-                    <input type="submit" name="" id="" value="Setujui" class="text-small">
+                    <input type="submit" name="" id="" value="Setujui" class="text-small" onclick="loading()">
                 </form>
                 <br>
                 <hr>
@@ -69,7 +69,7 @@
                     @csrf
                     <input type="text" name="alasan" id="" placeholder="Alasan Penolakan" required
                         class="alasan">
-                    <button type="submit" class="text-small tolak">Tolak</button>
+                    <button type="submit" class="text-small tolak" onclick="loading()">Tolak</button>
                 </form>
             @endif
         </div>

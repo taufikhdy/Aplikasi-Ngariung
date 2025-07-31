@@ -4,6 +4,10 @@
 
 @section('content')
 
+    @if (session('error'))
+        <p class="message-error cp" id="message">{{ session('error') }}</p>
+    @endif
+
     <div class="bg">
 
         <div class="back">
@@ -32,7 +36,8 @@
 
             <div class="card-menu">
                 <div class="card-nav">
-                    <a href="{{route('warga.detailIuran', ['id' => $iuran->id] )}}" class="link-a-disable text-small text-center">Detail</a>
+                    <a href="{{ route('warga.detailIuran', ['id' => $iuran->id]) }}"
+                        class="link-a-disable text-small text-center">Detail</a>
                 </div>
             </div>
         </div>
@@ -49,18 +54,20 @@
             <h6 class="text-left">Bayar Iuran</h6>
         </div>
 
-        <form action="{{ route('warga.bayarIuran', ['id' => $iuran->id] ) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('warga.bayarIuran', ['id' => $iuran->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form">
 
-                <input type="hidden" name="warga_id" id="" value="{{Auth::user()->warga->id}}">
+                <input type="hidden" name="warga_id" id="" value="{{ Auth::user()->warga->id }}">
+                <input type="hidden" name="kartu_keluarga_id" id="" value="{{ Auth::user()->warga->kk_id }}">
 
                 <div class="input-tambah">
                     <label for="bukti_bayar">Bukti Bayar</label>
-                    <input type="file" name="bukti_bayar" id="bukti_bayar" placeholder="bukti_bayar" autocomplete="off" required>
+                    <input type="file" name="bukti_bayar" id="bukti_bayar" placeholder="bukti_bayar" autocomplete="off">
                 </div>
 
-                <input type="submit" name="" id="" class="text-small" value="Bayar Iuran">
+                <input type="submit" name="" id="" class="text-small" value="Bayar Iuran"
+                    onclick="loading()">
             </div>
 
 

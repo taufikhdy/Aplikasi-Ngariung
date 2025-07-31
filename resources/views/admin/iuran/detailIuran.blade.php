@@ -95,7 +95,7 @@
                 @else
                     @foreach ($semuaRiwayat as $riwayat)
                         <div class="item">
-                            <p class="text-regular">{{ $riwayat->warga->nama }}</p>
+                            <p class="text-regular">{{ $riwayat->kk->no_kk }}</p>
 
                             <a href="#popup-{{ $riwayat->id }}" class="text-small">Lihat bukti</a>
 

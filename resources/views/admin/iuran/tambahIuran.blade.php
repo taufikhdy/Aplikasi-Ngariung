@@ -44,12 +44,20 @@
 
                 <div class="input-tambah-flex">
                     @error('tanggal_mulai')
-                        <p class="message-error cp">{{ $message }}</p>
+                    <p class="message-error cp">{{ $message }}</p>
                     @enderror
 
                     @error('tanggal_akhir')
-                        <p class="message-error cp">{{ $message }}</p>
+                    <p class="message-error cp">{{ $message }}</p>
                     @enderror
+                </div>
+
+                <div class="input-tambah">
+                    <label for="jenis">Jenis Iuran</label>
+                    <select name="jenis" id="jenis">
+                        <option value="kk">Per-Keluarga</option>
+                        <option value="perorangan">Perorangan</option>
+                    </select>
                 </div>
 
                 <div class="input-tambah">
@@ -61,7 +69,7 @@
                 </div>
             </div>
 
-            <input type="submit" name="submit" id="" value="Tambah Iuran" class="text-small">
+            <input type="submit" name="submit" id="" value="Tambah Iuran" class="text-small" onclick="loading()">
         </form>
         <a href="{{ route('admin.kasiuran') }}" class="link-a-error big text-small text-center">Batal</a>
 

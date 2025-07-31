@@ -26,7 +26,7 @@
 
         <div class="overflow">
 
-            @if ($kas->isEmpty() && !$k_iurans)
+            @if ($kas->isEmpty() && $iurans->isEmpty())
                 <p class="cp text-center text-white">Belum ada data kas dan iuran</p>
             @else
                 @foreach ($kas as $k)
@@ -62,48 +62,52 @@
                     </div>
                 @endforeach
 
-                @if ($k_iurans)
+                @foreach ($iurans as $iuranNew)
                     <div class="card">
                         <div class="card-head">
                             <div class="card-header">
                                 <div class="card-title">
                                     <i class="ri-wallet-3-line card-icon"></i>
-                                    <h6>{{ $k_iurans->nama_iuran }}</h6>
+                                    <h6>{{ $iuranNew->nama_iuran }}</h6>
                                 </div>
                             </div>
 
                             <div class="card-info">
                                 <p class="cp">Berakhir tanggal
-                                    {{ Carbon\Carbon::parse($k_iurans->tanggal_akhir)->format('d M Y') }}</p>
-                                <h3>{{ 'Rp. ' . number_format($k_iurans->jumlah, 0, ',', '.') }}</h3>
+                                    {{ Carbon\Carbon::parse($iuranNew->tanggal_akhir)->format('d M Y') }}</p>
+                                <h3>{{ 'Rp. ' . number_format($iuranNew->jumlah, 0, ',', '.') }}</h3>
                             </div>
                         </div>
 
                         <div class="card-menu">
-                            @if (!$transaksi)
+                            @if ($iuranNew->status_bayar === 'pending' or $iuranNew->status === 'pending')
                                 <div class="card-status-warning">
                                     <p class="cp">Belum Bayar</p>
-                                    <p class="cp">{{ 'Rp. ' . number_format($k_iurans->jumlah, 0, ',', '.') }}</p>
+                                    <p class="cp">{{ 'Rp. ' . number_format($iuranNew->jumlah, 0, ',', '.') }}</p>
                                 </div>
                                 <div class="card-nav">
-                                    <a href="{{route('warga.detailIuran', ['id' => $k_iurans->id] )}}" class="link-a-disable text-small text-center">Detail</a>
+                                    <a href="{{ route('warga.detailIuran', ['id' => $iuranNew->id]) }}"
+                                        class="link-a-disable text-small text-center">Detail</a>
 
-                                    <a href="{{route('warga.formBayarIuran', ['id' => $k_iurans->id] )}}" class="link-a-secondary text-small text-center"><i class="ri-arrow-right-line"></i> Bayar</a>
+                                    <a href="{{ route('warga.formBayarIuran', ['id' => $iuranNew->id]) }}"
+                                        class="link-a-secondary text-small text-center"><i class="ri-arrow-right-line"></i>
+                                        Bayar</a>
                                 </div>
-                            @else
+                            @elseif ($iuranNew->status_bayar === 'terkonfirmasi' or $iuranNew->status === 'terkonfirmasi')
                                 <div class="card-status-success">
                                     <p class="cp">Sudah Bayar</p>
                                     <p class="cp">
-                                        {{ Carbon\Carbon::parse($k_iurans->iuran->first()->tanggal_bayar)->format('d M Y') }}
+                                        {{ Carbon\Carbon::parse($iuranNew->tanggal_bayar)->format('d M Y') }}
                                     </p>
                                 </div>
                                 <div class="card-nav">
-                                    <a href="{{route('warga.detailIuran', ['id' => $k_iurans->id] )}}" class="link-a-disable text-small text-center">Detail</a>
+                                    <a href="{{ route('warga.detailIuran', ['id' => $iuranNew->id]) }}"
+                                        class="link-a-disable text-small text-center">Detail</a>
                                 </div>
                             @endif
                         </div>
                     </div>
-                @endif
+                @endforeach ($iuranNew)
 
             @endif
 

@@ -12,6 +12,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
 use App\Models\User; //APAKAH DIAMBIL DARI WARGA?
+use Illuminate\Support\Facades\Redirect;
 
 class LoginRegisterController extends Controller implements HasMiddleware
 {
@@ -88,9 +89,13 @@ class LoginRegisterController extends Controller implements HasMiddleware
 
     }
 
-    public function home(): View
+    public function home()
     {
-        return view('auth.login');
+        if(Auth::user()->role->nama_role === 'warga'){
+            return redirect()->route('warga.dashboard');
+        }else if(Auth::user()->role->nama_role === 'rt'){
+            return redirect()->route('admin.dashboard');
+        }
     }
 
     public function logout(Request $request): RedirectResponse

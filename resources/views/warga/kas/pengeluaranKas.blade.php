@@ -76,9 +76,9 @@
                 </div>
             @endforeach
 
-    </div>
+        @endif
 
-    @endif
+    </div>
 
     <div class="navigasi">
         <div class="rincian-menu">

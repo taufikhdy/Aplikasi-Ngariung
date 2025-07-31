@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
+
 
     {{-- CSS EKSTERNAL --}}
 
@@ -16,7 +18,7 @@
 
     {{-- CSS INTERNAL --}}
     <link rel="stylesheet" href="{{ asset('styles/login.css') }}">
-    <link rel="stylesheet" href="{{ asset('styles/messages') }}">
+    <link rel="stylesheet" href="{{ asset('styles/messages.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/animation.css') }}">
 
 
@@ -55,7 +57,8 @@
                         <input type="password" name="password" id="password" placeholder="Kata Sandi" autocomplete="off">
 
                         <div class="checkbox">
-                        <input type="checkbox" name="" id="show" onclick="showPassword()"> <label for="show" class="cp-gray">Tampilkan Password.</label>
+                            <input type="checkbox" name="" id="show" onclick="showPassword()"> <label
+                                for="show" class="cp-gray">Tampilkan Password.</label>
                         </div>
 
                         @if (session('password'))

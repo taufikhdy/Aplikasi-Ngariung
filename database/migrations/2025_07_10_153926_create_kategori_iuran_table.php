@@ -18,6 +18,8 @@ return new class extends Migration
 
             $table->integer('jumlah');
 
+            $table->enum('jenis', ['kk', 'perorangan'])->default('kk');
+
             $table->text('deskripsi')->nullable();
 
             $table->date('tanggal_mulai');

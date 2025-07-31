@@ -50,7 +50,7 @@
             <h4>Iuran</h4>
 
             {{-- ini iuran yang lagi aktif di controller pakai iurans untuk tgl yang aktif kalau k_iurans semua iuran --}}
-            @if ($iuranNew->isEmpty())
+            @if (!$iuranNew)
                 <p class="cp-gray text-center">Belum ada iuran untuk saat ini.</p>
             @else
                 @foreach ($iuranNew as $iuran)
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="card-menu">
-                            @if ($iuran->iuran->isEmpty())
+                            @if ($iuran->status_bayar === 'pending')
                                 <div class="card-status-warning">
                                     <p class="cp">Belum Bayar</p>
                                     <p class="cp">{{ 'Rp. ' . number_format($iuran->jumlah, 0, ',', '.') }}</p>
@@ -90,7 +90,7 @@
                                             class="link-a-secondary-full text-small text-center"><i class="ri-arrow-right-line"></i> Bayar</button>
                                     </form> --}}
                                 </div>
-                            @else
+                            @elseif ($iuran->status_bayar === 'terkonfirmasi')
                                 <div class="card-status-success">
                                     <p class="cp">Sudah Bayar</p>
                                     <p class="cp">

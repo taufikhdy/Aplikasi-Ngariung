@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('kategori_iuran_id')->constrained('kategori_iuran')->onDelete('cascade');
-            $table->foreignId('warga_id')->constrained('warga')->onDelete('cascade');
+            $table->foreignId('warga_id')->nullable();
+            $table->foreignId('kartu_keluarga_id')->nullable();
 
             $table->date('tanggal_bayar')->nullable();
 

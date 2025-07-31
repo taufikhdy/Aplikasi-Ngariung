@@ -256,7 +256,6 @@ a.text-regular.active {
     width: 100%;
     height: 100%;
     background-color: hsla(0, 0%, 0%, 25%);
-    opacity: 0;
     visibility: hidden;
     transition: .3s ease-out;
     z-index: 1000;
@@ -280,11 +279,4 @@ a.text-regular.active {
 .popup-content img{
     width: 100%;
     height: auto;
-}
-
-.popup-content .close{
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
 }

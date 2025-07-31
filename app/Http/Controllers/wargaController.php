@@ -35,20 +35,76 @@ class wargaController extends Controller
         }
     }
 
-    public function dashboard(): View
+    public function dashboard(): view
     {
         $this->hanyaUntukWarga();
 
         $kas = Kas::all();
-        $wargaId = Auth::user()->warga->id;
+        $warga = Auth::user()->warga;
+        $kkId = Auth::user()->warga->kk_id;
 
-        $k_iurans = KategoriIuran::latest()->first();
+        // $iuranNew = KategoriIuran::latest()->first();
 
-        if ($k_iurans) {
-            $transaksi = TransaksiIuran::where('kategori_iuran_id', $k_iurans->id)->where('warga_id', $wargaId)->first();
-        } else {
-            $transaksi = null;
+
+        // PEMBATASAN IURAN PER DATA WARGA DIBUAT
+        $tanggalMasukWarga = $warga->created_at;
+        $tanggalMasukKK = $warga->KartuKeluarga->created_at ?? $tanggalMasukWarga;
+
+        $iuranPerorang = KategoriIuran::where('jenis', 'perorangan')->where('created_at', '>=', $tanggalMasukWarga)->orderBy('created_at', 'desc')->latest()->first(); //take(1)->get();
+
+        $iuranPerKK = KategoriIuran::where('jenis', 'kk')->where('created_at', '>=', $tanggalMasukKK)->orderBy('created_at', 'desc')->latest()->first(); //->take(1)->get();
+
+        // if ($iuranNew) {
+        //     if ($iuranNew->jenis === 'kk') {
+        //         $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuranNew->id)->where('kartu_keluarga_id', $kkId)->latest()->first();
+        //     } else if ($iuranNew->jenis === 'perorangan') {
+        //         $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuranNew->id)->where('warga_id', $wargaId)->latest()->first();
+        //     }
+
+        // $iurans = $iuranPerorang->merge($iuranPerKK)->sortByDesc('created_at')->values();
+
+        $iurans = []; //deklarasi untuk nyimpen data transaksi
+
+
+        $transaksi = '';
+        // if ($iurans) {
+
+
+        if ($iuranPerKK) {
+            // $idKK = $iuranPerKK->first();
+            $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuranPerKK->id)->where('kartu_keluarga_id', $kkId)
+                ->latest()->first();
+
+            // if ($transaksi) {
+            //     $iurans->setAttribute('status_bayar', $transaksi->status);
+            // } else {
+            //     $iurans->setAttribute('status_bayar', 'pending');
+            // }
+            // INI TADINYA KALO COLLECTION DARI HASIL MERGE
+
+
+            if ($transaksi) {
+                $iuranPerKK->status_bayar = $transaksi->status;
+            }else{
+                $iuranPerKK->status_bayar = 'pending';
+            }
+
+            $iurans[] = $iuranPerKK;
+        } else if ($iuranPerorang) {
+            // $idWarga = $iuranPerorang->first();
+            $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuranPerorang->id)->where('warga_id', $warga->id)
+                ->latest()->first();
+
+            if ($transaksi) {
+                $iuranPerorang->status_bayar = $transaksi->status;
+            }else{
+                $iuranPerorang->status_bayar = 'pending';
+            }
+
+            $iurans[] = $iuranPerorang;
         }
+
+        // } INI PENUTUP IF $IURANS
 
         $user = Auth::user();
 
@@ -65,7 +121,7 @@ class wargaController extends Controller
         }
 
         $beritas = Berita::latest()->get();
-        return view('warga.dashboard', compact('kas', 'k_iurans', 'transaksi', 'beritas'));
+        return view('warga.dashboard', compact('kas', 'iurans', 'transaksi', 'beritas'));
     }
 
 
@@ -89,13 +145,98 @@ class wargaController extends Controller
 
         $kas = Kas::all();
 
+        $warga = Auth::user()->warga;
+        $kkId = $warga->kk_id;
+
 
         // AMBIL IURAN BUAT WARGA
 
-        $iuranNew = KategoriIuran::latest()->get();
-        $riwayat = TransaksiIuran::where('warga_id', Auth::user()->warga->id)->get();
+        // $iuranNew = KategoriIuran::latest()->get();
 
-        return view('warga.kas.kasiuran', compact('kas', 'iuranNew', 'riwayat'));
+
+        // foreach ($iuranNew as $iuran) {
+        //     $transaksi = null;
+
+        //     if ($iuran->jenis === 'kk') {
+        //         $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuran->id)->where('kartu_keluarga_id', $kkId)
+        //             ->latest()->first();
+        //     } else if ($iuran->jenis === 'perorangan') {
+        //         $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuran->id)->where('warga_id', $warga->id)
+        //             ->latest()->first();
+        //     }
+
+        //     if ($transaksi) {
+        //         $iuran->status_bayar = $transaksi->status;
+        //     } else {
+        //         $iuran->status_bayar = 'pending';
+        //     }
+        // }
+
+        // PEMBATASAN IURAN PER DATA WARGA DIBUAT
+        $tanggalMasukWarga = $warga->created_at;
+        $tanggalMasukKK = $warga->KartuKeluarga->created_at ?? $tanggalMasukWarga;
+
+        $iuranPerorangs = KategoriIuran::where('jenis', 'perorangan')->where('created_at', '>=', $tanggalMasukWarga)->orderBy('created_at', 'desc')->latest()->get(); //take(1)->get();
+
+        $iuranPerKKs = KategoriIuran::where('jenis', 'kk')->where('created_at', '>=', $tanggalMasukKK)->orderBy('created_at', 'desc')->latest()->get(); //->take(1)->get();
+
+        // if ($iuranNew) {
+        //     if ($iuranNew->jenis === 'kk') {
+        //         $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuranNew->id)->where('kartu_keluarga_id', $kkId)->latest()->first();
+        //     } else if ($iuranNew->jenis === 'perorangan') {
+        //         $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuranNew->id)->where('warga_id', $wargaId)->latest()->first();
+        //     }
+
+        // $iurans = $iuranPerorang->merge($iuranPerKK)->sortByDesc('created_at')->values();
+
+        $iuranNew = []; //deklarasi untuk nyimpen data transaksi
+
+
+        $transaksi = '';
+        // if ($New) {
+
+
+        foreach ($iuranPerKKs as $iuranPerKK) {
+            // $idKK = $iuranPerKK->first();
+            $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuranPerKK->id)->where('kartu_keluarga_id', $kkId)
+                ->latest()->first();
+
+            // if ($transaksi) {
+            //     $New->setAttribute('status_bayar', $transaksi->status);
+            // } else {
+            //     $iurans->setAttribute('status_bayar', 'pending');
+            // }
+            // INI TADINYA KALO COLLECTION DARI HASIL MERGE
+
+
+            if ($transaksi) {
+                $iuranPerKK->status_bayar = $transaksi->status;
+            }else{
+                $iuranPerKK->status_bayar = 'pending';
+            }
+
+            $iuranNew[] = $iuranPerKK;
+        }
+
+        foreach ($iuranPerorangs as $iuranPerorang) {
+            // $idWarga = $iuranPerorang->first();
+            $transaksi = TransaksiIuran::where('kategori_iuran_id', $iuranPerorang->id)->where('warga_id', $warga->id)
+                ->latest()->first();
+
+            if ($transaksi) {
+                $iuranPerorang->status_bayar = $transaksi->status;
+            }else{
+                $iuranPerorang->status_bayar = 'pending';
+            }
+
+            $iuranNew[] = $iuranPerorang;
+
+        }
+
+        array_values($iuranNew);
+        // $riwayat = TransaksiIuran::where('warga_id', $warga->id)->orWhere('kartu_keluarga_id', $warga->kk_id)->get();
+
+        return view('warga.kas.kasiuran', compact('kas', 'iuranNew'));
     }
 
     //DETAIL KAS
@@ -164,29 +305,104 @@ class wargaController extends Controller
     }
 
 
+
+
     // public function bayarIuran(Request $request)
     public function bayarIuran(Request $request, $id)
     {
         $this->hanyaUntukWarga();
 
+        // $user = Auth::user();
+        // $warga = Warga::find($user->warga_id); //Cari di tabel user kolom warga_id samakan dengan tabel warga
+        // $kategori = KategoriIuran::findOrFail($id);
+        // // $warga = Auth::user()->warga;
+
+
+        // if ($kategori->jenis === 'kk') {
+        //     $bayar = TransaksiIuran::where('kategori_iuran_id', $id)->where('kartu_keluarga_id', $warga->kk_id)->first();
+        // } else if ($kategori->jenis === 'perorangan') {
+        //     $bayar = TransaksiIuran::where('kategori_iuran_id', $id)->where('warga_id', $warga->id)->first();
+        // }
+
+
+        // if ($bayar && $bayar->status === 'pending') {
+        //     $data = [
+        //         'status' => 'pending',
+        //         'tanggal_bayar' => now()
+        //     ];
+
+        //     if ($request->hasFile('bukti_bayar')) {
+        //         // $file = $request->file('bukti_bayar');
+        //         // $path = $file->store('bukti_bayar_iuran', 'public');
+        //         // $data['bukti_bayar'] = $path;
+
+        //         $data['bukti_bayar'] = $request->file('bukti_bayar')->store('bukti_bayar', 'public');
+        //     }
+
+        //     $bayar->update($data);
+
+        //     return redirect()->back()->with('success', 'Pembayaran menunggu konfirmasi');
+        // }
+
+        // return redirect()->back()->with('error', 'Iuran sudah pernah dibayar');
+
+        $iuran = KategoriIuran::findOrFail($id);
+
+        $warga = Auth::user()->warga;
+
         $request->validate([
-            'warga_id' => 'required|exists:warga,id',
+            // 'warga_id' => 'required|exists:warga,id',
+
+            // 'kartu_keluarga_id' => 'required|exists:kartu_keluarga,id',
+
             'bukti_bayar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
         $pathBukti = $request->file('bukti_bayar')->store('bukti_bayar_iuran', 'public');
 
-        TransaksiIuran::create([
-            'kategori_iuran_id' => $request->id,
-            'warga_id' => $request->warga_id, //?
-            'jumlah_bayar' => $request->jumlah, //ini kosong terisi jika dikonfirmasi RT nilai diambil di RT
+
+        // if ($kategori->jenis === 'kk'){
+        //     $sudahBayar = TransaksiIuran::where('kategori_iuran_id', $kategori->id)->where('kartu_keluarga_id', $warga->kk_id)->whereIn('status', ['pending', 'terkonfirmasi'])->exists();
+        // } else {
+        //     $sudahBayar = TransaksiIuran::where('kategori_iuran_id', $kategori->id)->where('warga_id', $warga->id)->whereIn('status', ['pending', 'terkonfirmasi'])->exists();
+        // }
+
+        // if ($sudahBayar) {
+        //     return redirect()->back()->with('success', 'Iuran ini sudah dibayar atau menunggu konfirmasi');
+        // }
+
+        $data = [
+            'kategori_iuran_id' => $iuran->id,
+            'kartu_keluarga_id' => $warga->kk_id,
+            'jumlah_bayar' => $iuran->jumlah,
             'tanggal_bayar' => now(),
             'status' => 'pending',
-            'bukti_bayar' => $pathBukti //$pathBukti,
-        ]);
+            'bukti_bayar' => $pathBukti
+        ];
+
+        // TransaksiIuran::create([
+        //     'kategori_iuran_id' => $id, // ini dari kategori iuran
+        //     'warga_id' => $iuran->jenis === 'perorangan' ? $warga->id : null,
+
+        //     'kartu_keluarga_id' => $warga->kk_id,
+
+        //     'jumlah_bayar' => null, //ini kosong terisi jika dikonfirmasi RT nilai diambil di RT
+        //     'tanggal_bayar' => now(),
+        //     'status' => 'pending',
+        //     'bukti_bayar' => $pathBukti //$pathBukti,
+        // ]);
+
+        if ($iuran->jenis === 'perorangan') {
+            $data['warga_id'] = $warga->id;
+        }
+
+        // JADI KALO PER KK ID WARGA JADI NULL
+        TransaksiIuran::create($data);
 
         return redirect()->route('warga.kasiuran')->with('success', 'Bukti bayar telah dikirim, tunggu konfirmasi dari RT.');
     }
+
+
 
     // DETAIL IURAN
     public function detailIuran($id): View
@@ -199,7 +415,7 @@ class wargaController extends Controller
         $total_warga = Warga::count();
         // $kategoriIuran = KategoriIuran::findOrFail($id)->first();
 
-        $sudah_bayar = TransaksiIuran::where('kategori_iuran_id', $id)->count(); //buat berapa orang
+        $sudah_bayar = TransaksiIuran::where('kategori_iuran_id', $id)->where('status', 'terkonfirmasi')->count(); //buat berapa orang
         $total_masuk = TransaksiIuran::where('kategori_iuran_id', $id)->sum('jumlah_bayar');
 
         $target = $total_warga * $iuran->jumlah;

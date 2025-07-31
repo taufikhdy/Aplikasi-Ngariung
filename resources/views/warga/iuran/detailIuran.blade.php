@@ -24,6 +24,7 @@
 
                 <div class="card-info">
                     <p class="cp">Dibuat pada : {{ $iuran->created_at->format('d M Y') }}</p>
+                    <p class="cp">Berakhir Tanggal {{ $iuran->tanggal_akhir }}</p>
                     <h3>{{ 'Rp. ' . number_format($iuran->jumlah, 0, ',', '.') }}</h3>
                 </div>
             </div>
