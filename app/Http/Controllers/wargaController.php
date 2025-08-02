@@ -423,7 +423,9 @@ class wargaController extends Controller
         $this->hanyaUntukWarga();
 
         $iuran = KategoriIuran::findOrFail($id);
-        $riwayat = TransaksiIuran::with('kategoriIuran')->where('kategori_iuran_id', $id)->where('warga_id', Auth::user()->warga->id)->first();
+        $riwayatOrang = TransaksiIuran::with('kategoriIuran')->where('kategori_iuran_id', $id)->where('warga_id', Auth::user()->warga->id)->first();
+
+        $riwayatKeluarga = TransaksiIuran::with('kategoriIuran')->where('kategori_iuran_id', $id)->where('kartu_keluarga_id', Auth::user()->warga->kk_id)->first();
 
         $total_warga = Warga::count();
         // $kategoriIuran = KategoriIuran::findOrFail($id)->first();
@@ -435,7 +437,8 @@ class wargaController extends Controller
 
         return view('warga.iuran.detailIuran', compact(
             'iuran',
-            'riwayat',
+            'riwayatOrang',
+            'riwayatKeluarga',
             'total_warga',
             'sudah_bayar',
             'total_masuk',

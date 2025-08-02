@@ -93,17 +93,29 @@
 
             <div class="row">
 
-                @if (!$riwayat)
+                @if ($iuran->jenis === 'perorangan' && !$riwayatOrang or $iuran->jenis === 'kk' && !$riwayatKeluarga)
                     <p class="cp-gray text-center">Belum ada riwayat bayar</p>
-                @else
+                @elseif ($iuran->jenis === 'perorangan' && $riwayatOrang)
                     <div class="item">
-                        <p class="text-regular">{{ $riwayat->warga->nama }}</p>
+                        <p class="text-regular">{{ $riwayatOrang->warga->nama }}</p>
 
-                        <a href="#popup-{{ $riwayat->id }}" class="text-small">Lihat bukti</a>
+                        <a href="#popup-{{ $riwayatOrang->id }}" class="text-small">Lihat bukti</a>
 
-                        <div id="popup-{{ $riwayat->id }}" class="popup-overlay">
+                        <div id="popup-{{ $riwayatOrang->id }}" class="popup-overlay">
                             <a href="#" class="popup-content">
-                                <img src="{{ asset('storage/' . $riwayat->bukti_bayar) }}" alt="bukti bayar">
+                                <img src="{{ asset('storage/' . $riwayatOrang->bukti_bayar) }}" alt="bukti bayar">
+                            </a>
+                        </div>
+                    </div>
+                @elseif ($iuran->jenis === 'kk' && $riwayatKeluarga)
+                    <div class="item">
+                        <p class="text-regular">{{ $riwayatKeluarga->warga->nama }}</p>
+
+                        <a href="#popup-{{ $riwayatKeluarga->id }}" class="text-small">Lihat bukti</a>
+
+                        <div id="popup-{{ $riwayatKeluarga->id }}" class="popup-overlay">
+                            <a href="#" class="popup-content">
+                                <img src="{{ asset('storage/' . $riwayatKeluarga->bukti_bayar) }}" alt="bukti bayar">
                             </a>
                         </div>
                     </div>
@@ -114,9 +126,9 @@
 
     </div>
 
-    @if (!$riwayat)
+    @if ($iuran->jenis === 'perorangan' && !$riwayatOrang OR $iuran->jenis === 'kk' && !$riwayatKeluarga)
         <div class="navigasi">
-            <a href="{{ route('warga.formBayarIuran', ['id' => $iuran->id] ) }}"
+            <a href="{{ route('warga.formBayarIuran', ['id' => $iuran->id]) }}"
                 class="link-a-active big text-center text-small tombol">Bayar Iuran</a>
         </div>
     @endif
