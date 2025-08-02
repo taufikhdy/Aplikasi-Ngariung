@@ -64,7 +64,7 @@
     */
 
     /* ⚠️ HATI HATI NAMA FONT SERING SALAH */
-    --font: "Nunito", sans-serif;
+    --font: "Nunito", 'segoe-ui';
 
     --body-regular: 16px;
     --regular-height: 24px;

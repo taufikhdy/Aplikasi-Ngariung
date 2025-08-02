@@ -26,7 +26,7 @@
 
         <div class="overflow">
 
-            @if ($kas->isEmpty() && $iurans->isEmpty())
+            @if ($kas->isEmpty() && !$iurans)
                 <p class="cp text-center text-white">Belum ada data kas dan iuran</p>
             @else
                 @foreach ($kas as $k)
@@ -111,6 +111,34 @@
 
             @endif
 
+        </div>
+    </div>
+
+    <div class="data-list" style="padding-bottom: 20px;">
+
+        <div class="data">
+            <div class="data-caption">
+                {{-- <p class="cp">Data Jam Operasional RT</p> --}}
+                <h6>Jam Operasional RT</h6>
+            </div>
+
+            <div class="row">
+
+                @if (!$jam)
+                    <p class="cp-gray text-center">Data jam operasional belum tersedia</p>
+                @elseif ($jam && !$jam->libur)
+                    <div class="item">
+                        <p class="text-regular">{{ $jam->hari }}</p>
+                        <p class="text-regular">Pukul {{ \Carbon\Carbon::parse($jam->jam_mulai)->format('H:i') }}</p>
+                        <p class="text-regular">Sampai {{ \Carbon\Carbon::parse($jam->jam_selesai)->format('H:i') }}</p>
+                    </div>
+                @elseif ($jam && $jam->libur)
+                    <div class="item">
+                        <p class="text-regular">{{ $jam->hari }}</p>
+                        <p class="text-regula">Hari ini libur</p>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 

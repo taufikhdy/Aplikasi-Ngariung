@@ -27,6 +27,8 @@
             <a href="{{ route('admin.profile') }}" class="text-regular {{ Request::is('admin/profile*') ? 'active' : '' }}"><i class="ri-user-line regular-icon"></i>Data &
                 Profil</a>
 
+            <a href="{{ route('admin.jamOperasional') }}" class="text-regular {{ Request::is('admin/jam*') ? 'active' : '' }}"><i class="ri-calendar-schedule-line regular-icon"></i>Jam Operasional RT</a>
+
             <a href="{{ asset('Panduan Pengguna Aplikasi Manajemen RT.pdf') }}" download class="text-regular"><i class="ri-file-download-line regular-icon"></i>Unduh Panduan Pengguna</a>
 
         </div>

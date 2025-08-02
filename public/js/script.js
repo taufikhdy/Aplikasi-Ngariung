@@ -73,3 +73,20 @@ document.addEventListener("DOMContentLoaded", function() {
     function loading() {
         document.getElementById('loading').style.transform = 'scale(1)';
     }
+
+
+
+    // HARI LIBUR OPERASIONAL
+    function free() {
+        const liburday = document.getElementById('libur').checked;
+        const mulai = document.getElementById('jam-mulai');
+        const selesai = document.getElementById('jam-selesai');
+
+        mulai.disabled = liburday;
+        selesai.disabled = liburday;
+
+        if(liburday){
+            mulai.value = '';
+            selesai.value = '';
+        }
+    }

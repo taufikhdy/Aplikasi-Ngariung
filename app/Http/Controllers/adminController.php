@@ -27,6 +27,8 @@ use App\Models\JenisSurat;
 use App\Models\Surat;
 use App\Models\SuratSKCK;
 
+use App\Models\JamOperasional;
+
 // TANGGAL
 use Carbon\Carbon;
 
@@ -63,7 +65,11 @@ class adminController extends Controller
             };
         }
 
-        return view('admin.dashboard', compact('kas', 'k_iuran', 'beritas'));
+        $hariIni = now()->locale('id')->isoFormat('dddd');
+
+        $jam = JamOperasional::where('hari', $hariIni)->first();
+
+        return view('admin.dashboard', compact('kas', 'k_iuran', 'beritas', 'jam'));
     }
 
 
@@ -508,9 +514,9 @@ class adminController extends Controller
 
         $kategori = KategoriIuran::findOrFail($id);
 
-        if ($kategori->jenis === 'kk'){
+        if ($kategori->jenis === 'kk') {
             $transaksi = TransaksiIuran::where('kategori_iuran_id', $kategori->id)->with('kk')->latest()->get();
-        } else if ($kategori->jenis === 'perorangan'){
+        } else if ($kategori->jenis === 'perorangan') {
             $transaksi = TransaksiIuran::where('kategori_iuran_id', $kategori->id)->with('warga')->latest()->get();
         }
 
@@ -755,5 +761,38 @@ class adminController extends Controller
         $surat->save();
 
         return redirect()->back()->with('success', 'Surat ditolak.');
+    }
+
+
+    // REVISI JAM OPERASIONAL
+
+    public function jamOperasional()
+    {
+        $jams = JamOperasional::all();
+
+        return view('admin.jam.formJam', compact('jams'));
+    }
+
+    public function tambahJam(Request $request)
+    {
+        $request->validate([
+            // 'hari' => 'required',
+            // 'jam_mulai' => 'required',
+            // 'jam_selesai' => 'required',
+        ]);
+
+        JamOperasional::create([
+            'hari' => $request->hari,
+            'jam_mulai' => $request->jam_mulai,
+            'jam_selesai' => $request->jam_selesai,
+            'libur' => $request->has('libur'),
+        ]);
+
+        return redirect()->back()->with('success', 'Jam operasional berhasil ditambahkan');
+    }
+
+    public function hapusJam($id){
+        JamOperasional::findOrFail($id)->delete();
+        return redirect()->back()->with('success', 'Jam opersional berhasil dihapus');
     }
 }

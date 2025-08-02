@@ -30,7 +30,7 @@
                                             onsubmit="return confirm('Yakin ingin menghapus kas ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="small-icon delete-btn"><i
+                                            <button type="submit" class="small-icon delete-btn" onclick="loading()"><i
                                                     class="ri-delete-bin-line"></i></button>
                                         </form>
                                     </div>
@@ -76,7 +76,7 @@
                                             onsubmit="return confirm('Yakin ingin menghapus iuran ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="small-icon delete-btn"><i
+                                            <button type="submit" class="small-icon delete-btn" onclick="loading()"><i
                                                     class="ri-delete-bin-line"></i></button>
                                         </form>
                                     </div>

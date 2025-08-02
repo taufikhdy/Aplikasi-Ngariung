@@ -23,6 +23,8 @@ use App\Models\JenisSurat;
 use App\Models\Surat;
 use App\Models\SuratSKCK;
 
+use App\Models\JamOperasional;
+
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
 
@@ -115,13 +117,25 @@ class wargaController extends Controller
                 session()->flash('surat', 'Ada surat kamu yang sudah dikonfirmasi RT. Yuk cek sekarang.');
             };
 
-            if ($adaIuranBaru = KategoriIuran::whereMonth('tanggal_mulai', now()->month)->whereYear('tanggal_mulai', now()->year)->exists()) {
+            $adaIuranBaru = KategoriIuran::where('created_at', '>=', $tanggalMasukWarga)->whereMonth('tanggal_mulai', now()->month)->whereYear('tanggal_mulai', now()->year)->exists();
+
+            if ($adaIuranBaru) {
                 session()->flash('iuran', 'Ada iuran baru  yang harus kamu bayar, yuk bayar sekarang.');
             };
         }
 
+
+
+        // Jam Operasional
+
+        $hariIni = now()->locale('id')->isoFormat('dddd');
+
+        $jam = JamOperasional::where('hari', $hariIni)->first();
+
+        // jam
+
         $beritas = Berita::latest()->get();
-        return view('warga.dashboard', compact('kas', 'iurans', 'transaksi', 'beritas'));
+        return view('warga.dashboard', compact('kas', 'iurans', 'jam', 'transaksi', 'beritas'));
     }
 
 
@@ -233,7 +247,6 @@ class wargaController extends Controller
 
         }
 
-        array_values($iuranNew);
         // $riwayat = TransaksiIuran::where('warga_id', $warga->id)->orWhere('kartu_keluarga_id', $warga->kk_id)->get();
 
         return view('warga.kas.kasiuran', compact('kas', 'iuranNew'));
@@ -514,5 +527,14 @@ class wargaController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Pengajuan surat SKCK berhasil dikirim.');
+    }
+
+
+    // Jam operasional
+
+    public function jamOperasional(){
+        $jams = JamOperasional::all();
+
+        return view('warga.jam.jamOperasional', compact('jams'));
     }
 }

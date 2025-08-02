@@ -111,6 +111,12 @@ Route::controller(adminController::class)->group(function () {
     route::post('/admin/surat/setujui/{id}', 'setujuiSurat')->name('admin.setujuiSurat');
     route::post('/admin/surat/tolak/{id}', 'tolakSurat')->name('admin.tolakSurat');
 
+
+    // JAM OPERASIONAL
+
+    route::get('/admin/jam-ops/jam-form', 'jamOperasional')->name('admin.jamOperasional');
+    route::post('/admin/jam-ops/tambahJam', 'tambahJam')->name('admin.tambahJam');
+    route::delete('/admin/jam-ops/hapusJam/{id}', 'hapusJam')->name('admin.hapusJam');
 });
 
 
@@ -152,4 +158,7 @@ Route::controller(wargaController::class)->group(function () {
 
     route::get('/warga/detailSurat/{id}', 'detailSurat')->name('warga.detailSurat');
 
+
+    // Jam Operasional
+    route::get('/warga/jam-ops', 'jamOperasional')->name('warga.jamOperasional');
 });

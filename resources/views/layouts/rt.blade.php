@@ -51,7 +51,7 @@
     </div>
 
     {{-- IMPOR JS DARI PUBLIC --}}
-    <script src="{{ asset('js/script.js?v=10') }}"></script>
+    <script src="{{ asset('js/script.js?v=12') }}"></script>
     <script src="{{ asset('js/message.js') }}"></script>
 </body>
 

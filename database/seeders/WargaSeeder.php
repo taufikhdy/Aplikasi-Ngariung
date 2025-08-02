@@ -25,7 +25,8 @@ class WargaSeeder extends Seeder
             'status_perkawinan' => 'belum_kawin',
             'status_keluarga' => 'Kepala',
             'telepon' => '087736687006',
-            'kk_id' => 1
+            'kk_id' => 1,
+            'created_at' => now()
         ]);
     }
 }

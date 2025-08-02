@@ -58,7 +58,7 @@
 
                         <div class="checkbox">
                             <input type="checkbox" name="" id="show" onclick="showPassword()"> <label
-                                for="show" class="cp-gray">Tampilkan Password.</label>
+                                for="show" class="cp-gray">Tampilkan kata sandi</label>
                         </div>
 
                         @if (session('password'))

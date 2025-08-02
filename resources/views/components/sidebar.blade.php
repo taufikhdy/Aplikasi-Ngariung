@@ -26,6 +26,8 @@
                 class="text-regular {{ Request::is('warga/surat*') ? 'active' : '' }}"><i
                     class="ri-mail-line regular-icon"></i>Surat SKCK</a>
 
+            <a href="{{ route('warga.jamOperasional') }}" class="text-regular {{ Request::is('warga/jam*') ? 'active' : '' }}"><i class="ri-calendar-schedule-line regular-icon"></i>Jam Operasional RT</a>
+
             <a href="{{ route('warga.profile') }}"
                 class="text-regular {{ Request::is('warga/profile*') ? 'active' : '' }}"><i
                     class="ri-user-line regular-icon"></i>Data &
