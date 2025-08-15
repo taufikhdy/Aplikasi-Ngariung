@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="{{ asset('styles/animation.css') }}">
 
 
-    <title>Aplikasi Manajemen Warga RT</title>
+    <title>Aplikasi Ngariung - Manajemen Warga RT</title>
 </head>
 
 <body>

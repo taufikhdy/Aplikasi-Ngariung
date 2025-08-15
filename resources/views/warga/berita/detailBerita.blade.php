@@ -17,7 +17,7 @@
                 <img src="{{ asset('storage/' . $berita->gambar) }}" alt="img berita">
             @endif
             <div class="berita-title">
-                <p class="cp">{{ Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</p>
+                <p class="cp">{{ Carbon\Carbon::parse($berita->tanggal)->format('d F Y') }}</p>
                 <h3 class="bold">{{ $berita->judul }}</h3>
             </div>
         </div>

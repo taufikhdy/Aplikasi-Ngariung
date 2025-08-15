@@ -597,6 +597,7 @@ class adminController extends Controller
             'jenis' => 'masuk',
             'jumlah' => $transaksi->kategoriIuran->jumlah,
             'keterangan' => 'Transaksi masuk dari ' . $transaksi->kategoriIuran->nama_iuran,
+            'bukti_transaksi' => $transaksi->bukti_bayar,
             'tanggal' => now()
         ]);
 

@@ -109,7 +109,7 @@
                     </div>
                 @elseif ($iuran->jenis === 'kk' && $riwayatKeluarga)
                     <div class="item">
-                        <p class="text-regular">{{ $riwayatKeluarga->warga->nama }}</p>
+                        <p class="text-regular">{{ $riwayatKeluarga->kk->no_kk }}</p>
 
                         <a href="#popup-{{ $riwayatKeluarga->id }}" class="text-small">Lihat bukti</a>
 
